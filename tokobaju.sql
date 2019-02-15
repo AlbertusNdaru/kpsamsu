@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2019 at 11:01 AM
+-- Generation Time: Feb 15, 2019 at 11:07 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -30,7 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `Id` int(10) NOT NULL,
-  `Category_name` varchar(20) NOT NULL
+  `Category_name` varchar(20) NOT NULL,
+  `Create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `Update_at` datetime DEFAULT NULL,
+  `Description` varchar(60) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -100,7 +103,8 @@ CREATE TABLE `product` (
   `Product_name` varchar(20) NOT NULL,
   `Category_id` int(10) NOT NULL,
   `Merk` varchar(20) NOT NULL,
-  `Description` varchar(500) NOT NULL
+  `Description` varchar(500) NOT NULL,
+  `Product_type_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -126,7 +130,8 @@ CREATE TABLE `product_stok` (
 
 CREATE TABLE `product_type` (
   `Id` int(11) NOT NULL,
-  `Type_name` varchar(20) DEFAULT NULL,
+  `Type_name` varchar(40) DEFAULT NULL,
+  `Size_type` varchar(10) DEFAULT NULL,
   `Description` varchar(100) DEFAULT NULL,
   `Create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `Update_at` datetime DEFAULT NULL
@@ -164,6 +169,13 @@ CREATE TABLE `user` (
   `Create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `Update_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`Id`, `Usergrup_id`, `Username`, `Password`, `IsLogin`, `LastLogin`, `Create_at`, `Update_at`) VALUES
+(1, 1, 'Admin', 'Pass@word5', 1, '1550199197', '2019-02-15 02:18:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -225,7 +237,8 @@ ALTER TABLE `member`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `fk_barang3` (`Category_id`);
+  ADD KEY `fk_barang3` (`Category_id`),
+  ADD KEY `Product_type_id` (`Product_type_id`);
 
 --
 -- Indexes for table `product_stok`
@@ -316,7 +329,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `usergrup`
@@ -346,7 +359,8 @@ ALTER TABLE `imageproduct`
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Category_id`) REFERENCES `category` (`Id`);
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Category_id`) REFERENCES `category` (`Id`),
+  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`Product_type_id`) REFERENCES `product_type` (`Id`);
 
 --
 -- Constraints for table `product_stok`
