@@ -1,8 +1,5 @@
 <div class="container-fluid">
             <div class="block-header">
-                <h2>
-                    PRODUCT
-                </h2>
             </div>
             <!-- Basic Examples -->
             <div class="row clearfix">
@@ -10,7 +7,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                BASIC EXAMPLE
+                                PRODUCT
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -56,14 +53,11 @@
                                           <td><?php echo $r->Product_name ?></td>
                                           <td><?php echo $r->Category_name ?></td>
                                           <td><?php echo $r->Merk ?></td>
-                                          <td><?php echo $r->Deskripsi ?></td>
+                                          <td><?php echo $r->Description ?></td>
                                           <td><?php echo $r->Type_name ?></td>
-                                          <td><?php echo $r->deskripsi ?></td>
-                                          <td style="text-align:center">
-                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-primary" onclick="previewimage('<?php echo $r->id_barang?>')">Preview Image</button></td>
                                           <td align="center">
-                                              <a href='<?php echo base_url('product/edit/'.$r->id_barang)?>'><i class="material-icons text-warning">edit</i></a>
-                                              <a href='<?php echo base_url('product/delete/'.$r->id_barang)?>'><i class="material-icons text-primary">delete</i></a>
+                                              <a href='<?php echo base_url('product/edit/'.$r->Id)?>'><i class="material-icons text-warning">edit</i></a>
+                                              <a href='<?php echo base_url('product/delete/'.$r->Id)?>'><i class="material-icons text-primary">delete</i></a>
                                           </td>
                                         </tr>
                                     <?php } ?>

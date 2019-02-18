@@ -9,8 +9,8 @@ class Kategori extends CI_Controller{
     
     function index()
     {
-        $data['record']     =    $this->Model_ketogori->tampil_data();
-        $this->template->load('template','admin/product/view_product',$data);
+        $data['record']     =    $this->Model_kategori->tampil_data();
+        $this->template->load('template','admin/kategori/view_category',$data);
     }
 
     function viewAddCategory()
@@ -22,17 +22,17 @@ class Kategori extends CI_Controller{
     {
         $categoryname    = $this->input->post('categoryname');
         $description = $this->input->post('description');
-        $dataCategory    = array('Type_name'=>$typename,'Description'=>$description,'Size_type'=>$sizetype);
+        $dataCategory    = array('Category_name'=>$categoryname,'Description'=>$description);
         $insert = $this->Model_kategori->M_addCategory($dataCategory);
         if($insert)
         {
             $this->session->set_flashdata('Status','Input Succes');
-            redirect('Product/viewAddCategory');
+            redirect('Kategori/viewAddCategory');
         }
         else
         {
             $this->session->set_flashdata('Status','Input Failed');
-            redirect('Product/viewAddCategory');
+            redirect('Kategori/viewAddCategory');
         }
     }
     

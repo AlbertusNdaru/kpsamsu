@@ -3,7 +3,7 @@ class Model_kategori extends CI_Model{
     
     function tampil_data()
     {
-        $query= "SELECT*FROM product";
+        $query= "SELECT*FROM category";
         return $this->db->query($query)->result();
     }
 
@@ -12,4 +12,6 @@ class Model_kategori extends CI_Model{
        $insert = $this->db->insert('Category',$dataCategory);
        return $insert;
     }
+
+    
 }

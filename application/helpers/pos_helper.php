@@ -101,4 +101,9 @@ function get_current_date()
     return date('Ymd', strtotime($date->date));
 }
 
+function base_url_shop()
+{
+    return base_url('assets/shop/');
+}
+
 ?>

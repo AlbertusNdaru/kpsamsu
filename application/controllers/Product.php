@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Product extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model('Model_barang');
+        $this->load->model('Model_barang');
+        $this->load->model('Model_kategori');
 	}
 
 	function index()
@@ -12,10 +13,18 @@ class Product extends CI_Controller {
         $data['record']     =    $this->Model_barang->tampil_data();
         $this->template->load('template','admin/product/view_product',$data);
     }
+
+    function viewProductType()
+    {     
+        $data['record']     =    $this->Model_barang->tampil_data_type();
+        $this->template->load('template','admin/product/view_product_type',$data);
+    }
     
     function viewAddProduct()
     {
-        $this->template->load('template','admin/product/input_product');
+        $data['dataCategory'] = $this->Model_kategori->tampil_data();
+        $data['dataType'] = $this->Model_barang->tampil_data_type();
+        $this->template->load('template','admin/product/input_product',$data);
     }
 
     function viewAddProductType()
@@ -27,9 +36,9 @@ class Product extends CI_Controller {
     {
         $typename    = $this->input->post('typename');
         $description = $this->input->post('description');
-        $sizetype = $this->input->post('type');
+        $sizetype    = $this->input->post('type');
         $dataType    = array('Type_name'=>$typename,'Description'=>$description,'Size_type'=>$sizetype);
-        $insert = $this->Model_barang->M_addType($dataType);
+        $insert      = $this->Model_barang->M_addType($dataType);
         if($insert)
         {
             $this->session->set_flashdata('Status','Input Succes');
@@ -41,9 +50,46 @@ class Product extends CI_Controller {
             redirect('Product/viewAddProductType');
         }
     }
-    
-   
 
+    function addProduct()
+    {
+       $productname = $this->input->post('productname');
+       $category    = $this->input->post('category');
+       $typeproduct = $this->input->post('typeproduct');
+       $merk        = $this->input->post('merk');
+       $description = $this->input->post('description');
+       $dataProduct = array('Product_name'=>$productname,
+                            'Category_id'=>$category,
+                            'Merk'=>$merk,
+                            'Description'=>$description,
+                            'Product_type_id'=>$typeproduct);
+       $typesize    = $this->Model_barang->tampil_data_type_byId($typeproduct);
+       $typename    = $typesize->Size_type;
+        if($typename=="Atasan")
+            {
+                $stok=array('XL','L','M','S');
+            }
+        else if($typename=="Bawahan")
+                {
+                    $stok=array('26','27','28','29','30','31','32','33','34','35','36');
+                }
+        else 
+                {
+                    $stok=array('31','32','33','34','35','36');
+                }
+       $insert     = $this->Model_barang->M_addProduct($dataProduct,$stok);
+        if($insert)
+        {
+            $this->session->set_flashdata('Status','Input Succes');
+            redirect('Product/viewAddProduct');
+        }
+        else
+        {
+            $this->session->set_flashdata('Status','Input Failed');
+            redirect('Product/viewAddProduct');
+        }
+    }
+    
 
     public function aksi_upload($id,$files){
         $images = array();
