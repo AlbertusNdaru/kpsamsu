@@ -7,13 +7,16 @@
                         <ul class="ml-menu">
                             
                                     <li>
-                                        <a href="<?= base_url('Product')?>">Product</a>
+                                        <a href="<?= base_url('admin/Product')?>">Product</a>
                                     </li>
                                     <li>
-                                        <a href="<?= base_url('Kategori')?>">Category</a>
+                                        <a href="<?= base_url('admin/Kategori')?>">Category</a>
                                     </li>
                                     <li>
-                                        <a href="<?= base_url('Product/viewProductType')?>">Product Type</a>
+                                        <a href="<?= base_url('admin/Product_type')?>">Product Type</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url('admin/Image_product')?>">Image Product</a>
                                     </li>
                         </ul>
                     </li>

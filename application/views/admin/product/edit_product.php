@@ -18,7 +18,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                            <?php echo form_open_multipart('product/edit'); ?>
+                            <?php echo form_open_multipart('admin/product/edit'); ?>
                             <input type="hidden" name="id" value="<?php echo $record->id_barang?>">
                                 <div class="form-group">
                                     <label>Nama Barang</label>

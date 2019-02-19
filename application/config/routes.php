@@ -38,11 +38,12 @@
 |
 */
 
-$route['default_controller'] = "penjualan";
+$route['default_controller'] = "C_User";
 $route['loginadmin']="auth/loginadmin";
 $route['loginuser']="authuser/loginuserr";
 $route['404_override'] = '';
-
+$route['admin'] = "admin/Login/loginadmin";
+$route['Shop'] = "user/shop";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

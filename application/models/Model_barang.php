@@ -44,5 +44,7 @@ class Model_barang extends ci_model{
                          'Stok'=>$stok);
        return $addArray;
     }
+
+   
  
 }

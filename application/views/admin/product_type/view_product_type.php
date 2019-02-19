@@ -16,7 +16,7 @@
                                         <i class="material-icons">more_vert</i>
                                     </a>
                                     <ul class="dropdown-menu pull-right">
-                                        <li><a href="<?php echo base_url()?>Product/viewAddProduct">Add Data</a></li>
+                                        <li><a href="<?php echo base_url()?>admin/Product_type/viewAddProductType">Add Data</a></li>
                                         <li><a href="javascript:void(0);">Another action</a></li>
                                         <li><a href="javascript:void(0);">Something else here</a></li>
                                     </ul>

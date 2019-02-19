@@ -34,7 +34,7 @@
         </div>
         <div class="card">
             <div class="body">
-            <?php echo form_open('Login/login'); ?>
+            <?php echo form_open('admin/Login/login'); ?>
                     <div class="msg">Sign in to start your session</div>
                     <div class="input-group">
                         <span class="input-group-addon">

@@ -7,7 +7,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
                             <div class="body">
-                            <?php echo form_open('Product/addProduct'); ?>
+                            <?php echo form_open('admin/Product/addProduct'); ?>
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group form-float">
