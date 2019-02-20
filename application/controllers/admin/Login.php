@@ -8,7 +8,6 @@ class Login extends CI_Controller{
         
     }
 
-    
     function loginadmin()
     {
       
@@ -24,7 +23,7 @@ class Login extends CI_Controller{
 
     function viewregister()
     {
-        $data['usergroup'] = $this->Model_login->selectusergrup();
+        $data['usergroup'] = $this->Model_login->M_selectusergrup();
         $this->load->view('admin/registeradmin',$data);
     }
 
@@ -35,7 +34,7 @@ class Login extends CI_Controller{
         $password   =   $this->input->post('password');
         $usergrup    =   $this->input->post('usergrup');
         $datauser = array('Usergrup_id'=>$usergrup,'Username'=>$username,'Password'=>$password);
-        $hasil=  $this->Model_login->inputadmin($datauser); 
+        $hasil=  $this->Model_login->M_inputadmin($datauser); 
         redirect('admin/Login/loginadmin');
     }
     
@@ -43,7 +42,7 @@ class Login extends CI_Controller{
     {
             $username   =   $this->input->post('username');
             $password   =   $this->input->post('password');
-            $hasil=  $this->Model_login->login($username,$password);
+            $hasil=  $this->Model_login->M_login($username,$password);
             if($hasil==3)
             {
                 redirect('admin/Product');

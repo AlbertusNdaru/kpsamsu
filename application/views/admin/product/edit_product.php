@@ -1,96 +1,83 @@
-<div class="content-wrapper"  style="margin-left: 0px">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        General Form Elements
-        <small>Preview</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-    <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                            <?php echo form_open_multipart('admin/product/edit'); ?>
-                            <input type="hidden" name="id" value="<?php echo $record->id_barang?>">
-                                <div class="form-group">
-                                    <label>Nama Barang</label>
-                                    <input id="inputnamabarang" class="form-control" name="nama_barang" placeholder="Nama barang" value="<?php echo $record->nama_barang?>" required>
+<div class="container-fluid">
+                <div class="block-header">
+                    <h2 align="center">ADD PRODUCT</h2>
+                </div>
+                <!-- Input -->
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="body">
+                            <?php echo form_open('admin/Product/editProduct'); ?>
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="productname" value='<?= $record->Product_name?>'>
+                                                <label class="form-label">Product Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" hidden name="id" value='<?= $record->Id?>'>
+                                    <div class="col-sm-6">
+                                        <div class="form-group form-float">
+                                            <div>
+                                                <select name="category_id">
+                                                <?php foreach ($dataCategory as $k) {
+                                                        echo "<option value='$k->Id'";
+                                                        echo $record->Category_id==$k->Id?'selected':'';
+                                                        echo">$k->Category_name</option>";
+                                                    } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group form-float">
+                                            <div>
+                                                <select name="product_type_id">
+                                                    <?php foreach ($dataType as $t) {
+                                                        echo "<option value='$t->Id'";
+                                                        echo $record->Product_type_id==$t->Id?'selected':'';
+                                                        echo">$t->Type_name</option>";
+                                                    }?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-float form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="merk" value='<?= $record->Merk?>' />
+                                                <label class="form-label">Merk</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="description" value='<?= $record->Description?>' />
+                                                <label class="form-label">Description</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                               <label class="form-label">Status</label><br>
+                                            <select name="status">
+                                                <option <?php if($record->Status_item=='None'){echo 'selected';}?> value="None">None</option>
+                                                <option <?php if($record->Status_item=='New'){echo 'selected';}?> value="New">New</option>
+                                                <option <?php if($record->Status_item=='Sale'){echo 'selected';}?> value="Sale">Sale</option>
+                                            </select>
+                                        </div>
+                         
+                                    </div>
+                                    <div class="col-sm-12" style="margin-bottom:5px !important">
+                                        <button type="submit" class="btn btn-primary">UPDATE</button>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Kategori</label>
-                                    <select id="inputkategori" name="kategori" class="form-control">
-                                    <?php foreach ($kategori as $k) {
-                                            echo "<option value='$k->id_kategori'";
-                                            echo $record->jenis_barang==$k->jenis_barang?'selected':'';
-                                            echo">$k->jenis_barang</option>";
-                                        } ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Merk</label>
-                                    <input id="inputmerk" class="form-control" name="merk" placeholder="Merk" value="<?php echo $record->merk?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Harga</label>
-                                    <input required onkeypress='validate(event)' onchange="validateharga()"  id="inputharga" class="form-control" name="harga" placeholder="Harga" value="<?php echo $record->harga?>" >
-                                </div>
-                                <div class="form-group">
-                                    <label>Stok</label>
-                                    <input type="number" class="form-control" name="stok" min="1" value='<?php echo $record->stok?>' required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Upload Foto</label>
-                                    <input id="inputfoto" multiple='multiple' accept="image/x-png,image/gif,image/jpeg" type="file" class="form-control" name="berkas[]" placeholder="upload">
-                                </div>
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <select id="inputstatus" name="status" class="form-control" required>
-                                    <option value='bestseller'>Best Seller</option>
-                                    <option value='sale'>Sale</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Deskripsi</label>
-                                    <input id="deskripsi" class="form-control" name="deskripsi" placeholder="Deskripsi" value="<?php echo $record->deskripsi?>" required>
-                                </div>
-                                <button type="submit" id="btnsimpanbarang" name="submit" class="btn btn-primary btn-sm" >Update</button> | 
-                                <?php echo anchor('barang','Kembali',array('class'=>'btn btn-danger btn-sm'))?>
-                           </form>
+                                </form >
                             </div>
                         </div>
-                        <!-- /. PANEL  -->
                     </div>
                 </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <script>
-function validateharga() {
+                <!--#END# Switch Button -->
+    </div>
 
 
-  
-
-
-    var hargajual=parseInt($('#inputhargajual').val());
-    if(hargajual<=10)
-    {
-        alert('<?php echo get_current_date()?>')
-        $('#btnsimpanbarang').attr("disabled",'disabled');
-      
-    }
-    else
-    {
-        $('#btnsimpanbarang').removeAttr('disabled');
-    }
-}
-</script>
+    

@@ -9,7 +9,7 @@ class Image_product extends CI_Controller{
     
     function index()
     {
-        $data['record']     =    $this->Model_image->tampil_data();
+        $data['record']     =    $this->Model_image->M_tampil_data();
         $this->template->load('template','admin/image_product/input_image',$data);
     }
 
@@ -21,38 +21,11 @@ class Image_product extends CI_Controller{
     function addImage_product()
     {
         $Id    = $this->input->post('IdProduct');
+        $this->Model_image->M_deleteImage($Id);
         $this->Model_image->M_Update_image($Id,$_FILES['berkas']['name'][0]);
         $this->aksi_upload($Id,$_FILES['berkas']);
     }
-    
-    function editImageProduct()
-    {
-        if (ceksession()){
-        if(isset($_POST['submit'])){
-            // proses kategori
-            $this->Model_kategori->edit();
-            redirect('admin/kategori');
-        }
-        else{
-            $id=  $this->uri->segment(3);
-            $data['record']=  $this->Model_kategori->get_one($id)->row();
-            //print_r($data['record']->id_kategori);
-            //$this->load->view('kategori/form_edit',$data);
-            $this->template->load('template','admin/kategori/edit_kategori',$data);
-        }
-    }
-    }
-    
-    
-    function delete()
-    {
-        if (ceksession()){
-        $id=  $this->uri->segment(3);
-        $this->Model_kategori->delete($id);
-        redirect('admin/kategori');
-        }
-    }
-
+       
     
     public function aksi_upload($id,$files)
     {
@@ -82,10 +55,20 @@ class Image_product extends CI_Controller{
                     echo json_encode($error);
                 }else{
                     $data = array('upload_data' => $this->upload->data());
-                    $this->Model_image->M_addProductImage($id,$image);
+                    $insertimg=$this->Model_image->M_addProductImage($id,$image);
                     //redirect('barang');
                 }
         }
-        redirect('admin/Image_product');
+        if($insertimg)
+        {
+            $this->session->set_flashdata('Status','Upload Succes');
+            redirect('admin/Image_product');
+        }
+        else
+        {
+            $this->session->set_flashdata('Status','Upload Failed');
+            redirect('admin/Image_product');
+        }
+      
     }
 }

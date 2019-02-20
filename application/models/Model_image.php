@@ -1,10 +1,9 @@
 <?php
 class Model_image extends ci_model{
     
-    
-    function tampil_data()
+    function M_tampil_data()
     {
-        $query= "SELECT a.* ,b.Category_name, c.Type_name FROM product as a inner join category as b on b.Id=a.Category_id inner join product_type as c on c.Id=a.Product_type_id where a.Photo_name is null";
+        $query= "SELECT a.* ,b.Category_name, c.Type_name FROM product as a inner join category as b on b.Id=a.Category_id inner join product_type as c on c.Id=a.Product_type_id";
         return $this->db->query($query)->result();
     }
 
@@ -16,9 +15,10 @@ class Model_image extends ci_model{
 
     function M_addProductImage($id,$nama)
     {
-        $data       = array('Product_id'=>$id,
-                            'Photo_name'=> $nama);
-        $this->db->insert('imageproduct',$data);
+        $data = array('Product_id'=>$id,
+                      'Photo_name'=> $nama);
+        $insertimg=$this->db->insert('imageproduct',$data);
+        return $insertimg;
     }
     
 
@@ -30,6 +30,17 @@ class Model_image extends ci_model{
        return $addArray;
     }
 
-   
- 
+    function M_deleteImage($id)
+    {   
+       
+        $query="SELECT*FROM imageproduct where Product_id='".$id."'";
+        $img=$this->db->query($query)->result();
+        foreach($img as $r)
+        {
+            unlink('assets/img_product/'.$r->Photo_name);
+        }
+        $this->db->where('Product_id',$id);
+        $this->db->delete('imageproduct');
+    }
+
 }

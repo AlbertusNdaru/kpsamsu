@@ -8,8 +8,11 @@ class Shop extends CI_Controller{
     }
     
     function index()
-    {
-        $this->load->view('user/user_index');
+    {   
+        $data['all'] = $this->Model_barang->M_productFeatured_all();
+		$data['man'] = $this->Model_barang->M_productFeatured_Man();
+		$data['woman'] = $this->Model_barang->M_productFeatured_Woman();
+        $this->load->view('user/user_index',$data);
     }
 
     function viewAddCategory()
@@ -34,7 +37,7 @@ class Shop extends CI_Controller{
             redirect('Kategori/viewAddCategory');
         }
     }
-    
+
     function edit()
     {
         if (ceksession()){
@@ -52,8 +55,7 @@ class Shop extends CI_Controller{
         }
     }
     }
-    
-    
+
     function delete()
     {
         if (ceksession()){

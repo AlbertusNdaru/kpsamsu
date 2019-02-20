@@ -9,13 +9,19 @@ class Kategori extends CI_Controller{
     
     function index()
     {
-        $data['record']     =    $this->Model_kategori->tampil_data();
+        $data['record']     =    $this->Model_kategori->M_tampil_data();
         $this->template->load('template','admin/kategori/view_category',$data);
     }
 
     function viewAddCategory()
     {
         $this->template->load('template','admin/kategori/input_category');
+    }
+
+    function viewEditKategori($id)
+    {   
+        $data['record']= $this->Model_kategori->M_tampil_data_by_id($id);
+        $this->template->load('template','admin/Kategori/edit_category',$data);
     }
     
     function addCategory()
@@ -35,32 +41,41 @@ class Kategori extends CI_Controller{
             redirect('admin/Kategori/viewAddCategory');
         }
     }
-    
-    function edit()
+
+    function editCategory()
     {
-        if (ceksession()){
-        if(isset($_POST['submit'])){
-            // proses kategori
-            $this->Model_kategori->edit();
-            redirect('admin/kategori');
+        $categoryname= $this->input->post('categoryname');
+        $description= $this->input->post('description');
+        $update_at= get_current_date();
+        $id= $this->input->post('id');
+        $dataEdit= array('Category_name'=>$categoryname,
+                         'Description'=>$description,
+                         'Update_at'=>$update_at);
+        $edit=$this->Model_kategori->M_editCategory($dataEdit,$id);
+        if($edit)
+        {
+            $this->session->set_flashdata('Status','Edit Succes');
+            redirect('admin/Kategori');
         }
-        else{
-            $id=  $this->uri->segment(3);
-            $data['record']=  $this->Model_kategori->get_one($id)->row();
-            //print_r($data['record']->id_kategori);
-            //$this->load->view('kategori/form_edit',$data);
-            $this->template->load('template','admin/kategori/edit_kategori',$data);
+        else
+        {
+            $this->session->set_flashdata('Status','Edit Failed');
+            redirect('admin/Kategori');
         }
     }
-    }
-    
-    
-    function delete()
+
+    function deleteCategory($id)
     {
-        if (ceksession()){
-        $id=  $this->uri->segment(3);
-        $this->Model_kategori->delete($id);
-        redirect('admin/kategori');
+        $delete = $this->Model_kategori->M_deleteCategory($id);
+        if($delete)
+        {
+            $this->session->set_flashdata('Status','Delete Succes');
+            redirect('admin/Kategori');
+        }
+        else
+        {
+            $this->session->set_flashdata('Status','Delete Failed');
+            redirect('admin/Kategori');
         }
     }
 }

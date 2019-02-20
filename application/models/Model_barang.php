@@ -2,19 +2,25 @@
 class Model_barang extends ci_model{
     
     
-    function tampil_data()
+    function M_tampil_data()
     {
         $query= "SELECT a.* ,b.Category_name, c.Type_name FROM product as a inner join category as b on b.Id=a.Category_id inner join product_type as c on c.Id=a.Product_type_id ";
         return $this->db->query($query)->result();
     }
 
-    function tampil_data_type()
+    function M_tampil_data_by_id($id)
+    {
+        $query= "SELECT a.* ,b.Category_name, c.Type_name FROM product as a inner join category as b on b.Id=a.Category_id inner join product_type as c on c.Id=a.Product_type_id where a.Id=".$id." ";
+        return $this->db->query($query)->row();
+    }
+
+    function M_tampil_data_type()
     {
         $query= "SELECT*FROM product_type";
         return $this->db->query($query)->result();
     }
 
-    function tampil_data_type_byId($id)
+    function M_tampil_data_type_byId($id)
     {
         $query= "SELECT*FROM product_type where Id='".$id."'";
         return $this->db->query($query)->row();
@@ -35,6 +41,7 @@ class Model_barang extends ci_model{
              $insertDataStok=$this->M_addArrayInsert($Id,$s,0);
              $this->db->insert('Product_stok',$insertDataStok);
         }
+        return $insertProduct;
     }
 
     function M_addArrayInsert($idProduct,$size,$stok)
@@ -45,6 +52,72 @@ class Model_barang extends ci_model{
        return $addArray;
     }
 
+    function M_editProduct($dataEdit,$Id)
+    {
+       $this->db->where('Id',$Id);
+       $edit= $this->db->update('product',$dataEdit);
+       return $edit;
+    }
+
+    function M_editType($dataEdit,$Id)
+    {
+       $this->db->where('Id',$Id);
+       $edit= $this->db->update('product_type',$dataEdit);
+       return $edit;
+    }
+
+    function M_deleteProduct($Id)
+    {
+       $this->M_deleteImage($Id);
+       $this->M_deleteStok($Id);
+       $this->db->where('Id',$Id);
+       $delete= $this->db->delete('product');
+       return $delete;
+    }
+
+    function M_deleteImage($id)
+    {   
+       
+        $query="SELECT*FROM imageproduct where Product_id='".$id."'";
+        $img=$this->db->query($query)->result();
+        foreach($img as $r)
+        {
+            unlink('assets/img_product/'.$r->Photo_name);
+        }
+        $this->db->where('Product_id',$id);
+        $this->db->delete('imageproduct');
+    }
+
+    function M_deleteStok($id)
+    {
+        $this->db->where('Product_id',$id);
+        $this->db->delete('product_stok');
+    }
+
+    function M_deleteType($id)
+    {
+        $this->db->where('Id',$id);
+        $delete = $this->db->delete('product_type');
+        return $delete;
+    }
+
+    function M_productFeatured_all()
+    {
+       $all   = $this->db->get('product')->result();
+       return $all;
+    }
    
- 
+    function M_productFeatured_Man()
+    {
+       $this->db->where('Category_id',1);
+       $man   = $this->db->get('product')->result();
+       return $man;
+    }
+
+    function M_productFeatured_Woman()
+    {
+       $this->db->where('Category_id',2);
+       $woman   = $this->db->get('product')->result();
+       return $woman;
+    }
 }

@@ -96,9 +96,11 @@ function isLoginSessionExpireduser() {
 
 function get_current_date()
 {
-    $CI= & get_instance();
-    $date= $CI->db->query('Select NOW() as date')->row();
-    return date('Ymd', strtotime($date->date));
+    $date = new DateTime();
+    $date->setTimezone(new DateTimeZone('Asia/Jakarta'));
+    if(isset($format))
+        return $date->format($format);
+    return $date->format('Y-m-d h:i:s');
 }
 
 function base_url_shop()

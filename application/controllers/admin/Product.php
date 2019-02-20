@@ -10,16 +10,24 @@ class Product extends CI_Controller {
 
 	function index()
     {     
-        $data['record']     =    $this->Model_barang->tampil_data();
+        $data['record']     =    $this->Model_barang->M_tampil_data();
         $this->template->load('template','admin/product/view_product',$data);
     }
 
     
     function viewAddProduct()
     {
-        $data['dataCategory'] = $this->Model_kategori->tampil_data();
-        $data['dataType'] = $this->Model_barang->tampil_data_type();
+        $data['dataCategory'] = $this->Model_kategori->M_tampil_data();
+        $data['dataType'] = $this->Model_barang->M_tampil_data_type();
         $this->template->load('template','admin/product/input_product',$data);
+    }
+
+    function viewEditProduct($id)
+    {   
+        $data['dataCategory'] = $this->Model_kategori->M_tampil_data();
+        $data['dataType'] = $this->Model_barang->M_tampil_data_type();
+        $data['record']= $this->Model_barang->M_tampil_data_by_id($id);
+        $this->template->load('template','admin/product/edit_product',$data);
     }
 
     function addProduct()
@@ -29,12 +37,16 @@ class Product extends CI_Controller {
        $typeproduct = $this->input->post('typeproduct');
        $merk        = $this->input->post('merk');
        $description = $this->input->post('description');
+       $price       = $this->input->post('price');
+       $status      = $this->input->post('status');
        $dataProduct = array('Product_name'=>$productname,
                             'Category_id'=>$category,
                             'Merk'=>$merk,
                             'Description'=>$description,
-                            'Product_type_id'=>$typeproduct);
-       $typesize    = $this->Model_barang->tampil_data_type_byId($typeproduct);
+                            'Product_type_id'=>$typeproduct,
+                            'Price'=>$price,
+                            'Status_item'=>$status);
+       $typesize    = $this->Model_barang->M_tampil_data_type_byId($typeproduct);
        $typename    = $typesize->Size_type;
         if($typename=="Atasan")
             {
@@ -60,44 +72,51 @@ class Product extends CI_Controller {
             redirect('admin/Product/viewAddProduct');
         }
     }
-    
 
-    public function aksi_upload($id,$files){
-        $images = array();
-        $config['upload_path']          = './assets/img_product/';
-        $config['allowed_types']        = '*';
-        $this->load->library('upload', $config);
-        foreach($files['name'] as $key => $image)
-        { 
-            $_FILES['berkas[]']['name']= $files['name'][$key];
-            $_FILES['berkas[]']['type']= $files['type'][$key];
-            $_FILES['berkas[]']['tmp_name']= $files['tmp_name'][$key];
-            $_FILES['berkas[]']['error']= $files['error'][$key];
-            $_FILES['berkas[]']['size']= $files['size'][$key];
-
-            //echo $dataimage->name;
-               
-                $config['file_name']            = 'BRG_'.get_current_date().'_'.$image;
-                //$config['max_size']             = 100;
-                //$config['max_width']            = 1024;
-                //$config['max_height']           = 768;
-        
-                $this->upload->initialize($config);
-        
-                if ( ! $this->upload->do_upload('berkas[]')){
-                    $error = array('error' => $this->upload->display_errors());
-                    echo json_encode($error);
-                }else{
-                    $data = array('upload_data' => $this->upload->data());
-                    $this->Model_barang->inserttabelproduct($id,'BRG_'.get_current_date().'_'.$image);
-                    //redirect('barang');
-                }
-
-                
-
+    function editProduct()
+    {
+        $productname      = $this->input->post('productname');
+        $category_id      = $this->input->post('category_id');
+        $merk             = $this->input->post('merk');
+        $description      = $this->input->post('description');
+        $product_type_id  = $this->input->post('product_type_id');
+        $status           = $this->input->post('status');
+        $update_at        = get_current_date();
+        $id               = $this->input->post('id');
+        $dataEdit= array('Product_name'=>$productname,
+                         'Category_id'=>$category_id,
+                         'Merk'=>$merk,
+                         'Description'=>$description,
+                         'Product_type_id'=>$product_type_id,
+                         'Update_at'=>$update_at,
+                         'Status_item'=>$status);
+        $edit=$this->Model_barang->M_editProduct($dataEdit,$id);
+        if($edit)
+        {
+            $this->session->set_flashdata('Status','Edit Succes');
+            redirect('admin/Product');
         }
-		
-        
+        else
+        {
+            $this->session->set_flashdata('Status','Edit Failed');
+            redirect('admin/Product');
+        }
     }
 
+    
+
+    function deleteProduct($id)
+    {
+        $delete=$this->Model_barang->M_deleteProduct($id);
+        if($delete)
+        {
+            $this->session->set_flashdata('Status','Delete Succes');
+            redirect('admin/Product');
+        }
+        else
+        {
+            $this->session->set_flashdata('Status','Delete Failed');
+            redirect('admin/Product');
+        }
+    }
 }
