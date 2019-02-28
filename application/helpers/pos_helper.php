@@ -108,4 +108,9 @@ function base_url_shop()
     return base_url('assets/shop/');
 }
 
+function base_url_carousel()
+{
+    return base_url('assets/img_slide/');
+}
+
 ?>

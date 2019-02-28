@@ -1,5 +1,6 @@
 <div class="container-fluid">
             <div class="block-header">
+                
             </div>
             <!-- Basic Examples -->
             <div class="row clearfix">
@@ -7,7 +8,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                PRODUCT
+                                CAROUSEL
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -15,7 +16,7 @@
                                         <i class="material-icons">more_vert</i>
                                     </a>
                                     <ul class="dropdown-menu pull-right">
-                                        <li><a href="<?php echo base_url()?>admin/Product/viewAddProduct">Add Data</a></li>
+                                        <li><a href="<?php echo base_url()?>admin/Carousel/viewAddCarousel">Add Data</a></li>
                                         <li><a href="javascript:void(0);">Another action</a></li>
                                         <li><a href="javascript:void(0);">Something else here</a></li>
                                     </ul>
@@ -27,24 +28,28 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Nama Barang</th>
-                                            <th>Kategori</th>
-                                            <th>Merk</th>
-                                            <th>Deskripsi</th>
-                                            <th>Harga</th>
-                                            <th>Type</th>
-                                            <th style="text-align:center">Aksi</th>
+                                            <th>Judul</th>
+                                            <th>Sub Judul</th>
+                                            <th>Baris 1</th>
+                                            <th>Baris 2</th>
+                                            <th>Baris 3</th>
+                                            <th>Baris 4</th>
+                                            <th>Baris 5</th>
+                                            <th>Foto</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Nama Barang</th>
-                                            <th>Kategori</th>
-                                            <th>Merk</th>
-                                            <th>Deskripsi</th>
-                                            <th>Harga</th>
-                                            <th>Type</th>
-                                            <th style="text-align:center">Aksi</th>
+                                            <th>Judul</th>
+                                            <th>Sub Judul</th>
+                                            <th>Baris 1</th>
+                                            <th>Baris 2</th>
+                                            <th>Baris 3</th>
+                                            <th>Baris 4</th>
+                                            <th>Baris 5</th>
+                                            <th>Foto</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -52,15 +57,17 @@
                                     $no = $this->uri->segment('3');
                                     foreach ($record as $r) { ?>
                                         <tr class="gradeU">
-                                          <td><?php echo $r->Product_name ?></td>
-                                          <td><?php echo $r->Category_name ?></td>
-                                          <td><?php echo $r->Merk ?></td>
-                                          <td><?php echo $r->Description ?></td>
-                                          <td>Rp <?php echo $r->Price ?></td>
-                                          <td><?php echo $r->Type_name ?></td>
+                                          <td><?php echo $r->Title ?></td>
+                                          <td><?php echo $r->Subtitle ?></td>
+                                          <td><?php echo $r->Line1 ?></td>
+                                          <td><?php echo $r->Line2 ?></td>
+                                          <td><?php echo $r->Line3 ?></td>
+                                          <td><?php echo $r->Line4 ?></td>
+                                          <td><?php echo $r->Line5 ?></td>
+                                          <td><?php echo $r->Image ?></td>
                                           <td align="center">
-                                              <a href='<?php echo base_url('admin/Product/viewEditProduct/'.$r->Id)?>'><i class="material-icons text-warning">edit</i></a>
-                                              <a href='<?php echo base_url('admin/Product/deleteProduct/'.$r->Id)?>'><i class="material-icons text-primary">delete</i></a>
+                                              <a href='<?php echo base_url('admin/Carousel/viewEditCarousel/'.$r->Id)?>'><i class="material-icons text-warning">edit</i></a>
+                                              <a href='<?php echo base_url('admin/Carousel/deleteCarousel/'.$r->Id)?>'><i class="material-icons text-primary">delete</i></a>
                                           </td>
                                         </tr>
                                     <?php } ?>
@@ -73,9 +80,7 @@
             </div>
             <!-- #END# Basic Examples -->
         </div>
-<script>
-</script>
-<script>
+        <script>
   <?php if (!empty($this->session->flashdata('Status'))){?>
     setnotifstatus('<?php echo $this->session->flashdata('Status')?>');
 <?php }?>
@@ -83,13 +88,13 @@
 
  function setnotifstatus(err)
 { 
-if (err == 'Edit Succes' || err == 'Delete Succes')
+    if (err == 'Edit Succes' || err == 'Delete Succes')
     {
-      ttp='success';
+        ttp='success';
     }
- else if(err == 'Edit Failed' || err == 'Delete Failed')
+    else if(err == 'Edit Failed' || err == 'Delete Failed')
     {
-    ttp='danger';
+        ttp='danger';
     }
 
   $.notify({
