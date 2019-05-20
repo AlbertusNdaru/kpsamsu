@@ -44,7 +44,7 @@ class Login extends CI_Controller{
             $password   =   $this->input->post('password');
             $hasil=  $this->Model_login->M_login($username,$password);
             if($hasil==3)
-            {
+            {   
                 redirect('admin/Product');
             }
             else
@@ -59,7 +59,7 @@ class Login extends CI_Controller{
     {
         $this->db->query("update user set IsLogin=0 where Id=".$_SESSION['userdata']->Id."") ;
         $this->session->sess_destroy();
-        redirect('admin/login/loginadmin');
+        redirect('admin/Login/loginadmin');
     }
 
     

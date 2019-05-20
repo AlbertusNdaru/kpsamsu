@@ -31,9 +31,8 @@
                                             <th>Kategori</th>
                                             <th>Merk</th>
                                             <th>Deskripsi</th>
-                                            <th>Harga</th>
                                             <th>Stok</th>
-                                            <th>Type</th>
+                                            <th>Harga</th>
                                             <th style="text-align:center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -43,9 +42,8 @@
                                             <th>Kategori</th>
                                             <th>Merk</th>
                                             <th>Deskripsi</th>
-                                            <th>Harga</th>
                                             <th>Stok</th>
-                                            <th>Type</th>
+                                            <th>Harga</th>
                                             <th style="text-align:center">Aksi</th>
                                         </tr>
                                     </tfoot>
@@ -58,12 +56,10 @@
                                           <td><?php echo $r->Category_name ?></td>
                                           <td><?php echo $r->Merk ?></td>
                                           <td><?php echo $r->Description ?></td>
-                                          <td>Rp <?php echo $r->Price ?></td>
                                           <td><?php echo $r->Stok ?></td>
-                                          <td><?php echo $r->Type_name ?></td>
+                                          <td>Rp <?php echo $r->Harga_supliyer ?></td>
                                           <td align="center">
-                                              <a href='<?php echo base_url('admin/Product/viewEditProduct/'.$r->Id)?>'><i class="material-icons text-warning">edit</i></a>
-                                              <a href='<?php echo base_url('admin/Product/deleteProduct/'.$r->Id)?>'><i class="material-icons text-primary">delete</i></a>
+                                              <a class="btn btn-primary" href='<?php echo base_url('admin/Pembelian/viewPembelian/'.$r->Id)?>'>Beli</a>
                                           </td>
                                         </tr>
                                     <?php } ?>
@@ -86,11 +82,12 @@
 
  function setnotifstatus(err)
 { 
-if (err == 'Edit Succes' || err == 'Delete Succes')
+  console.log(err);
+if (err == 'Edit Succes' || err == 'Delete Succes' || err == 'Input Succes')
     {
       ttp='success';
     }
- else if(err == 'Edit Failed' || err == 'Delete Failed')
+ else if(err == 'Edit Failed' || err == 'Delete Failed' || err == 'Input Failed')
     {
     ttp='danger';
     }

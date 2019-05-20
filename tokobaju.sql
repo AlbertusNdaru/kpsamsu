@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2019 at 03:50 AM
+-- Generation Time: May 20, 2019 at 09:56 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -104,13 +104,6 @@ CREATE TABLE `imageproduct` (
   `Update_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `imageproduct`
---
-
-INSERT INTO `imageproduct` (`Id`, `Product_id`, `Photo_name`, `Create_at`, `Update_at`) VALUES
-(1, 1, 'Bayu.jpg', '2019-03-05 02:16:55', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -137,6 +130,46 @@ CREATE TABLE `member` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pembelian`
+--
+
+CREATE TABLE `pembelian` (
+  `id` int(11) NOT NULL,
+  `id_product` int(11) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `jumlah_beli` int(11) DEFAULT NULL,
+  `create_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembelian`
+--
+
+INSERT INTO `pembelian` (`id`, `id_product`, `price`, `jumlah_beli`, `create_at`) VALUES
+(2, 1, 500000, 40, NULL),
+(3, 1, 500000, 5, NULL),
+(4, 1, 500000, 42, NULL),
+(5, 1, 500000, 3, NULL),
+(6, 1, 500000, 21, NULL),
+(7, 1, 500000, 222, NULL),
+(8, 1, 500000, 222, NULL),
+(9, 1, 500000, 5, NULL),
+(10, 1, 500000, 5, NULL),
+(11, 2, 35000, 42, NULL);
+
+--
+-- Triggers `pembelian`
+--
+DELIMITER $$
+CREATE TRIGGER `tambahstok` AFTER INSERT ON `pembelian` FOR EACH ROW BEGIN 
+UPDATE product set Stok=Stok+new.jumlah_beli where id=new.id_product;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product`
 --
 
@@ -150,6 +183,8 @@ CREATE TABLE `product` (
   `Status_item` varchar(20) DEFAULT NULL,
   `Description` varchar(500) DEFAULT NULL,
   `Product_type_id` int(11) DEFAULT NULL,
+  `Stok` int(11) DEFAULT '0',
+  `Harga_supliyer` int(11) DEFAULT NULL,
   `Create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `Update_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -158,33 +193,9 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`Id`, `Product_name`, `Category_id`, `Merk`, `Price`, `Photo_name`, `Status_item`, `Description`, `Product_type_id`, `Create_at`, `Update_at`) VALUES
-(1, 'Erigo Start', 1, 'Antik', 80000, 'Bayu.jpg', 'Sale', 'Erigo', 1, '2019-02-28 03:01:33', '2019-03-05 02:16:54');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_stok`
---
-
-CREATE TABLE `product_stok` (
-  `Id` int(11) NOT NULL,
-  `Product_id` int(11) DEFAULT NULL,
-  `Size` varchar(10) DEFAULT NULL,
-  `Stok` int(11) DEFAULT NULL,
-  `Create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `Update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `product_stok`
---
-
-INSERT INTO `product_stok` (`Id`, `Product_id`, `Size`, `Stok`, `Create_at`, `Update_at`) VALUES
-(1, 1, 'XL', 0, '2019-02-28 03:01:33', NULL),
-(2, 1, 'L', 0, '2019-02-28 03:01:33', NULL),
-(3, 1, 'M', 0, '2019-02-28 03:01:33', NULL),
-(4, 1, 'S', 0, '2019-02-28 03:01:33', NULL);
+INSERT INTO `product` (`Id`, `Product_name`, `Category_id`, `Merk`, `Price`, `Photo_name`, `Status_item`, `Description`, `Product_type_id`, `Stok`, `Harga_supliyer`, `Create_at`, `Update_at`) VALUES
+(1, 'Erigo Start', 1, 'Antik', 80000, '8-bit-256-x-256-Grayscale-Lena-Image.jpg', 'Sale', 'Erigo', 1, 565, NULL, '2019-02-28 03:01:33', '2019-05-19 06:59:12'),
+(2, 'Test', 1, '123', 40000, NULL, 'New', '12221', 1, 42, 35000, '2019-05-20 04:21:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -206,7 +217,7 @@ CREATE TABLE `product_type` (
 --
 
 INSERT INTO `product_type` (`Id`, `Type_name`, `Size_type`, `Description`, `Create_at`, `Update_at`) VALUES
-(1, 'Shirt', 'Atasan', 'Erigo', '2019-02-28 03:00:19', NULL);
+(1, 'Shirt', 'Atasan', 'Erigo', '2019-02-28 03:00:19', '2019-05-20 11:13:46');
 
 -- --------------------------------------------------------
 
@@ -246,7 +257,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`Id`, `Usergrup_id`, `Username`, `Password`, `IsLogin`, `LastLogin`, `Create_at`, `Update_at`) VALUES
-(1, 1, 'admin', 'pass@word5', 1, '1551752193', '2019-02-28 02:55:49', NULL);
+(1, 1, 'admin', 'pass@word5', 0, '1558335792', '2019-02-28 02:55:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -309,20 +320,19 @@ ALTER TABLE `member`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Indexes for table `pembelian`
+--
+ALTER TABLE `pembelian`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_product` (`id_product`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `fk_barang3` (`Category_id`),
   ADD KEY `product_ibfk_2` (`Product_type_id`);
-
---
--- Indexes for table `product_stok`
---
-ALTER TABLE `product_stok`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `Id` (`Id`),
-  ADD KEY `product_stok_ibfk_1` (`Product_id`);
 
 --
 -- Indexes for table `product_type`
@@ -375,7 +385,7 @@ ALTER TABLE `details`
 -- AUTO_INCREMENT for table `imageproduct`
 --
 ALTER TABLE `imageproduct`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `member`
@@ -384,16 +394,16 @@ ALTER TABLE `member`
   MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `pembelian`
+--
+ALTER TABLE `pembelian`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `product_stok`
---
-ALTER TABLE `product_stok`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product_type`
@@ -438,17 +448,17 @@ ALTER TABLE `imageproduct`
   ADD CONSTRAINT `imageproduct_ibfk_1` FOREIGN KEY (`Product_id`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `pembelian`
+--
+ALTER TABLE `pembelian`
+  ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `product` (`Id`);
+
+--
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Category_id`) REFERENCES `category` (`Id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`Product_type_id`) REFERENCES `product_type` (`Id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `product_stok`
---
-ALTER TABLE `product_stok`
-  ADD CONSTRAINT `product_stok_ibfk_1` FOREIGN KEY (`Product_id`) REFERENCES `product` (`Id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`

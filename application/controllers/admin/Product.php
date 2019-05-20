@@ -30,6 +30,51 @@ class Product extends CI_Controller {
         $this->template->load('template','admin/product/edit_product',$data);
     }
 
+    // function addProduct()
+    // {
+    //    $productname = $this->input->post('productname');
+    //    $category    = $this->input->post('category');
+    //    $typeproduct = $this->input->post('typeproduct');
+    //    $merk        = $this->input->post('merk');
+    //    $description = $this->input->post('description');
+    //    $price       = $this->input->post('price');
+    //    $price_S     = $this->input->post('price_supliyer');
+    //    $status      = $this->input->post('status');
+    //    $dataProduct = array('Product_name'=>$productname,
+    //                         'Category_id'=>$category,
+    //                         'Merk'=>$merk,
+    //                         'Description'=>$description,
+    //                         'Product_type_id'=>$typeproduct,
+    //                         'Price'=>$price,
+    //                         'Harga_supliyer'=>$price_S,
+    //                         'Status_item'=>$status);
+    //    $typesize    = $this->Model_barang->M_tampil_data_type_byId($typeproduct);
+    //    $typename    = $typesize->Size_type;
+    //     if($typename=="Atasan")
+    //         {
+    //             $stok=array('XL','L','M','S');
+    //         }
+    //     else if($typename=="Bawahan")
+    //             {
+    //                 $stok=array('26','27','28','29','30','31','32','33','34','35','36');
+    //             }
+    //     else 
+    //             {
+    //                 $stok=array('31','32','33','34','35','36');
+    //             }
+    //    $insert     = $this->Model_barang->M_addProduct($dataProduct,$stok);
+    //     if($insert)
+    //     {
+    //         $this->session->set_flashdata('Status','Input Succes');
+    //         redirect('admin/Product/viewAddProduct');
+    //     }
+    //     else
+    //     {
+    //         $this->session->set_flashdata('Status','Input Failed');
+    //         redirect('admin/Product/viewAddProduct');
+    //     }
+    // }
+
     function addProduct()
     {
        $productname = $this->input->post('productname');
@@ -38,6 +83,7 @@ class Product extends CI_Controller {
        $merk        = $this->input->post('merk');
        $description = $this->input->post('description');
        $price       = $this->input->post('price');
+       $price_S     = $this->input->post('price_supliyer');
        $status      = $this->input->post('status');
        $dataProduct = array('Product_name'=>$productname,
                             'Category_id'=>$category,
@@ -45,21 +91,8 @@ class Product extends CI_Controller {
                             'Description'=>$description,
                             'Product_type_id'=>$typeproduct,
                             'Price'=>$price,
+                            'Harga_supliyer'=>$price_S,
                             'Status_item'=>$status);
-       $typesize    = $this->Model_barang->M_tampil_data_type_byId($typeproduct);
-       $typename    = $typesize->Size_type;
-        if($typename=="Atasan")
-            {
-                $stok=array('XL','L','M','S');
-            }
-        else if($typename=="Bawahan")
-                {
-                    $stok=array('26','27','28','29','30','31','32','33','34','35','36');
-                }
-        else 
-                {
-                    $stok=array('31','32','33','34','35','36');
-                }
        $insert     = $this->Model_barang->M_addProduct($dataProduct,$stok);
         if($insert)
         {

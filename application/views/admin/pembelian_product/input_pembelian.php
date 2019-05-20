@@ -7,37 +7,13 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
                             <div class="body">
-                            <?php echo form_open('admin/Product/addProduct'); ?>
+                            <?php echo form_open('admin/Pembelian/addPembelian'); ?>
                                 <div class="row clearfix">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                              <label class="form-label">Product Name</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="productname" placeholder="Enter Product Name">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <div>
-                                                <label class="form-label">Category</label><br>
-                                                <select name="category">
-                                                <?php foreach($dataCategory as $data) {?>
-                                                    <option value="<?php echo $data->Id?>"><?php echo $data->Category_name?></option>
-                                                <?php }?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <div>
-                                                <label class="form-label">Type</label><br>
-                                                <select name="typeproduct">
-                                                <?php foreach($dataType as $data) {?>
-                                                    <option value="<?php echo $data->Id?>"><?php echo $data->Type_name?></option>
-                                                <?php }?>
-                                                </select>
+                                                <input readonly type="text" class="form-control" name="productname" value="<?= $product->Product_name?>">
                                             </div>
                                         </div>
                                     </div>
@@ -45,46 +21,29 @@
                                         <div class="form-group">
                                               <label class="form-label">Merk</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="merk" placeholder="Enter Merk" />
+                                                <input type="text" class="form-control" name="merk" value="<?= $product->Merk?>" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                              <label class="form-label">Description</label>
+                                                <label class="form-label">Harga Supliyer</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="description" placeholder="Enter Description" />
+                                                <input type="text" class="form-control" name="harga_supliyer" value="<?= $product->Harga_supliyer?>" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                                <label class="form-label">Price Supliyer</label>
+                                                <label class="form-label">Jumlah Beli</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="price_supliyer" placeholder="Enter Price" />
+                                                <input type="number" class="form-control" name="jumlah_beli"  />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                                <label class="form-label">Price</label>
-                                            <div class="form-line">
-                                                <input type="text" class="form-control" name="price" placeholder="Enter Price" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                               <label class="form-label">Status</label><br>
-                                            <select name="status">
-                                                <option value="None">None</option>
-                                                <option value="New">New</option>
-                                                <option value="Sale">Sale</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-sm-12" style="margin-bottom:5px !important">
-                                        <button type="submit" class="btn btn-primary">ADD</button>
+                                        <button type="submit" name="id" value="<?= $product->Id?>" class="btn btn-primary">Beli</button>
                                     </div>
                                 </div>
                                 </form >
