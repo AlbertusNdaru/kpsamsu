@@ -5,6 +5,7 @@ class Image_product extends CI_Controller{
         parent::__construct();
         $this->load->model('Model_image');
         $this->load->model('Model_barang');
+        $this->load->model('Model_penjualan_admin');
         isLoginSessionExpired();
     }
     

@@ -6,6 +6,7 @@ class Pembelian  extends CI_Controller {
 		parent::__construct();
         $this->load->model('Model_pembelian');
         $this->load->model('Model_barang');
+        $this->load->model('Model_penjualan_admin');
         isLoginSessionExpired();
     }
 
