@@ -12,6 +12,7 @@ class Product_type extends CI_Controller {
     function index()
     {     
         $data['record']     =    $this->Model_barang->M_tampil_data_type();
+        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
         $this->template->load('template','admin/product_type/view_product_type',$data);
     }
     

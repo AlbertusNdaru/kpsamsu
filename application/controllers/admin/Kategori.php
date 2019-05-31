@@ -10,6 +10,7 @@ class Kategori extends CI_Controller{
     function index()
     {
         $data['record']     =    $this->Model_kategori->M_tampil_data();
+        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
         $this->template->load('template','admin/kategori/view_category',$data);
     }
 
@@ -21,6 +22,7 @@ class Kategori extends CI_Controller{
     function viewEditKategori($id)
     {   
         $data['record']= $this->Model_kategori->M_tampil_data_by_id($id);
+        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
         $this->template->load('template','admin/Kategori/edit_category',$data);
     }
     

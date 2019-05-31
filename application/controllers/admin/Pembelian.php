@@ -13,12 +13,14 @@ class Pembelian  extends CI_Controller {
     function index()
     {
         $dataProduct['record'] = $this->Model_barang->M_tampil_data();  
+        $dataProduct['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
         $this->template->load('template','admin/pembelian_product/view_pembelian',$dataProduct);
     }
 
     function viewPembelian($id)
     {   
         $dataProduct['product'] = $this->Model_barang->M_tampil_data_by_id($id);    
+        $dataProduct['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
         $this->template->load('template','admin/pembelian_product/input_pembelian',$dataProduct);
     }
 

@@ -11,13 +11,11 @@ class Image_product extends CI_Controller{
     function index()
     {
         $data['record']     =    $this->Model_image->M_tampil_data();
+        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
         $this->template->load('template','admin/image_product/input_image',$data);
     }
 
-    function viewAddImageProduct()
-    {
-        $this->template->load('template','admin/kategori/input_category');
-    }              
+               
     
     function addImage_product()
     {

@@ -22,6 +22,7 @@ class Product extends CI_Controller {
     {
         $data['dataCategory'] = $this->Model_kategori->M_tampil_data();
         $data['dataType'] = $this->Model_barang->M_tampil_data_type();
+        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
         $this->template->load('template','admin/product/input_product',$data);
     }
 
@@ -30,6 +31,7 @@ class Product extends CI_Controller {
         $data['dataCategory'] = $this->Model_kategori->M_tampil_data();
         $data['dataType'] = $this->Model_barang->M_tampil_data_type();
         $data['record']= $this->Model_barang->M_tampil_data_by_id($id);
+        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
         $this->template->load('template','admin/product/edit_product',$data);
     }
 
