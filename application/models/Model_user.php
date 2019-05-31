@@ -1,6 +1,43 @@
 <?php
 class Model_user extends ci_model
 {
+
+    function loginuser($email,$password)
+    {
+        $this->db->select('*');
+        $this->db->from('member');
+        $this->db->where('email',$email);
+        $this->db->where('password',$password);
+        $chek = $this->db->get();
+        $hasil=$chek->row();
+        if($hasil)
+        {
+            if ($hasil->FailedLogin >=3 ) 
+            {
+                return 2;
+            }
+            else if($hasil->isLogin == 'Y' )
+            {
+                return 1;
+            }
+            else if ($hasil->isLogin != 'Y' && $hasil->FailedLogin<3)
+            {
+                $query = "update member set FailedLogin=0, isLogin='Y', lastlogin=".time()."  where Email='".$email."'";
+                $this->db->query($query);
+                $this->session->set_userdata('userdata',$hasil);
+                $this->session->set_userdata('loggedin_time',time());
+                return 3;
+            }
+        }
+        else
+        {
+            $query = "update member set FailedLogin=FailedLogin+1 where Email='".$email."'";
+            $this->db->query($query);
+            return 0;
+        }
+    
+    }
+
     function register($datauser)
     {
         $this->db->select('email');
@@ -45,26 +82,17 @@ class Model_user extends ci_model
 
     function registeruser($datauser)
     {
-        $this->db->select('email');
+        $this->db->select('Email');
         $this->db->from('member');
-        $this->db->where('email',$datauser['email']);
+        $this->db->where('Email',$datauser['Email']);
         $chek = $this->db->get();
         $data=$chek->row();
         if ($data)
         {
-            return 'email sudah ada';
+            return 1;
         }
         else
         {
-            $query = "SELECT max(id_member) as maxKode from member";
-            $check = $this->db->query($query);
-            $data = $check->row();
-            $id_member = $data->maxKode;
-            $noUrut = (int) substr($id_member,3,3);
-            $noUrut++;
-            $char = "MBR";
-            $newID = $char. sprintf("%03s",$noUrut);
-            $datauser['id_member']=$newID;
             $this->db->insert('member',$datauser);
             return 0;
         }

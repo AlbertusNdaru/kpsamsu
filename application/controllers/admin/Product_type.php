@@ -6,6 +6,7 @@ class Product_type extends CI_Controller {
 		parent::__construct();
         $this->load->model('Model_barang');
         $this->load->model('Model_kategori');
+        isLoginSessionExpired();
 	}
 
     function index()

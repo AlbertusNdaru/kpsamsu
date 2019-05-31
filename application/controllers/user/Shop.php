@@ -11,60 +11,40 @@ class Shop extends CI_Controller{
     
     function index()
     {   
-        $data['all'] = $this->Model_barang->M_productFeatured_all();
-		$data['man'] = $this->Model_barang->M_productFeatured_Man();
-        $data['woman'] = $this->Model_barang->M_productFeatured_Woman();
-        $data['carousel'] = $this->Model_carousel->M_tampil_data();
-        $this->load->view('user/user_index',$data);
-    }
-
-    function viewAddCategory()
-    {
-        $this->template->load('template','admin/kategori/input_category');
-    }
-    
-    function addCategory()
-    {
-        $categoryname    = $this->input->post('categoryname');
-        $description = $this->input->post('description');
-        $dataCategory    = array('Category_name'=>$categoryname,'Description'=>$description);
-        $insert = $this->Model_kategori->M_addCategory($dataCategory);
-        if($insert)
+        $barang['all'] = $this->Model_barang->M_tampil_data();
+        $total=0;
+        if(isset($_SESSION['cart']))
         {
-            $this->session->set_flashdata('Status','Input Succes');
-            redirect('Kategori/viewAddCategory');
+            foreach($_SESSION['cart'] as $key => $data)
+            {
+                $total = $total+$data['Price']*$data['Qty'];
+            }
+            $barang['total'] = $total;
         }
         else
         {
-            $this->session->set_flashdata('Status','Input Failed');
-            redirect('Kategori/viewAddCategory');
+            $barang['total'] = 0;
         }
+     $this->load->view('user/user_index',$barang);
     }
 
-    function edit()
-    {
-        if (ceksession()){
-        if(isset($_POST['submit'])){
-            // proses kategori
-            $this->Model_kategori->edit();
-            redirect('kategori');
+    function cheeckout()
+    {   $total=0;
+        if(isset($_SESSION['cart']))
+        {
+            foreach($_SESSION['cart'] as $key => $data)
+            {
+                $total = $total+$data['Price']*$data['Qty'];
+            }
+            $data['total'] = $total;
         }
-        else{
-            $id=  $this->uri->segment(3);
-            $data['record']=  $this->Model_kategori->get_one($id)->row();
-            //print_r($data['record']->id_kategori);
-            //$this->load->view('kategori/form_edit',$data);
-            $this->template->load('template','admin/kategori/edit_kategori',$data);
+        else
+        {
+            $data['total'] = 0;
         }
+        $this->load->view('user/checkout',$data);
     }
-    }
+    
 
-    function delete()
-    {
-        if (ceksession()){
-        $id=  $this->uri->segment(3);
-        $this->Model_kategori->delete($id);
-        redirect('kategori');
-        }
-    }
+   
 }

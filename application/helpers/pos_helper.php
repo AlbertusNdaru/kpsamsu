@@ -26,7 +26,7 @@ function isLoginSessionExpired() {
          
            
             session_destroy();
-            redirect('auth/loginadmin');
+            redirect('admin/Login/loginadmin');
         } 
         else
         {
@@ -37,14 +37,14 @@ function isLoginSessionExpired() {
    
 }
 
-function ceklastlogin($email=null)
+function ceklastlogin($username=null)
 {  $CI= & get_instance();
     $login_session_duration = 300; 
-    $lastlogin = $CI->db->query("SELECT lastlogin from user where email='".$email."'")->row() ;
+    $lastlogin = $CI->db->query("SELECT LastLogin from user where Username='".$username."'")->row() ;
     if($lastlogin){
         if (abs(time()-($lastlogin->lastlogin))>$login_session_duration)
         {
-        $CI->db->query("update user set isLogin='N' where email='".$email."'"); 
+        $CI->db->query("update user set isLogin='0' where Username='".$username."'"); 
         return true;
         }
     }
@@ -83,7 +83,7 @@ function isLoginSessionExpireduser() {
          
             $CI->db->query("update member set isLogin='N', gagallogin=0 where id_member='".$_SESSION['userdata']->id_member."'") ;
             session_destroy();
-            redirect('penjualan');
+            redirect('user/Shop');
         } 
         else
         {
@@ -100,7 +100,7 @@ function get_current_date()
     $date->setTimezone(new DateTimeZone('Asia/Jakarta'));
     if(isset($format))
         return $date->format($format);
-    return $date->format('Y-m-d h:i:s');
+    return $date->format('Y-m-d H:i:s');
 }
 
 function base_url_shop()

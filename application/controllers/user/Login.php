@@ -4,63 +4,118 @@ class Login extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->model('Model_barang');
-        isLoginSessionExpired();
+        $this->load->model('Model_penjualan');
+        $this->load->model('Model_user');
     }
     
-    function index()
+    function loginuser()
     {
-        $data['record']     =    $this->Model_kategori->tampil_data();
-        $this->template->load('template','admin/kategori/view_category',$data);
+        if(isset($_SESSION['userdata']))
+        {
+            redirect('user/Shop');
+        }
+        else
+        { 
+            $this->load->view('user/login');
+        }
     }
 
-    function viewAddCategory()
+    function logincekout()
     {
-        $this->template->load('template','admin/kategori/input_category');
+        $this->load->view('user/login');
     }
-    
-    function addCategory()
+
+    function viewFormRegister()
     {
-        $categoryname    = $this->input->post('categoryname');
-        $description = $this->input->post('description');
-        $dataCategory    = array('Category_name'=>$categoryname,'Description'=>$description);
-        $insert = $this->Model_kategori->M_addCategory($dataCategory);
-        if($insert)
+        $this->load->view('user/register');
+    }
+
+    function login()
+    {
+
+        $email   =   $this->input->post('email');
+        $password   =   $this->input->post('pass');
+        if (ceklastloginuser($email))
+            {
+            $hasil=  $this->Model_user->loginuser($email,$password);
+            if (isset($_SESSION['cart']) && isset($_SESSION['userdata']))
+            {
+                $datatransaksi = $this->session->userdata('cart');
+                foreach($datatransaksi as $data)
+                {
+                    $this->Model_penjualan->addDetailFromCart($data);
+                }
+            }
+            if($hasil==0)
+            {   
+                $this->session->set_flashdata('Status','Email & Password Tidak Cocok');
+                redirect('user/Login/loginuser');
+        
+            }
+            else if($hasil==1)
+            {
+                $this->session->set_flashdata('Status','Akun telah digunakan untuk Login');
+                redirect('user/Login/loginuser');
+            }
+            else if($hasil==2)
+            {
+                $this->session->set_flashdata('Status','Akun terblokir. SIlahkan klik lupa password');
+                redirect('user/Login/loginuser');
+            }
+
+            else 
+            {
+                redirect('user/Shop');
+            }
+        }
+                   
+    }
+
+    function logout()
+    {
+        $this->db->query("update member set isLogin='N', FailedLogin=0, lastlogin=0 where Id='".$_SESSION['userdata']->Id."'") ;
+        $this->emptychartfromlogin();
+        $this->session->sess_destroy();
+        redirect('user/Shop');
+    }
+
+    function register()
+    {
+       
+        $Member_name = $_POST['name_member'];
+        $Address = $_POST['alamat'];
+        $City = $_POST['kota'];
+        $Province = $_POST['propinsi'] ;
+        $Email=$_POST['email'];
+        $Password =$_POST['pass'];
+        $Question =$_POST['pertanyaan'];
+        $Answer =$_POST['jawaban'];
+        $datauser = array('Member_name'=>$Member_name,
+                          'Address'=>$Address,
+                          'Email'=>$Email,
+                          'Password'=>$Password,
+                          'Question'=>$Question,
+                          'Answer'=>$Answer,
+                          'City'=>$City,
+                          'Province'=>$Province,
+                          'Question'=>$Question);
+        $hasil=  $this->Model_user->registeruser($datauser); 
+        if($hasil==1)
         {
-            $this->session->set_flashdata('Status','Input Succes');
-            redirect('Kategori/viewAddCategory');
+            $this->session->set_flashdata('Status','Email Sudah Terdaftar');
+            redirect('user/Login/viewFormRegister');
         }
         else
         {
-            $this->session->set_flashdata('Status','Input Failed');
-            redirect('Kategori/viewAddCategory');
+            redirect('user/Login/loginuser');
         }
     }
-    
-    function edit()
+
+    function emptychartfromlogin()
     {
-        if (ceksession()){
-        if(isset($_POST['submit'])){
-            // proses kategori
-            $this->Model_kategori->edit();
-            redirect('kategori');
-        }
-        else{
-            $id=  $this->uri->segment(3);
-            $data['record']=  $this->Model_kategori->get_one($id)->row();
-            //print_r($data['record']->id_kategori);
-            //$this->load->view('kategori/form_edit',$data);
-            $this->template->load('template','admin/kategori/edit_kategori',$data);
-        }
+        unset($_SESSION['cart']);
+        $Member_id = $_SESSION['userdata']->Id;
+        $this->Model_penjualan->emptychartfromlogin($Member_id);
     }
-    }
-    
-    
-    function delete()
-    {
-        if (ceksession()){
-        $id=  $this->uri->segment(3);
-        $this->Model_kategori->delete($id);
-        redirect('kategori');
-        }
-    }
+
 }

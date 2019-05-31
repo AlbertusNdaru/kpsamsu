@@ -9,7 +9,7 @@
                             <div class="body">
                             <?php echo form_open('admin/Pembelian/addPembelian'); ?>
                                 <div class="row clearfix">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                              <label class="form-label">Product Name</label>
                                             <div class="form-line">
@@ -21,7 +21,7 @@
                                         <div class="form-group">
                                               <label class="form-label">Merk</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="merk" value="<?= $product->Merk?>" />
+                                                <input readonly type="text" class="form-control" name="merk" value="<?= $product->Merk?>" />
                                             </div>
                                         </div>
                                     </div>
@@ -29,7 +29,7 @@
                                         <div class="form-group">
                                                 <label class="form-label">Harga Supliyer</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="harga_supliyer" value="<?= $product->Harga_supliyer?>" />
+                                                <input readonly type="text" class="form-control" name="harga_supliyer" value="<?= $product->Harga_supliyer?>" />
                                             </div>
                                         </div>
                                     </div>

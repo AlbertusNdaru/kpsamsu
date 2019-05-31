@@ -33,11 +33,15 @@
         </ul>
         <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">widgets</i>
-            <span>Pembelian Product</span>
+            <span>TRANSAKSI</span>
         </a>
         <ul class="ml-menu">
             <li>
             <a href="<?= base_url('admin/Pembelian')?>">Pembelian</a>
-            </ul>
+            </li>
+            <li>
+            <a href="<?= base_url('')?>">Penjualan</a>
+            </li>
+        </ul>
     </li>
 </ul>

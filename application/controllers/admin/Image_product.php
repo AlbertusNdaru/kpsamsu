@@ -5,6 +5,7 @@ class Image_product extends CI_Controller{
         parent::__construct();
         $this->load->model('Model_image');
         $this->load->model('Model_barang');
+        isLoginSessionExpired();
     }
     
     function index()
@@ -30,7 +31,7 @@ class Image_product extends CI_Controller{
     public function aksi_upload($id,$files)
     {
         $images = array();
-        $config['upload_path']          = './assets/img_product/';
+        $config['upload_path']          = './assets/shop/images/';
         $config['allowed_types']        = '*';
         $this->load->library('upload', $config);
         foreach($files['name'] as $key => $image)

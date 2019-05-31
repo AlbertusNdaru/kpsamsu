@@ -4,7 +4,7 @@ class Model_barang extends ci_model{
     
     function M_tampil_data()
     {
-        $query= "SELECT a.* ,b.Category_name, c.Type_name FROM product as a inner join category as b on b.Id=a.Category_id inner join product_type as c on c.Id=a.Product_type_id ";
+        $query= "SELECT a.* ,b.Category_name, c.Type_name, d.Photo_name FROM product as a inner join category as b on b.Id=a.Category_id inner join product_type as c on c.Id=a.Product_type_id inner join imageproduct as d on d.Product_id = a.Id";
         return $this->db->query($query)->result();
     }
 
@@ -69,7 +69,6 @@ class Model_barang extends ci_model{
     function M_deleteProduct($Id)
     {
        $this->M_deleteImage($Id);
-       $this->M_deleteStok($Id);
        $this->db->where('Id',$Id);
        $delete= $this->db->delete('product');
        return $delete;
@@ -82,17 +81,12 @@ class Model_barang extends ci_model{
         $img=$this->db->query($query)->result();
         foreach($img as $r)
         {
-            unlink('assets/img_product/'.$r->Photo_name);
+            unlink('assets/shop/images/'.$r->Photo_name);
         }
         $this->db->where('Product_id',$id);
         $this->db->delete('imageproduct');
     }
 
-    function M_deleteStok($id)
-    {
-        $this->db->where('Product_id',$id);
-        $this->db->delete('product_stok');
-    }
 
     function M_deleteType($id)
     {

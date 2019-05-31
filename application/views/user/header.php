@@ -1,58 +1,183 @@
-<header class="header">
-      <div class="header__top">
-        <div class="container-fluid">
-         
-        </div>
-      </div>
-      <nav class="navigation">
-        <div class="container-fluid">
-          <div class="navigation__column left">
-            <div class="header__logo"><a class="ps-logo" href="index.html"><img src="<?= base_url_shop()?>images/logo.png" alt=""></a></div>
-          </div>
-          <div class="navigation__column center">
-                <ul class="main-menu menu">
-                  <li class="menu-item menu-item-has-children dropdown"><a href="<?= base_url()?>">Home</a>
-                  </li>
-                  <li class="menu-item menu-item-has-children dropdown"><a href="<?= base_url()?>">Shop</a>
-                  </li>
-                </ul>
-          </div>
-          <div class="navigation__column right">
-            <form class="ps-search--header" action="do_action" method="post">
-              <input class="form-control" type="text" placeholder="Search Product…">
-              <button><i class="ps-icon-search"></i></button>
-            </form>
-            <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
-              <div class="ps-cart__listing">
-                <div class="ps-cart__content">
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<?= base_url_shop()?>images/cart-preview/1.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Amazin’ Glazin’</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<?= base_url_shop()?>images/cart-preview/2.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">The Crusty Croissant</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<?= base_url_shop()?>images/cart-preview/3.jpg" alt=""></div>
-                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">The Rolling Pin</a>
-                      <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="ps-cart__total">
-                  <p>Number of items:<span>36</span></p>
-                  <p>Item Total:<span>£528.00</span></p>
-                </div>
-                <div class="ps-cart__footer"><a class="ps-btn" href="cart.html">Check out<i class="ps-icon-arrow-left"></i></a></div>
-              </div>
-            </div>
-            <div class="menu-toggle"><span></span></div>
-          </div>
-        </div>
-      </nav>
-</header>
+<!--header strat here-->
+<div class="header">
+	<div class="container" style="width : 100% !important;">
+		<div class="header-main">
+			<div class="top-nav">
+				<div class="content white">
+	              <nav class="navbar navbar-default" role="navigation">
+					    <div class="navbar-header">
+					        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						        <span class="sr-only">Toggle navigation</span>
+						        <span class="icon-bar"></span>
+						        <span class="icon-bar"></span>
+						        <span class="icon-bar"></span>
+					        </button>
+					        <div class="navbar-brand logo">
+								<a href="<?= base_url('user/Shop')?>"><img src="<?php echo base_url_shop()?>images/logo1.png" alt=""></a>
+							</div>
+					    </div>
+					    <!--/.navbar-header-->
+					 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					        <ul class="nav navbar-nav">
+					        	   <li><a href="<?= base_url('user/Shop')?>">Home</a></li>
+						             <li class="dropdown">
+						        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <b class="caret"></b></a>
+						            <ul class="dropdown-menu multi-column columns-3">
+							            <div class="row">
+								            <div class="col-sm-4">
+									            <ul class="multi-column-dropdown">
+										            <li><a href="product-m.html">Accessories</a></li>
+										            <li><a href="product-m.html">Bags</a></li>
+										            <li><a href="product-m.html">Cap & Hats</a></li>
+										            <li><a href="product-m.html">Tops</a></li>
+										            <li><a href="product-m.html">Jackets & Coats</a></li>
+										            <li><a href="product-m.html">wallets</a></li>
+										            <li><a href="product-m.html">Jeans</a></li>
+									            </ul>
+								            </div>
+								            <div class="col-sm-4">
+									            <ul class="multi-column-dropdown">
+										            <li><a href="product-m.html">Shirts</a></li>
+										            <li><a href="product-m.html">Shoes,Boots</a></li>
+										            <li><a href="product-m.html">Shorts</a></li>
+										             <li><a href="product-m.html">Watches</a></li>
+										            <li><a href="product-m.html">Sunglasses</a></li>
+										             <li><a href="product-m.html">Bands</a></li>
+										            <li><a href="product-m.html">Swimwear</a></li>
+									            </ul>
+								            </div>
+								            <div class="col-sm-4">
+									            <ul class="multi-column-dropdown">
+										            <li><a href="product-m.html">Jewellery</a></li>
+										            <li><a href="product-m.html">Jack & Jones</a></li>
+										            <li><a href="product-m.html">Ray-Ban</a></li>
+										             <li><a href="product-m.html">Lipsticks</a></li>
+										            <li><a href="product-m.html">Longer wear</a></li>
+										            <li><a href="product-m.html">sarees</a></li>
+										            <li><a href="product-m.html">Nike</a></li>
+									            </ul>
+								            </div>
+							            </div>
+						            </ul>
+						        </li>
+						            <li class="dropdown">
+						        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Women <b class="caret"></b></a>
+						            <ul class="dropdown-menu multi-column columns-3">
+							            <div class="row">
+								            <div class="col-sm-4">
+									            <ul class="multi-column-dropdown">
+										            <li><a href="product.html">Accessories</a></li>
+										            <li><a href="product.html">Bags</a></li>
+										            <li><a href="product.html">Cap & Hats</a></li>
+										            <li><a href="product.html">Tops</a></li>
+										            <li><a href="product.html">Jackets & Coats</a></li>
+										            <li><a href="product.html">wallets</a></li>
+										            <li><a href="product.html">Jeans</a></li>
+									            </ul>
+								            </div>
+								            <div class="col-sm-4">
+									            <ul class="multi-column-dropdown">
+										            <li><a href="product.html">Shirts</a></li>
+										            <li><a href="product.html">Shoes,Boots</a></li>
+										            <li><a href="product.html">Shorts</a></li>
+										             <li><a href="product.html">Watches</a></li>
+										            <li><a href="product.html">Sunglasses</a></li>
+										             <li><a href="product.html">Bands</a></li>
+										            <li><a href="product.html">Swimwear</a></li>
+									            </ul>
+								            </div>
+								            <div class="col-sm-4">
+									            <ul class="multi-column-dropdown">
+										            <li><a href="product.html">Jewellery</a></li>
+										            <li><a href="product.html">Jack & Jones</a></li>
+										            <li><a href="product.html">Ray-Ban</a></li>
+										             <li><a href="product.html">Lipsticks</a></li>
+										            <li><a href="product.html">Longer wear</a></li>
+										            <li><a href="product.html">sarees</a></li>
+										            <li><a href="product.html">Nike</a></li>
+									            </ul>
+								            </div>
+							            </div>
+						            </ul>
+						        </li>
+						         <li class="dropdown">
+						        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Kids<b class="caret"></b></a>
+						            <ul class="dropdown-menu multi-column columns-3">
+							            <div class="row">
+								            <div class="col-sm-4">
+									            <ul class="multi-column-dropdown">
+										            <li><a href="product-k.html">Accessories</a></li>
+										            <li><a href="product-k.html">Bags</a></li>
+										            <li><a href="product-k.html">Cap & Hats</a></li>
+										            <li><a href="product-k.html">Tops</a></li>
+										            <li><a href="product-k.html">Jackets & Coats</a></li>
+										            <li><a href="product-k.html">wallets</a></li>
+										            <li><a href="product-k.html">Jeans</a></li>
+									            </ul>
+								            </div>
+								            <div class="col-sm-4">
+									            <ul class="multi-column-dropdown">
+										            <li><a href="product-k.html">Shirts</a></li>
+										            <li><a href="product-k.html">Shoes,Boots</a></li>
+										            <li><a href="product-k.html">Shorts</a></li>
+										             <li><a href="product-k.html">Watches</a></li>
+										            <li><a href="product-k.html">Sunglasses</a></li>
+										             <li><a href="product-k.html">Bands</a></li>
+										            <li><a href="product-k.html">Swimwear</a></li>
+									            </ul>
+								            </div>
+								            <div class="col-sm-4">
+									            <ul class="multi-column-dropdown">
+										            <li><a href="product-k.html">Jewellery</a></li>
+										            <li><a href="product-k.html">Jack & Jones</a></li>
+										            <li><a href="product-k.html">Ray-Ban</a></li>
+										             <li><a href="product-k.html">Lipsticks</a></li>
+										            <li><a href="product-k.html">Longer wear</a></li>
+										            <li><a href="product-k.html">sarees</a></li>
+										            <li><a href="product-k.html">Nike</a></li>
+									            </ul>
+								            </div>
+							            </div>
+						            </ul>
+						        </li>
+						        <li><a href="contact.html">Contact</a></li>
+					        </ul>
+					    </div>
+					    <!--/.navbar-collapse-->
+					</nav>
+					<!--/.navbar-->
+				</div>
+			</div>
+			<div class="header-right">
+				<div class="search">
+					<div class="search-text">
+					    <input class="serch" type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"/>
+					</div>
+					<div class="cart box_1">
+						<a href="<?= base_url('user/Shop/cheeckout')?>">
+						<h3>
+							<img src="<?php echo base_url_shop()?>images/cart.png" alt=""/>
+							<div class="total">
+							<span hidden class="simpleCart_total"></span>
+							<span id="totalchart"></span>
+					</div>
+						</h3>
+						</a>
+						<p><a href="javascript:;" class="simpleCart_empty" onclick="emptychart('FALSE')">Empty Cart</a></p>
+					</div>    
+					<div class="head-signin">
+						<h5><a href="<?= base_url('user/Login/loginuser')?>"><i class="hd-dign"></i>Sign in</a></h5>
+					</div>       
+					<div class="head-signin">
+						<h5><a href="<?= base_url('user/Login/viewFormRegister')?>"><i class="hd-dign"></i>Sign up</a></h5>
+					</div>         
+                     <div class="clearfix"> </div>					
+				</div>
+			</div>
+		 <div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<script>
+</script>
+<!--header end here-->

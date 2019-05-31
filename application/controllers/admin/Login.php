@@ -4,7 +4,6 @@ class Login extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->model('Model_login');
-         
         
     }
 
@@ -42,15 +41,18 @@ class Login extends CI_Controller{
     {
             $username   =   $this->input->post('username');
             $password   =   $this->input->post('password');
-            $hasil=  $this->Model_login->M_login($username,$password);
-            if($hasil==3)
-            {   
-                redirect('admin/Product');
-            }
-            else
+            if(ceklastlogin($username))
             {
-                $this->session->set_flashdata('Error','Username and Password Incorect'); 
-                redirect('admin');
+                $hasil=  $this->Model_login->M_login($username,$password);
+                if($hasil==3)
+                {   
+                    redirect('admin/Product');
+                }
+                else
+                {
+                    $this->session->set_flashdata('Error','Username and Password Incorect'); 
+                    redirect('admin');
+                }
             }
     }
     

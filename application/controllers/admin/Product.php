@@ -6,11 +6,14 @@ class Product extends CI_Controller {
 		parent::__construct();
         $this->load->model('Model_barang');
         $this->load->model('Model_kategori');
+        $this->load->model('Model_penjualan_admin');
+        isLoginSessionExpired();
 	}
 
 	function index()
     {     
         $data['record']     =    $this->Model_barang->M_tampil_data();
+        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
         $this->template->load('template','admin/product/view_product',$data);
     }
 
@@ -114,6 +117,8 @@ class Product extends CI_Controller {
         $description      = $this->input->post('description');
         $product_type_id  = $this->input->post('product_type_id');
         $status           = $this->input->post('status');
+        $price            = $this->input->post('harga');
+        $harga_supliyer   = $this->input->post('harga_supliyer');
         $update_at        = get_current_date();
         $id               = $this->input->post('id');
         $dataEdit= array('Product_name'=>$productname,
@@ -122,6 +127,8 @@ class Product extends CI_Controller {
                          'Description'=>$description,
                          'Product_type_id'=>$product_type_id,
                          'Update_at'=>$update_at,
+                         'Harga_supliyer'=>$harga_supliyer,
+                         'Price'=>$price,
                          'Status_item'=>$status);
         $edit=$this->Model_barang->M_editProduct($dataEdit,$id);
         if($edit)
