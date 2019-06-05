@@ -10,9 +10,37 @@ class Penjualan  extends CI_Controller {
         isLoginSessionExpired();
     }
 
-    function getdataPenjualan()
+    function index()
     {
+        $dataPenjualan['record'] = $this->Model_penjualan_admin->getDataPenjualan();
+        $dataPenjualan['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+        $this->template->load('template','admin/transaksi/view_transaksi',$dataPenjualan);
+    }
 
+    function updateStatusTransaksi()
+    {
+        $Id = $_GET['Id'];
+        $dataTransaksi= array('Stats'=>1,
+                              'Update_at' => get_current_date());
+        $Validate = $this->Model_penjualan_admin->updateStatusTransaksi($dataTransaksi,$Id);
+        if ($Validate)
+        {
+            $this->session->set_flashdata('Status','Acc Succes');
+            redirect('admin/Penjualan');
+        }
+        else
+        {
+            $this->session->set_flashdata('Status','Acc Failed');
+            redirect('admin/Penjualan');
+        }
+    }
+
+    function getDetailPenjualanById()
+    {
+        $Id = $_GET['Id'];
+        $dataPenjualan['record'] = $this->Model_penjualan_admin->getDetailPenjualanById($Id);
+        $dataPenjualan['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+        $this->template->load('template','admin/transaksi/view_detail_transaksi',$dataPenjualan);
     }
 
 }

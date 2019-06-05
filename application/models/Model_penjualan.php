@@ -1,6 +1,7 @@
 <?php
 class Model_penjualan extends ci_model{
-
+ 
+   
     function addDetailFromCart($databarangtransaksi)
     {
         $Product_id=$databarangtransaksi['Product_id'];

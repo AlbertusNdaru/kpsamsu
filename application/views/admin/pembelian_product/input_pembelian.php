@@ -41,6 +41,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div>
+                                                <label class="form-label">Supliyer</label><br>
+                                                <select name="Supliyer_id">
+                                                <?php foreach($Supliyer as $data) {?>
+                                                    <option value="<?php echo $data->Id?>"><?php echo $data->Nama?></option>
+                                                <?php }?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                    
                                     <div class="col-sm-12" style="margin-bottom:5px !important">
                                         <button type="submit" name="id" value="<?= $product->Id?>" class="btn btn-primary">Beli</button>

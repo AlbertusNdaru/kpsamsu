@@ -6,8 +6,9 @@ class Model_login extends CI_Model{
  
     function M_login($username,$password)
     {
-        $this->db->select('*');
-        $this->db->from('user');
+        $this->db->select('a.*,b.Name');
+        $this->db->from('user as a');
+        $this->db->join('usergrup as b','b.Id = a.Usergrup_id');
         $this->db->where('Username',$username);
         $this->db->where('password',$password);
         $chek = $this->db->get();

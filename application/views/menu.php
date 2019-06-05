@@ -17,11 +17,10 @@
             <li>
             <a href="<?= base_url('admin/Image_product')?>">Image Product</a>
             </li>
+            <li>
+            <a href="<?= base_url('admin/Supliyer')?>">Supliyer</a>
+            </li>
         </ul>
-        <a href="javascript:void(0);" class="menu-toggle">
-            <i class="material-icons">widgets</i>
-            <span>CAROUSEL</span>
-        </a>
         <ul class="ml-menu">
             <li>
             <a href="<?= base_url('admin/Carousel')?>">View Data</a>
@@ -40,7 +39,7 @@
             <a href="<?= base_url('admin/Pembelian')?>">Pembelian</a>
             </li>
             <li>
-            <a href="<?= base_url('')?>">Penjualan</a>
+            <a href="<?= base_url('admin/Penjualan')?>">Penjualan</a>
             </li>
         </ul>
     </li>

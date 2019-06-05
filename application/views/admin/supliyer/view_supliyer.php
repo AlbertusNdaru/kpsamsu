@@ -1,5 +1,6 @@
 <div class="container-fluid">
             <div class="block-header">
+                
             </div>
             <!-- Basic Examples -->
             <div class="row clearfix">
@@ -7,7 +8,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                PRODUCT
+                                SUPLIYER
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -15,7 +16,7 @@
                                         <i class="material-icons">more_vert</i>
                                     </a>
                                     <ul class="dropdown-menu pull-right">
-                                        <li><a href="<?php echo base_url()?>admin/Product/viewAddProduct">Add Data</a></li>
+                                        <li><a href="<?php echo base_url()?>admin/Supliyer/viewAddSupliyer">Add Data</a></li>
                                         <li><a href="javascript:void(0);">Another action</a></li>
                                         <li><a href="javascript:void(0);">Something else here</a></li>
                                     </ul>
@@ -27,52 +28,30 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Nama Barang</th>
-                                            <th>Kategori</th>
-                                            <th>Merk</th>
-                                            <th>Deskripsi</th>
-                                            <?php if ($_SESSION['userdata']->Usergrup_id == 1){?>
-                                            <th>Harga Supliyer</th>
-                                            <?php } ?>
-                                            <th>Harga</th>
-                                            <th>Stok</th>
-                                            <th>Type</th>
-                                            <th style="text-align:center">Aksi</th>
+                                            <th>Nama Supliyer</th>
+                                            <th>Alamat</th>
+                                            <th>No Telp</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Nama Barang</th>
-                                            <th>Kategori</th>
-                                            <th>Merk</th>
-                                            <th>Deskripsi</th>
-                                            <?php if ($_SESSION['userdata']->Usergrup_id == 1){?>
-                                            <th>Harga Supliyer</th>
-                                            <?php } ?>
-                                            <th>Harga</th>
-                                            <th>Stok</th>
-                                            <th>Type</th>
-                                            <th style="text-align:center">Aksi</th>
+                                            <th>Nama Supliyer</th>
+                                            <th>Alamat</th>
+                                            <th>No Telp</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
-                                    $no = $this->uri->segment('3');
                                     foreach ($record as $r) { ?>
                                         <tr class="gradeU">
-                                          <td><?php echo $r->Product_name ?></td>
-                                          <td><?php echo $r->Category_name ?></td>
-                                          <td><?php echo $r->Merk ?></td>
-                                          <td><?php echo $r->Description ?></td>
-                                          <?php if ($_SESSION['userdata']->Usergrup_id == 1){?>
-                                          <td>Rp <?php echo $r->Harga_supliyer ?></td>
-                                          <?php } ?>
-                                          <td>Rp <?php echo $r->Price ?></td>
-                                          <td><?php echo $r->Stok ?></td>
-                                          <td><?php echo $r->Type_name ?></td>
+                                          <td><?php echo $r->Nama ?></td>
+                                          <td><?php echo $r->Alamat ?></td>
+                                          <td><?php echo $r->Kontak ?></td>
                                           <td align="center">
-                                              <a href='<?php echo base_url('admin/Product/viewEditProduct/'.$r->Id)?>'><i class="material-icons text-warning">edit</i></a>
-                                              <a href='<?php echo base_url('admin/Product/deleteProduct/'.$r->Id)?>'><i class="material-icons text-primary">delete</i></a>
+                                              <a href='<?php echo base_url('admin/Supliyer/viewEditSupliyer/'.$r->Id)?>'><i class="material-icons text-warning">edit</i></a>
+                                              <a href='<?php echo base_url('admin/Supliyer/deleteSupliyer/'.$r->Id)?>'><i class="material-icons text-primary">delete</i></a>
                                           </td>
                                         </tr>
                                     <?php } ?>
@@ -85,9 +64,7 @@
             </div>
             <!-- #END# Basic Examples -->
         </div>
-<script>
-</script>
-<script>
+        <script>
   <?php if (!empty($this->session->flashdata('Status'))){?>
     setnotifstatus('<?php echo $this->session->flashdata('Status')?>');
 <?php }?>
@@ -95,13 +72,13 @@
 
  function setnotifstatus(err)
 { 
-if (err == 'Edit Succes' || err == 'Delete Succes')
+    if (err == 'Edit Succes' || err == 'Delete Succes')
     {
-      ttp='success';
+        ttp='success';
     }
- else if(err == 'Edit Failed' || err == 'Delete Failed')
+    else if(err == 'Edit Failed' || err == 'Delete Failed')
     {
-    ttp='danger';
+        ttp='danger';
     }
 
   $.notify({

@@ -17,7 +17,8 @@ class Kategori extends CI_Controller{
 
     function viewAddCategory()
     {
-        $this->template->load('template','admin/kategori/input_category');
+        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+        $this->template->load('template','admin/kategori/input_category',$data);
     }
 
     function viewEditKategori($id)

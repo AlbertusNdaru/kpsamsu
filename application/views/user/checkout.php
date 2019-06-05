@@ -76,15 +76,28 @@
 
 		function checkout()
 		{
-			$.ajax({
-				url  :"<?php echo base_url('user/Penjualan/checkout');?>",
-				type :"POST" ,
-				data :{ Payment : <?php echo $total?>},
-				success : function(data)
+			<?php if (isset($_SESSION['userdata'])) {?>
+				if(<?php echo $total?><=0)
 				{
-                   alert('Terima Kasih Sudah Berbelanja DiToko Kami');
+					alert('Harap memilih product yang akan dibeli dan  klik tombol AddtoCart');
+					window.location.href = "<?php echo base_url('user/Shop')?>";
 				}
-			});
+				else
+				{
+				$.ajax({
+					url  :"<?php echo base_url('user/Penjualan/checkout');?>",
+					type :"POST" ,
+					data :{ Payment : <?php echo $total?>},
+					success : function(data)
+					{
+					alert('Terima Kasih Sudah Berbelanja DiToko Kami');
+					window.location.href = "<?php echo base_url('user/Shop')?>";
+					}
+				});
+				}
+		<?php } else {?>
+			window.location.href = "<?php echo base_url('user/Login/loginuser')?>";
+		<?php }?>
 		}
 </script>
 </body>

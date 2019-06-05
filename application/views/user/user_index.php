@@ -39,16 +39,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<ul class="bann-small-img">
 					<li><a href="single.html"><img style="width:100%;height:255px;" src="<?= base_url_shop()."images/".$P->Photo_name?>"></a></li>
 				</ul>
-				<h6>Size Charts</h6>
 				<ul class="bann-btns">
-				<li><select class="bann-size">
-					<option value="select your location">Size</option>
-					<option value="saab">Small</option>
-					<option value="fiat">Medium</option>
-					<option value="audi">Large</option>
-				</select>
-				</li>
-				<li><a href="#" class="" onclick="addtocart('<?= $P->Id?>','<?php if(isset($_SESSION['userdata'])) {echo 'TRUE';} else {echo 'False';} ?>')" >Add To Cart</a></li>
+				<li style="display:block;"><a href="#" onclick="addtocart('<?= $P->Id?>','<?php if(isset($_SESSION['userdata'])) {echo 'TRUE';} else {echo 'False';} ?>')" >Add To Cart</a></li>
         </ul>
 			</div>
 			<?php } ?>

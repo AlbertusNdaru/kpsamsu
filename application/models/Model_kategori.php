@@ -9,8 +9,8 @@ class Model_kategori extends CI_Model{
 
     function M_tampil_data_by_id($id)
     {
-        $query= "SELECT*FROM category where Id=".$id."";
-        return $this->db->query($query)->row();
+        $this->db->where('Id',$id);
+        return $this->db->get('Category')->row();
     }
 
     function M_addCategory($dataCategory)
