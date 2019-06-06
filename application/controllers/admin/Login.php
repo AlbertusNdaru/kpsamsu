@@ -51,7 +51,7 @@ class Login extends CI_Controller{
                 else
                 {
                     $this->session->set_flashdata('Error','Username and Password Incorect'); 
-                    redirect('admin/loginadmin');
+                    redirect('admin/Login/loginadmin');
                 }
             }
     }
