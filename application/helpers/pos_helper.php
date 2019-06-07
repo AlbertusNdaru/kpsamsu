@@ -2,7 +2,7 @@
 
 function ceksession()
 {   $CI= & get_instance();
-    if (isset($_SESSION['userdata']->id_user))
+    if (isset($_SESSION['userdata']->Username))
     {
         isLoginSessionExpired();
         return true;
@@ -106,11 +106,6 @@ function get_current_date()
 function base_url_shop()
 {
     return base_url('assets/shop/');
-}
-
-function base_url_carousel()
-{
-    return base_url('assets/img_slide/');
 }
 
 ?>

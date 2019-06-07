@@ -3,8 +3,7 @@ class Model_kategori extends CI_Model{
     
     function M_tampil_data()
     {
-        $query= "SELECT*FROM category";
-        return $this->db->query($query)->result();
+        return $this->db->get('category')->result();
     }
 
     function M_tampil_data_by_id($id)

@@ -2,12 +2,15 @@
 class Model_pembelian extends ci_model
 {
     
-    function getDataCategory()
+    function getDataPembelian()
     {
         //mendapatkan semua data Category dari tabel tb_Category
-        $dataCategory = $this->db->get("tb_category")->result();
-        return $dataCategory;
+        $this->db->select('a.*,b.Product_name');
+        $this->db->from('pembelian as a');
+        $this->db->join('product as b', 'b.Id = a.id_product');
+        return $this->db->get()->result();
     }
+      
 
     function getDataCategoryById($id)
     {

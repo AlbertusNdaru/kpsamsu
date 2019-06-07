@@ -24,6 +24,7 @@ class Model_login extends CI_Model{
                 $query = "update user set isLogin='1', lastlogin=".time()."  where Id='".$hasil->Id."'";
                 $this->db->query($query);
                 $this->session->set_userdata('userdata',$hasil);
+                $this->session->set_userdata('loggedin_time',time());
                 return 3;
             }
         }
@@ -42,7 +43,7 @@ class Model_login extends CI_Model{
 
     function M_inputadmin($datauser)
     {
-        $this->db->insert('user',$datauser);
+        return $this->db->insert('user',$datauser);
     }
 
     function tampildata()

@@ -12,27 +12,36 @@ class Product extends CI_Controller {
 
 	function index()
     {     
-        $data['record']     =    $this->Model_barang->M_tampil_data();
-        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
-        $this->template->load('template','admin/product/view_product',$data);
+        if (ceksession())
+        {
+            $data['record']     =    $this->Model_barang->M_tampil_data();
+            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $this->template->load('template','admin/product/view_product',$data);
+        }
     }
 
     
     function viewAddProduct()
     {
-        $data['dataCategory'] = $this->Model_kategori->M_tampil_data();
-        $data['dataType'] = $this->Model_barang->M_tampil_data_type();
-        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
-        $this->template->load('template','admin/product/input_product',$data);
+        if (ceksession())
+        {
+            $data['dataCategory'] = $this->Model_kategori->M_tampil_data();
+            $data['dataType'] = $this->Model_barang->M_tampil_data_type();
+            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $this->template->load('template','admin/product/input_product',$data);
+        }
     }
 
     function viewEditProduct($id)
     {   
-        $data['dataCategory'] = $this->Model_kategori->M_tampil_data();
-        $data['dataType'] = $this->Model_barang->M_tampil_data_type();
-        $data['record']= $this->Model_barang->M_tampil_data_by_id($id);
-        $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
-        $this->template->load('template','admin/product/edit_product',$data);
+        if (ceksession())
+        {
+            $data['dataCategory'] = $this->Model_kategori->M_tampil_data();
+            $data['dataType']     = $this->Model_barang->M_tampil_data_type();
+            $data['record']       = $this->Model_barang->M_tampil_data_by_id($id);
+            $data['transaksi']    = $this->Model_penjualan_admin->cekpenjualan();
+            $this->template->load('template','admin/product/edit_product',$data);
+        }
     }
 
     // function addProduct()
@@ -82,66 +91,72 @@ class Product extends CI_Controller {
 
     function addProduct()
     {
-       $productname = $this->input->post('productname');
-       $category    = $this->input->post('category');
-       $typeproduct = $this->input->post('typeproduct');
-       $merk        = $this->input->post('merk');
-       $description = $this->input->post('description');
-       $price       = $this->input->post('price');
-       $price_S     = $this->input->post('price_supliyer');
-       $status      = $this->input->post('status');
-       $dataProduct = array('Product_name'=>$productname,
-                            'Category_id'=>$category,
-                            'Merk'=>$merk,
-                            'Description'=>$description,
-                            'Product_type_id'=>$typeproduct,
-                            'Price'=>$price,
-                            'Harga_supliyer'=>$price_S,
-                            'Status_item'=>$status);
-       $insert     = $this->Model_barang->M_addProduct($dataProduct,$stok);
-        if($insert)
+        if (ceksession())
         {
-            $this->session->set_flashdata('Status','Input Succes');
-            redirect('admin/Product/viewAddProduct');
-        }
-        else
-        {
-            $this->session->set_flashdata('Status','Input Failed');
-            redirect('admin/Product/viewAddProduct');
+            $productname = $this->input->post('productname');
+            $category    = $this->input->post('category');
+            $typeproduct = $this->input->post('typeproduct');
+            $merk        = $this->input->post('merk');
+            $description = $this->input->post('description');
+            $price       = $this->input->post('price');
+            $price_S     = $this->input->post('price_supliyer');
+            $status      = $this->input->post('status');
+            $dataProduct = array('Product_name'=>$productname,
+                                 'Category_id'=>$category,
+                                 'Merk'=>$merk,
+                                 'Description'=>$description,
+                                 'Product_type_id'=>$typeproduct,
+                                 'Price'=>$price,
+                                 'Harga_supliyer'=>$price_S,
+                                 'Status_item'=>$status);
+            $insert     = $this->Model_barang->M_addProduct($dataProduct,$stok);
+             if($insert)
+             {
+                 $this->session->set_flashdata('Status','Input Succes');
+                 redirect('admin/Product/viewAddProduct');
+             }
+             else
+             {
+                 $this->session->set_flashdata('Status','Input Failed');
+                 redirect('admin/Product/viewAddProduct');
+             }
         }
     }
 
     function editProduct()
     {
-        $productname      = $this->input->post('productname');
-        $category_id      = $this->input->post('category_id');
-        $merk             = $this->input->post('merk');
-        $description      = $this->input->post('description');
-        $product_type_id  = $this->input->post('product_type_id');
-        $status           = $this->input->post('status');
-        $price            = $this->input->post('harga');
-        $harga_supliyer   = $this->input->post('harga_supliyer');
-        $update_at        = get_current_date();
-        $id               = $this->input->post('id');
-        $dataEdit= array('Product_name'=>$productname,
-                         'Category_id'=>$category_id,
-                         'Merk'=>$merk,
-                         'Description'=>$description,
-                         'Product_type_id'=>$product_type_id,
-                         'Update_at'=>$update_at,
-                         'Harga_supliyer'=>$harga_supliyer,
-                         'Price'=>$price,
-                         'Status_item'=>$status);
-        $edit=$this->Model_barang->M_editProduct($dataEdit,$id);
-        if($edit)
+        if (ceksession())
         {
-            $this->session->set_flashdata('Status','Edit Succes');
-            redirect('admin/Product');
-        }
-        else
-        {
-            $this->session->set_flashdata('Status','Edit Failed');
-            redirect('admin/Product');
+            $productname      = $this->input->post('productname');
+            $category_id      = $this->input->post('category_id');
+            $merk             = $this->input->post('merk');
+            $description      = $this->input->post('description');
+            $product_type_id  = $this->input->post('product_type_id');
+            $status           = $this->input->post('status');
+            $price            = $this->input->post('harga');
+            $harga_supliyer   = $this->input->post('harga_supliyer');
+            $update_at        = get_current_date();
+            $id               = $this->input->post('id');
+            $dataEdit= array('Product_name'=>$productname,
+                             'Category_id'=>$category_id,
+                             'Merk'=>$merk,
+                             'Description'=>$description,
+                             'Product_type_id'=>$product_type_id,
+                             'Update_at'=>$update_at,
+                             'Harga_supliyer'=>$harga_supliyer,
+                             'Price'=>$price,
+                             'Status_item'=>$status);
+            $edit=$this->Model_barang->M_editProduct($dataEdit,$id);
+            if($edit)
+            {
+                $this->session->set_flashdata('Status','Edit Succes');
+                redirect('admin/Product');
+            }
+            else
+            {
+                $this->session->set_flashdata('Status','Edit Failed');
+                redirect('admin/Product');
+            }
         }
     }
 
@@ -149,16 +164,19 @@ class Product extends CI_Controller {
 
     function deleteProduct($id)
     {
-        $delete=$this->Model_barang->M_deleteProduct($id);
-        if($delete)
+        if (ceksession())
         {
-            $this->session->set_flashdata('Status','Delete Succes');
-            redirect('admin/Product');
-        }
-        else
-        {
-            $this->session->set_flashdata('Status','Delete Failed');
-            redirect('admin/Product');
+            $delete=$this->Model_barang->M_deleteProduct($id);
+            if($delete)
+            {
+                $this->session->set_flashdata('Status','Delete Succes');
+                redirect('admin/Product');
+            }
+            else
+            {
+                $this->session->set_flashdata('Status','Delete Failed');
+                redirect('admin/Product');
+            }
         }
     }
 }

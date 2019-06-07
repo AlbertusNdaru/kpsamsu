@@ -42,5 +42,17 @@
             <a href="<?= base_url('admin/Penjualan')?>">Penjualan</a>
             </li>
         </ul>
+        <a href="javascript:void(0);" class="menu-toggle">
+            <i class="material-icons">widgets</i>
+            <span>LAPORAN</span>
+        </a>
+        <ul class="ml-menu">
+            <li>
+            <a href="<?= base_url('admin/Laporan/laporanpembelian')?>" target="_blank">Laporan Pembelian</a>
+            </li>
+            <li>
+            <a href="<?= base_url('admin/Laporan/laporanpenjualan')?>" target="_blank">Laporan Penjualan</a>
+            </li>
+        </ul>
     </li>
 </ul>

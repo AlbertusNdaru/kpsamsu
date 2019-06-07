@@ -64,7 +64,7 @@
 			</div>
 		</div>
 
-</div
+</div>
 </div>
 		<!-- Header Mobile -->
 		<div class="wrap_header_mobile">

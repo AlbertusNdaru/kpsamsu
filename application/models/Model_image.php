@@ -22,14 +22,6 @@ class Model_image extends ci_model{
     }
     
 
-    function M_addArrayInsert($idProduct,$size,$stok)
-    {
-        $addArray= array('Product_id'=>$idProduct,
-                         'Size'=>$size,
-                         'Stok'=>$stok);
-       return $addArray;
-    }
-
     function M_deleteImage($id)
     {   
        
