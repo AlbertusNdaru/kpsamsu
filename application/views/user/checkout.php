@@ -30,7 +30,24 @@
 					<div class="clearfix"></div>
 					<?php } } ?>
 					</ul>
-					<div align="right""><button onclick="checkout()" style="transform: translate(-130%,0);"class="btn btn-success">Checkout</button></div>
+					<div>
+						<?php if (isset($_SESSION['userdata'])) {?>
+						<select  style="width: 25%;" name="courier" id="courier">
+									<option value="">Pilih Kurir</option>
+									<option value="jne">JNE</option>
+									<option value="tiki">TIKI</option>
+									<option value="pos">POS</option>
+						</select>
+						<button onclick="get_cost('501','<?= $_SESSION['userdata']->City?>',courier.value)" class="btn btn-success">
+								Pilih Jasa Kirim
+						</button>
+						<?php }?>
+						<button onclick="checkout()" style="transform: translate(0,0); float:right;"class="btn btn-success">Checkout</button>
+					</div>
+					<span id="totalsemuanya" class="m-text21 w-size20 w-full-sm">
+						 Total : Rp <?= $total?>
+				   </span>
+				   <input hidden id="ongkir" value="0">
 				</div>
 			</div>  
 		 </div>
@@ -84,10 +101,13 @@
 				}
 				else
 				{
+				total = $('#ongkir').val();
+				console.log('sdadad : '+total);
 				$.ajax({
 					url  :"<?php echo base_url('user/Penjualan/checkout');?>",
 					type :"POST" ,
-					data :{ Payment : <?php echo $total?>},
+					data :{ Payment : <?php echo $total?>,
+					 	    Ongkir : total },
 					success : function(data)
 					{
 					alert('Terima Kasih Sudah Berbelanja DiToko Kami');
@@ -98,6 +118,57 @@
 		<?php } else {?>
 			window.location.href = "<?php echo base_url('user/Login/loginuser')?>";
 		<?php }?>
+		}
+
+		function get_cost(city_origin, city_destination, courier) 
+		{
+
+			console.log(city_origin);
+			console.log(city_destination);
+			console.log(courier);
+			console.log(<?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart'])*0.2;} else {echo 0;}?> );
+			if(city_destination != '' && courier != '') 
+			{
+				console.log('here');
+				$.ajax({
+				url  :"<?php echo base_url('Apiongkir/cost');?>",
+				type : 'POST',
+				data : {
+					city_origin : city_origin,
+					city_destination : city_destination ,
+					weight : <?php if(isset($_SESSION['cart'])) {$totalberat=count($_SESSION['cart'])*0.2; if($totalberat<1){echo 1;}else{echo $totalberat;}} else {echo 0;}?> ,
+					courier : courier
+				},
+					success : function(data)
+					{
+						var cost = $.parseJSON(data);   
+									if(cost['rajaongkir']['results'][0]['costs'].length > 0) {
+										$.each(cost['rajaongkir']['results'][0]['costs'], function(key, value) {
+											pilihongkir(value.cost[0]['value'],courier)
+										});
+									}
+								
+						
+					}
+				})
+			}
+		}
+
+		function pilihongkir(pilih,kurir) {
+			if(pilih=="")
+			{
+				alert('Pengiriman Tidak Terjangkau')
+			}
+			else
+			{
+				var total=0;
+				total = <?php echo $total?>;
+				pilih = parseInt(pilih);
+				total = total+pilih ;
+				$('#totalsemuanya').html('Total : Rp '+total);
+				$('#ongkir').val(pilih);
+			}
+		
 		}
 </script>
 </body>

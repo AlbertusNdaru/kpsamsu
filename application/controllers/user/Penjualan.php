@@ -6,7 +6,7 @@ class Penjualan extends CI_Controller
         parent::__construct();
         $this->load->model('Model_barang');
         $this->load->model('Model_penjualan');
-        isLoginSessionExpireduser();
+
     }
 
     function poscartpending()
@@ -139,7 +139,8 @@ class Penjualan extends CI_Controller
   {
       $transaksibill = $_SESSION['userdata']->Member_name.'-'.get_current_date();
       $datacheckout= array('Payment'=> $_POST['Payment'],
-                           'Transaction_bill' => $transaksibill
+                           'Transaction_bill' => $transaksibill,
+                           'Ongkir'=> $_POST['Ongkir']
                           );
      $this->Model_penjualan->checkout($datacheckout);
      $IdTransaksi = $this->Model_penjualan->getidtransaksibyBill($transaksibill);

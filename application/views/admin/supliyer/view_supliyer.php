@@ -17,8 +17,6 @@
                                     </a>
                                     <ul class="dropdown-menu pull-right">
                                         <li><a href="<?php echo base_url()?>admin/Supliyer/viewAddSupliyer">Add Data</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
                                     </ul>
                                 </li>
                             </ul>

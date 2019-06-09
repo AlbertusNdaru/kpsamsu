@@ -50,20 +50,16 @@
 						<span class="label-input100">Alamat</span>
                     </div>
                     
-                    
-                    <div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="kota">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Kota</span>
-                    </div>
-                    
-                    
-                    <div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="propinsi">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Propinsi</span>
+					<div class="wrap-input100 validate-input" style="height: 30px;">
+						<select style="width: 100%;" id="province_destination"  class="selection-2" name="province_destination" onchange="get_city_destination(this);">	
+						</select>
 					</div>
-					
+                    
+                    <div class="wrap-input100 validate-input" style="height: 30px;">
+						<select style="width: 100%;" id="city_destination"  class="selection-2" name="city_destination">
+							<option value=''>Pilih Kota</option>
+						</select>
+                    </div>
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" name="email">
@@ -131,6 +127,8 @@
     setnotifstatus('<?php echo $this->session->flashdata('Status')?>');
 <?php }?>
 
+get_city();
+
 
  function setnotifstatus(err)
 { 
@@ -183,6 +181,44 @@ if(err== "Email Sudah Terdaftar")
   });
 
 }
+
+	function get_city()
+		{
+			$.ajax({
+					url  :"<?php echo base_url('Apiongkir/province');?>",
+					type : 'POST',
+					success : function(data)
+					{
+
+					var all_province = $.parseJSON(data);
+					$("#province_destination").html("<option value=''>Pilih Provinsi</option>");
+							$.each(all_province['rajaongkir']['results'], function (key, value) {
+								$("#province_destination").append(
+									"<option value='" + value.province_id + "'>" + value.province + "</option>"
+								);
+							});
+					}
+			})
+		}
+
+		function get_city_destination(sel)
+		{
+			$.ajax({
+					url  :"<?php echo base_url('Apiongkir/city');?>",
+					type : 'POST',
+					data : {id: sel.value},
+					success : function(data)
+					{
+					var get_city = $.parseJSON(data);
+					$("#city_destination").html("<option value=''>Pilih Kota</option>");
+							$.each(get_city['rajaongkir']['results'], function (key, value) {
+								$("#city_destination").append(
+									"<option value='" + value.city_id + "'>" + value.type + " - " + value.city_name + "</option>"
+								);
+							});
+				}
+		})
+		}
   </script>
 
 

@@ -85,8 +85,8 @@ class Login extends CI_Controller{
        
         $Member_name = $_POST['name_member'];
         $Address = $_POST['alamat'];
-        $City = $_POST['kota'];
-        $Province = $_POST['propinsi'] ;
+        $City = $_POST['city_destination'];
+        $Province = $_POST['province_destination'] ;
         $Email=$_POST['email'];
         $Password =$_POST['pass'];
         $Question =$_POST['pertanyaan'];
