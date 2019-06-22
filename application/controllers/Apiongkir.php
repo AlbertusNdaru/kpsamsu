@@ -71,10 +71,10 @@ class Apiongkir extends CI_Controller{
                 
         $key = "512b2dc7f9284cd37871013297d39f72";
 
-        $origin = isset($_POST['city_origin']) ? $_POST['city_origin'] : '';
-        $destination = isset($_POST['city_destination']) ? $_POST['city_destination'] : '';
-        $weight = isset($_POST['weight']) ? $_POST['weight'] : '';
-        $courier = isset($_POST['courier']) ? $_POST['courier'] : '';
+        $origin      = isset($_POST['city_origin']) ? $_POST['city_origin']          : '';
+        $destination = isset($_POST['city_destination']) ? $_POST['city_destination']: '';
+        $weight      = isset($_POST['weight']) ? $_POST['weight']                    : '';
+        $courier     = isset($_POST['courier']) ? $_POST['courier']                  : '';
 
         $curl = curl_init();
 

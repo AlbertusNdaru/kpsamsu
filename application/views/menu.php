@@ -41,6 +41,9 @@
             <li>
             <a href="<?= base_url('admin/Penjualan')?>">Penjualan</a>
             </li>
+            <li>
+            <a href="<?= base_url('admin/Penjualan/vieDataStatusPenjualan')?>">Status Penjualan</a>
+            </li>
         </ul>
         <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">widgets</i>

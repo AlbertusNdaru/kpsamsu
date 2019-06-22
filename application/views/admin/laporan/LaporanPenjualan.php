@@ -40,9 +40,9 @@
                                                 <td align="center"><?php echo $no ?></td>
                                                 <td align="center"><?php echo $r->Date ?></td>
                                                 <td align="center"><?php $nama=explode('-',$r->Transaction_bill); echo $nama[0] ?></td>
-                                                <td align="left">Rp <?php echo number_format($r->Payment,2) ?></td>
+                                                <td align="left">Rp <?php $payment=($r->Ongkir+$r->Payment); echo number_format($payment,2) ?></td>
                                             </tr>
-                                        <?php $no++; $total=$total+$r->Payment; } ?>
+                                        <?php $no++; $total=$total+$payment; } ?>
                                             <tr>
                                                 <td colspan="3" style="text-align: right; font-size:18px;" ><B>Total</B></td>
                                                 <td style="font-size:18px;"><B>Rp <?php echo  number_format($total,2);?></B></td>

@@ -14,10 +14,17 @@ class Penjualan  extends CI_Controller {
     {
         if (ceksession())
         {
-            $dataPenjualan['record'] = $this->Model_penjualan_admin->getDataPenjualan();
-            $dataPenjualan['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $dataPenjualan['record']    = $this->Model_penjualan_admin->getDataPenjualan();
+            $dataPenjualan['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/transaksi/view_transaksi',$dataPenjualan);
         }
+    }
+
+    function vieDataStatusPenjualan()
+    {
+        $dataPenjualan['record']    = $this->Model_penjualan_admin->getDataPenjualanKirim();
+        $dataPenjualan['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
+        $this->template->load('template','admin/transaksi/view_status_transaksi',$dataPenjualan);
     }
 
     function updateStatusTransaksi()
@@ -25,8 +32,9 @@ class Penjualan  extends CI_Controller {
         if (ceksession())
         {
             $Id = $_GET['Id'];
-            $dataTransaksi= array('Stats'=>1,
-                                  'Update_at' => get_current_date());
+            $dataTransaksi= array('Stats'=>2,
+                                  'Update_at' => get_current_date()
+                                );
             $Validate = $this->Model_penjualan_admin->updateStatusTransaksi($dataTransaksi,$Id);
             if ($Validate)
             {
@@ -41,13 +49,34 @@ class Penjualan  extends CI_Controller {
         }
     }
 
+    function updateStatusKirim()
+    {
+        if (ceksession())
+        {
+            $Id = $_POST['Id'];
+            $dataTransaksi= array(
+                                  'Stats'     => $_POST['Stats'],
+                                  'Resi'      => $_POST['resi'],
+                                  'Update_at' => get_current_date()
+                                );
+            $Validate = $this->Model_penjualan_admin->updateStatusTransaksi($dataTransaksi,$Id);
+            if ($Validate)
+            {
+                $this->session->set_flashdata('Status','Sending Succes');            }
+            else
+            {
+                $this->session->set_flashdata('Status','Sending Failed');
+            }
+        }
+    }
+
     function getDetailPenjualanById()
     {
         if (ceksession())
         {
             $Id = $_GET['Id'];
-            $dataPenjualan['record'] = $this->Model_penjualan_admin->getDetailPenjualanById($Id);
-            $dataPenjualan['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $dataPenjualan['record']    = $this->Model_penjualan_admin->getDetailPenjualanById($Id);
+            $dataPenjualan['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/transaksi/view_detail_transaksi',$dataPenjualan);
         }
     }

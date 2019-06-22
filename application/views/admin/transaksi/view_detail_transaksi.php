@@ -65,11 +65,11 @@
  function setnotifstatus(err)
 { 
 
-    if (err == 'Edit Succes' || err == 'Delete Succes')
+    if (err == 'Edit Succes' || err == 'Delete Succes' || err == 'Acc Succes' )
     {
         ttp='success';
     }
-    else if(err == 'Edit Failed' || err == 'Delete Failed')
+    else if(err == 'Edit Failed' || err == 'Delete Failed' || err == 'Acc Failed' )
     {
         ttp='danger';
     }

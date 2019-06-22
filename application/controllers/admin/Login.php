@@ -30,9 +30,9 @@ class Login extends CI_Controller{
     function register()
     {
         // proses login disini
-        $username   =   $this->input->post('username');
-        $password   =   $this->input->post('password');
-        $usergrup    =   $this->input->post('usergrup');
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $usergrup = $this->input->post('usergrup');
         $datauser = array('Usergrup_id'=>$usergrup,'Username'=>$username,'Password'=>$password);
         $hasil=  $this->Model_login->M_inputadmin($datauser); 
         redirect('admin/Login/loginadmin');
@@ -40,8 +40,8 @@ class Login extends CI_Controller{
     
     function login()
     {
-            $username   =   $this->input->post('username');
-            $password   =   $this->input->post('password');
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
             if(ceklastlogin($username))
             {
                 $hasil=  $this->Model_login->M_login($username,$password);
@@ -69,8 +69,8 @@ class Login extends CI_Controller{
    
     function lupapasswordadmin()
     {
-        $id_user=$this->input->post('id_user');
-        $hasil = $this->Model_operator->getUser($id_user)->row();
+        $id_user = $this->input->post('id_user');
+        $hasil   = $this->Model_operator->getUser($id_user)->row();
         echo json_encode($hasil);
     }
 
@@ -88,7 +88,6 @@ class Login extends CI_Controller{
     {
         $i=$this->input->post('id_user');
         $p=$this->input->post('passbaru');
-
         $this->Model_operator->resetpasswordbaru($i,$p);
         echo 1;
 

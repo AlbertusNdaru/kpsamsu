@@ -85,6 +85,7 @@
     <script src="<?php echo base_url('assets/')?>plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="<?php echo base_url('assets/')?>plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="<?php echo base_url('assets/')?>plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/bootbox.min.js" type="text/javascript"></script>
     <!-- Autosize Plugin Js -->
     <script src="<?php echo base_url('assets/')?>plugins/autosize/autosize.js"></script>
 

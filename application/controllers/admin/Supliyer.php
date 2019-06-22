@@ -13,8 +13,8 @@ class Supliyer extends CI_Controller{
     {
         if (ceksession())
         {
-            $data['record']     =    $this->Model_supliyer->tampildata();
-            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $data['record']    = $this->Model_supliyer->tampildata();
+            $data['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/supliyer/view_supliyer',$data);
         }
     }
@@ -23,7 +23,7 @@ class Supliyer extends CI_Controller{
     {
         if (ceksession())
         {
-            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $data['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/supliyer/input_supliyer',$data);
         }
     }
@@ -32,8 +32,8 @@ class Supliyer extends CI_Controller{
     {  
         if (ceksession())
         {
-            $data['record']= $this->Model_supliyer->getSupliyerById($Id);
-            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $data['record']    = $this->Model_supliyer->getSupliyerById($Id);
+            $data['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/supliyer/edit_supliyer',$data);
         } 
     }
@@ -42,12 +42,13 @@ class Supliyer extends CI_Controller{
     {
         if (ceksession())
         {
-            $Nama    = $this->input->post('Nama');
+            $Nama   = $this->input->post('Nama');
             $Alamat = $this->input->post('Alamat');
             $Kontak = $this->input->post('Kontak');
-            $dataSupliyer    = array('Nama'=>$Nama,
-                                     'Alamat'=>$Alamat,
-                                     'Kontak'=>$Kontak
+            $dataSupliyer    = array(
+                                     'Nama'   => $Nama,
+                                     'Alamat' => $Alamat,
+                                     'Kontak' => $Kontak
                                     );
             $insert = $this->Model_supliyer->addSupliyer($dataSupliyer);
             if($insert)
@@ -71,10 +72,11 @@ class Supliyer extends CI_Controller{
             $Nama   = $this->input->post('Nama');
             $Alamat = $this->input->post('Alamat');
             $Kontak = $this->input->post('Kontak');
-            $dataSupliyer    = array('Nama'=>$Nama,
-                                     'Alamat'=>$Alamat,
-                                     'Kontak'=>$Kontak,
-                                     'Update'=> Get_current_date()
+            $dataSupliyer    = array(
+                                     'Nama'   => $Nama,
+                                     'Alamat' => $Alamat,
+                                     'Kontak' => $Kontak,
+                                     'Update' => Get_current_date()
                                     );
             $edit=$this->Model_supliyer->editSupliyer($dataSupliyer,$Id);
             if($edit)

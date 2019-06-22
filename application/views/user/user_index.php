@@ -37,10 +37,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<h1><?= $P->Product_name?></h1>
 				<h5 class="item_price">Rp <?= $P->Price?></h5>
 				<ul class="bann-small-img">
-					<li><a href="single.html"><img style="width:100%;height:255px;" src="<?= base_url_shop()."images/".$P->Photo_name?>"></a></li>
+					<li style="margin-right:0px; width:100%;"> <a href="single.html"><img style="width:100%;height:255px;" src="<?= base_url_shop()."images/".$P->Photo_name?>"></a></li>
 				</ul>
 				<ul class="bann-btns">
-				<li style="display:block;"><a href="#" onclick="addtocart('<?= $P->Id?>','<?php if(isset($_SESSION['userdata'])) {echo 'TRUE';} else {echo 'False';} ?>')" >Add To Cart</a></li>
+				<li style="display:block; margin-right:0px;"><a href="#" onclick="addtocart('<?= $P->Id?>','<?php if(isset($_SESSION['userdata'])) {echo 'TRUE';} else {echo 'False';} ?>')" >Add To Cart</a></li>
         </ul>
 			</div>
 			<?php } ?>
@@ -50,6 +50,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>	
 <!--home block end here-->
 <!--footer strat here-->
+<?php  include "modal_status.php";  ?>
 <?php include('footer.php')?>
 <!--footer end here-->
 </body>
@@ -123,6 +124,54 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						}
 					});	
 		}
+	}
+
+	function status()
+	{
+		if ('<?php if(isset($_SESSION["userdata"])) {echo true;} else {echo false;}?>')
+		{
+			$.ajax({
+				url:"<?php echo base_url('user/Penjualan/getdatatransaksi');?>",
+				type : "POST",
+				data : {id : '<?php if(isset($_SESSION["userdata"])) {echo $_SESSION['userdata']->Id;} else{echo null;}?>'},
+				success : function(data)
+				{
+				var result = $.parseJSON(data);
+				console.log(result);
+				$("#modalstatusdetail").empty();
+				for(var i=0; i<result.length; i++)
+				{
+					var link="";
+					var kurir="";
+					if(result[i]['Kurir']=='jne')
+						{
+						link='https://track.aftership.com/jne/'+result[i]['Resi']+'?'; kurir='JNE';
+						}
+					else if(result[i]['Kurir']=='tiki')
+						{
+						link='https://track.aftership.com/tiki/'+result[i]['Resi']+'?'; kurir='TIKI';
+						}else if(result[i]['Kurir']=='pos')
+							{
+								link='https://track.aftership.com/pos-indonesia-int/'+result[i]['Resi']+'?'; kurir="POS";
+							}
+					
+					$("#modalstatusdetail").append(
+								"<tr >"+
+									"<td>"+result[i]['Transaction_bill']+"</td>"+
+									"<td>"+result[i]['Date']+"</td>"+
+									"<td>Rp "+result[i]['Payment']+"</td>"+
+									"<td>Rp "+result[i]['Ongkir']+"</td>"+
+									"<td>"+result[i]['Stats']+"</td>"+
+									"<td>"+result[i]['Resi']+"</td>"+
+									"<td  style='text-align:center'>"+
+										"<a type='button' class='btn btn-danger' target='_blank' style='height: 22px;font-size: 12px;padding-top: 2px;' href="+link+">"+kurir+"</button>"+
+									"</td>"+
+								"</tr>"
+						);
+					}
+				}
+			});
+    	}
 	}
 </script>
 </html>

@@ -106,8 +106,11 @@
 				$.ajax({
 					url  :"<?php echo base_url('user/Penjualan/checkout');?>",
 					type :"POST" ,
-					data :{ Payment : <?php echo $total?>,
-					 	    Ongkir : total },
+					data :{ 
+							Payment: <?php echo $total?>,
+							Ongkir : total,
+							Kurir  : courier.value 
+						},
 					success : function(data)
 					{
 					alert('Terima Kasih Sudah Berbelanja DiToko Kami');

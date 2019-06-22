@@ -11,6 +11,7 @@ class Model_barang extends ci_model{
         $this->db->join('category as b ','b.Id=a.Category_id');
         $this->db->join('product_type as c','c.Id=a.Product_type_id');
         $this->db->join('imageproduct as d','d.Product_id = a.Id');
+        $this->db->where('a.Photo_name is NOT NULL', NULL, FALSE);
         return $this->db->get()->result();
     }
 

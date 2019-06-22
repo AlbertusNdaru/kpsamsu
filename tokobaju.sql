@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2019 at 05:37 PM
+-- Generation Time: Jun 22, 2019 at 05:28 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -95,20 +95,9 @@ CREATE TABLE `details` (
 --
 
 INSERT INTO `details` (`Id`, `Transaction_id`, `Product_id`, `Price`, `Date`, `Qty`, `Member_id`, `Status`, `Create_at`, `Update_at`) VALUES
-(66, 1, 1, 80000, '2019-05-31 04:58:09', 1, 6, 1, '2019-05-31 04:58:09', NULL),
-(67, 1, 2, 40000, '2019-05-31 04:58:12', 1, 6, 1, '2019-05-31 04:58:12', NULL),
-(78, 2, 1, 80000, '2019-05-31 10:06:18', 1, 6, 1, '2019-05-31 10:06:18', NULL),
-(79, 2, 2, 40000, '2019-05-31 10:06:18', 1, 6, 1, '2019-05-31 10:06:18', NULL),
-(80, 2, 3, 40000, '2019-05-31 10:06:18', 1, 6, 1, '2019-05-31 10:06:18', NULL),
-(81, 2, 5, 60000, '2019-05-31 10:06:18', 1, 6, 1, '2019-05-31 10:06:18', NULL),
-(86, 3, 1, 80000, '2019-05-31 10:09:48', 1, 6, 1, '2019-05-31 10:09:48', NULL),
-(87, 3, 2, 40000, '2019-05-31 10:09:50', 1, 6, 1, '2019-05-31 10:09:50', NULL),
-(88, 3, 3, 40000, '2019-05-31 10:09:52', 1, 6, 1, '2019-05-31 10:09:52', NULL),
-(89, 3, 5, 60000, '2019-05-31 10:09:54', 1, 6, 1, '2019-05-31 10:09:54', NULL),
-(90, 4, 1, 80000, '2019-06-02 14:42:51', 4, 6, 1, '2019-06-02 14:42:51', NULL),
-(91, 4, 5, 60000, '2019-06-02 14:43:00', 2, 6, 1, '2019-06-02 14:43:00', NULL),
-(92, 4, 3, 40000, '2019-06-02 14:43:06', 1, 6, 1, '2019-06-02 14:43:06', NULL),
-(94, 7, 1, 80000, '2019-06-02 15:10:16', 1, 6, 1, '2019-06-02 15:10:16', NULL);
+(1, 1, 1, 80000, '2019-06-15 04:47:09', 1, 6, 1, '2019-06-15 04:47:09', NULL),
+(2, 2, 1, 80000, '2019-06-17 08:46:35', 1, 6, 1, '2019-06-17 08:46:35', NULL),
+(3, 2, 2, 40000, '2019-06-17 08:46:38', 1, 6, 1, '2019-06-17 08:46:38', NULL);
 
 --
 -- Triggers `details`
@@ -129,7 +118,7 @@ DELIMITER ;
 CREATE TABLE `imageproduct` (
   `Id` int(10) NOT NULL,
   `Product_id` int(10) NOT NULL,
-  `Photo_name` varchar(200) NOT NULL,
+  `Photo_name` text NOT NULL,
   `Create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `Update_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -139,10 +128,12 @@ CREATE TABLE `imageproduct` (
 --
 
 INSERT INTO `imageproduct` (`Id`, `Product_id`, `Photo_name`, `Create_at`, `Update_at`) VALUES
-(1, 1, '8-bit-256-x-256-Grayscale-Lena-Image.jpg', '2019-05-23 03:35:55', NULL),
-(2, 2, 'KTP.JPG', '2019-05-23 03:36:06', NULL),
-(3, 3, 'K3.png', '2019-05-26 04:55:27', NULL),
-(5, 5, 'thatshirt-t-shirt-clip-art-safety-forklift_bw-41624.jpg', '2019-06-02 14:53:25', NULL);
+(24, 1, 'IMG_20190608091134_Product.jpg', '2019-06-08 02:11:34', NULL),
+(25, 2, 'IMG_20190608091242_Product.jpg', '2019-06-08 02:12:42', NULL),
+(26, 6, 'IMG_20190608091320_Product.jpg', '2019-06-08 02:13:20', NULL),
+(27, 3, 'IMG_20190609223244_Product.jpg', '2019-06-09 15:32:44', NULL),
+(28, 5, 'IMG_20190609223249_Product.jpg', '2019-06-09 15:32:49', NULL),
+(29, 7, 'IMG_20190609223650_Product.jpg', '2019-06-09 15:36:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -173,7 +164,8 @@ CREATE TABLE `member` (
 
 INSERT INTO `member` (`Id`, `Member_name`, `Email`, `Password`, `Question`, `Answer`, `isLogin`, `FailedLogin`, `lastlogin`, `Address`, `City`, `Province`, `Create_at`, `Update_at`) VALUES
 (2, 'sdadasd', 'albertusndarukrismandoko@gmail.com', 'wqwqwqwqwqwqwqwq', 'a', 'a', 'N', 0, NULL, 'aku', 0, 0, '2019-05-29 17:59:10', NULL),
-(6, 'Albertus Ndaru', 'ndarualbert21@gmail.com', '210892', 'aku', 'ndaru', 'N', 0, '0', 'Ngentak RT13', 0, 0, '2019-05-29 18:07:22', NULL);
+(6, 'Albertus Ndaru', 'ndarualbert21@gmail.com', '210892', 'aku', 'ndaru', 'N', 0, '0', 'Ngentak RT13', 1, 0, '2019-05-29 18:07:22', NULL),
+(7, 'Albertus Ndaru', 'kasurmabur@gmail.com', '210892', 'apa', 'iya', 'N', 0, '0', 'Ngentak RT13', 155, 6, '2019-06-09 05:55:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -186,7 +178,7 @@ CREATE TABLE `pembelian` (
   `id_product` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `jumlah_beli` int(11) DEFAULT NULL,
-  `create_at` timestamp NULL DEFAULT NULL,
+  `create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `Supliyer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -195,7 +187,12 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`id`, `id_product`, `price`, `jumlah_beli`, `create_at`, `Supliyer_id`) VALUES
-(1, 1, 500000, 4, NULL, 1);
+(1, 1, 500000, 4, NULL, 1),
+(2, 3, 35000, 3, NULL, 1),
+(3, 3, 35000, 20, '2019-06-07 09:46:22', 1),
+(4, 5, 35000, 4, '2019-06-07 09:46:27', 1),
+(5, 2, 35000, 1, '2019-06-07 10:51:50', 1),
+(6, 6, 35000, 10, '2019-06-09 15:33:10', 1);
 
 --
 -- Triggers `pembelian`
@@ -234,10 +231,12 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`Id`, `Product_name`, `Category_id`, `Merk`, `Price`, `Photo_name`, `Status_item`, `Description`, `Product_type_id`, `Stok`, `Harga_supliyer`, `Create_at`, `Update_at`) VALUES
-(1, 'Erigo Start', 1, 'Antik', 80000, '8-bit-256-x-256-Grayscale-Lena-Image.jpg', 'Sale', 'Erigo', 1, 561, 500000, '2019-02-28 03:01:33', '2019-05-23 03:35:55'),
-(2, 'Test', 1, '123', 40000, 'KTP.JPG', 'New', '12221', 1, 39, 35000, '2019-05-20 04:21:28', '2019-05-23 03:36:06'),
-(3, 'Test', 1, 'Nais', 40000, 'K3.png', 'New', '12221', 1, 7, 35000, '2019-05-26 04:53:33', '2019-05-26 04:55:26'),
-(5, 'Test 10', 1, '1235', 60000, 'thatshirt-t-shirt-clip-art-safety-forklift_bw-41624.jpg', 'New', '12221', 1, 16, 35000, '2019-05-31 09:27:42', '2019-06-02 14:53:25');
+(1, 'Erigo Start', 1, 'Antik', 80000, 'IMG_20190608091134_Product.jpg', 'Sale', 'Erigo', 1, 551, 500000, '2019-02-28 03:01:33', '2019-06-08 02:11:34'),
+(2, 'Test', 1, '123', 40000, 'IMG_20190608091242_Product.jpg', 'New', '12221', 1, 35, 35000, '2019-05-20 04:21:28', '2019-06-08 02:12:42'),
+(3, 'Test', 1, 'Nais', 40000, 'IMG_20190609223244_Product.jpg', 'New', '12221', 1, 30, 35000, '2019-05-26 04:53:33', '2019-06-09 15:32:43'),
+(5, 'Test 10', 1, '1235', 60000, 'IMG_20190609223249_Product.jpg', 'New', '12221', 1, 20, 35000, '2019-05-31 09:27:42', '2019-06-09 15:32:49'),
+(6, 'Test 10', 1, 'Nais', 40000, 'IMG_20190608091320_Product.jpg', 'New', '12221', 1, 7, 35000, '2019-06-08 01:32:30', '2019-06-08 02:13:20'),
+(7, 'terter', 1, 'Erigo', 45000, 'IMG_20190609223650_Product.jpg', 'New', 'dfsfsfsfdsfsdf', 1, 0, 40000, '2019-06-09 15:34:14', '2019-06-09 15:36:50');
 
 -- --------------------------------------------------------
 
@@ -292,10 +291,13 @@ INSERT INTO `supliyer` (`Id`, `Nama`, `Alamat`, `Kontak`, `Create`, `Update`) VA
 
 CREATE TABLE `transaction` (
   `Id` int(10) NOT NULL,
-  `Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Payment` int(11) NOT NULL,
-  `Stats` int(11) NOT NULL DEFAULT '0',
   `Transaction_bill` varchar(500) DEFAULT NULL,
+  `Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Stats` enum('Pending','Success','Sending') NOT NULL DEFAULT 'Pending',
+  `Ongkir` int(11) DEFAULT NULL,
+  `Payment` int(11) NOT NULL,
+  `Resi` varchar(40) DEFAULT NULL,
+  `Kurir` varchar(5) DEFAULT NULL,
   `Create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `Update_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -304,12 +306,9 @@ CREATE TABLE `transaction` (
 -- Dumping data for table `transaction`
 --
 
-INSERT INTO `transaction` (`Id`, `Date`, `Payment`, `Stats`, `Transaction_bill`, `Create_at`, `Update_at`) VALUES
-(1, '2019-05-31 12:07:13', 120000, 1, 'Albertus Ndaru-2019-05-31 12:07:13', '2019-05-31 05:07:13', '2019-06-02 16:05:30'),
-(2, '2019-05-31 17:06:28', 220000, 1, 'Albertus Ndaru-2019-05-31 05:06:28', '2019-05-31 10:06:28', '2019-06-02 16:05:37'),
-(3, '2019-05-31 17:09:57', 220000, 1, 'Albertus Ndaru-2019-05-31 17:09:57', '2019-05-31 10:09:57', '2019-06-02 16:05:39'),
-(4, '2019-06-02 21:43:10', 480000, 1, 'Albertus Ndaru-2019-06-02 21:43:10', '2019-06-02 14:43:10', '2019-06-02 21:43:34'),
-(7, '2019-06-02 22:10:20', 80000, 1, 'Albertus Ndaru-2019-06-02 22:10:20', '2019-06-02 15:10:20', '2019-06-03 10:27:53');
+INSERT INTO `transaction` (`Id`, `Transaction_bill`, `Date`, `Stats`, `Ongkir`, `Payment`, `Resi`, `Kurir`, `Create_at`, `Update_at`) VALUES
+(1, 'Albertus Ndaru-2019-06-15 11:47:23', '2019-06-15 11:47:23', 'Sending', 61000, 80000, 'JNCL-6605028670', 'jne', '2019-06-15 04:47:23', '2019-06-17 15:49:39'),
+(2, 'Albertus Ndaru-20190617154657', '2019-06-17 15:46:57', 'Sending', 77000, 120000, 'CP014455112ID', 'pos', '2019-06-17 08:46:57', '2019-06-17 15:49:47');
 
 -- --------------------------------------------------------
 
@@ -333,7 +332,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`Id`, `Usergrup_id`, `Username`, `Password`, `IsLogin`, `LastLogin`, `Create_at`, `Update_at`) VALUES
-(1, 1, 'Samsu', 'pass@word5', 1, '1559744989', '2019-02-28 02:55:49', NULL);
+(1, 1, 'Samsu', 'pass@word5', 1, '1560832176', '2019-02-28 02:55:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -462,31 +461,31 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `details`
 --
 ALTER TABLE `details`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `imageproduct`
 --
 ALTER TABLE `imageproduct`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `product_type`
@@ -504,7 +503,7 @@ ALTER TABLE `supliyer`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`

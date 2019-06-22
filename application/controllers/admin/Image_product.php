@@ -14,8 +14,8 @@ class Image_product extends CI_Controller{
     {
         if (ceksession())
         {
-            $data['record']     =    $this->Model_image->M_tampil_data();
-            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $data['record']    = $this->Model_image->M_tampil_data();
+            $data['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/image_product/input_image',$data);
         }
     }
@@ -33,8 +33,8 @@ class Image_product extends CI_Controller{
     {
         if (ceksession())
         {
-            $Id    = $this->input->post('IdProduct');
-            $New  = 'IMG_'.get_current_date_img().'_Product.jpg';
+            $Id  = $this->input->post('IdProduct');
+            $New = 'IMG_'.get_current_date_img().'_Product.jpg';
             $this->Model_image->M_deleteImage($Id);
             $this->Model_image->M_Update_image($Id,$New);
             $this->aksi_upload($Id, $New);
@@ -46,11 +46,11 @@ class Image_product extends CI_Controller{
     {
         if (ceksession())
         {
-            $config['upload_path']          = './assets/shop/images/';
-		    $config['allowed_types']        = '*';
-            $config['file_name'] = $New;
+            $config['upload_path']   = './assets/shop/images/';
+            $config['allowed_types'] = '*';
+            $config['file_name']     = $New;
             //$config['max_width']            = 1024;
-            //$config['max_height']           = 768;
+            //$config['max_height']           = 768;                    
 		    $this->load->library('upload', $config);
             
                     if ( ! $this->upload->do_upload('berkas')){

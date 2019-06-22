@@ -19,8 +19,10 @@
                                             <th>Id Transaksi</th>
                                             <th>Nama Member</th>
                                             <th>Tanggal</th>
+                                            <th>Onkos Kirim</th>
+                                            <th>Transaksi</th>
                                             <th>Total Transaksi</th>
-                                            <th style="text-align:center">Detail</th>
+                                            <th style = "text-align: center">Detail</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -28,8 +30,10 @@
                                             <th>Id Transaksi</th>
                                             <th>Nama Member</th>
                                             <th>Tanggal</th>
+                                            <th>Onkos Kirim</th>
+                                            <th>Transaksi</th>
                                             <th>Total Transaksi</th>
-                                            <th style="text-align:center">Detail</th>
+                                            <th style = "text-align: center">Detail</th>
                                         </tr>
                                         </tr>
                                     </tfoot>
@@ -41,7 +45,9 @@
                                           <td><?php echo $r->Transaction_bill ?></td>
                                           <td><?php $namamember=explode('-',$r->Transaction_bill) ;echo $namamember[0] ;?></td>
                                           <td><?php echo $r->Date ?></td>
+                                          <td>Rp <?php echo $r->Ongkir ?></td>
                                           <td>Rp <?php echo $r->Payment ?></td>
+                                          <td>Rp <?php echo ($r->Payment+$r->Ongkir) ?></td>
                                           <td align="center">
                                               <a class="btn btn-primary" href='<?php echo base_url('admin/Penjualan/getDetailPenjualanById?Id='.$r->Id)?>'>Detail</a>
                                           </td>

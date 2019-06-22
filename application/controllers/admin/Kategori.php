@@ -13,8 +13,8 @@ class Kategori extends CI_Controller{
     {
         if (ceksession())
         {
-            $data['record']     =    $this->Model_kategori->M_tampil_data();
-            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $data['record']    = $this->Model_kategori->M_tampil_data();
+            $data['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/kategori/view_category',$data);
         }
         
@@ -33,8 +33,8 @@ class Kategori extends CI_Controller{
     {   
         if (ceksession())
         {
-            $data['record']= $this->Model_kategori->M_tampil_data_by_id($id);
-            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $data['record']    = $this->Model_kategori->M_tampil_data_by_id($id);
+            $data['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/Kategori/edit_category',$data);
         }
     }
@@ -43,9 +43,9 @@ class Kategori extends CI_Controller{
     {
         if (ceksession())
         {
-            $categoryname    = $this->input->post('categoryname');
-            $description = $this->input->post('description');
-            $dataCategory    = array('Category_name'=>$categoryname,'Description'=>$description);
+            $categoryname = $this->input->post('categoryname');
+            $description  = $this->input->post('description');
+            $dataCategory = array('Category_name' => $categoryname,'Description' => $description);
             $insert = $this->Model_kategori->M_addCategory($dataCategory);
             if($insert)
             {
@@ -64,10 +64,10 @@ class Kategori extends CI_Controller{
     {
         if (ceksession())
         {
-            $categoryname= $this->input->post('categoryname');
-            $description= $this->input->post('description');
-            $update_at= get_current_date();
-            $id= $this->input->post('id');
+            $categoryname = $this->input->post('categoryname');
+            $description  = $this->input->post('description');
+            $update_at    = get_current_date();
+            $id           = $this->input->post('id');
             $dataEdit= array('Category_name'=>$categoryname,
                              'Description'=>$description,
                              'Update_at'=>$update_at);

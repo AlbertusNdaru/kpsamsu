@@ -16,8 +16,8 @@ class Pembelian  extends CI_Controller {
     {
         if (ceksession())
         {
-            $dataProduct['record'] = $this->Model_barang->M_tampil_data();  
-            $dataProduct['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $dataProduct['record']    = $this->Model_barang->M_tampil_data();  
+            $dataProduct['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/pembelian_product/view_pembelian',$dataProduct);
         }
     }
@@ -26,9 +26,9 @@ class Pembelian  extends CI_Controller {
     {   
         if (ceksession())
         {
-            $dataProduct['product'] = $this->Model_barang->M_tampil_data_by_id($id);   
-            $dataProduct['Supliyer'] =  $this->Model_supliyer->tampildata(); 
-            $dataProduct['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $dataProduct['product']   = $this->Model_barang->M_tampil_data_by_id($id);   
+            $dataProduct['Supliyer']  = $this->Model_supliyer->tampildata(); 
+            $dataProduct['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/pembelian_product/input_pembelian',$dataProduct);
         }
     }
@@ -37,11 +37,11 @@ class Pembelian  extends CI_Controller {
     {
         if (ceksession())
         {
-            $id_product= $_POST['id'];
-            $jumlah_beli = $_POST['jumlah_beli'];
-            $harga_supliyer= $_POST["harga_supliyer"];
-            $Supliyer_id = $_POST['Supliyer_id'];
-            $dataPembelian = array(
+            $id_product     = $_POST['id'];
+            $jumlah_beli    = $_POST['jumlah_beli'];
+            $harga_supliyer = $_POST["harga_supliyer"];
+            $Supliyer_id    = $_POST['Supliyer_id'];
+            $dataPembelian  = array(
                                  "id_product"=>$id_product,
                                  "price"=>$harga_supliyer,
                                  "jumlah_beli"=>$jumlah_beli,

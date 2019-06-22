@@ -13,9 +13,9 @@ class Laporan extends CI_Controller{
         if (ceksession())
         {
             $data['record']=  $this->Model_penjualan_admin->getDataPenjualan();
-            $config = array('format'=>'Folio');
-            $mpdf = new \Mpdf\Mpdf($config);
-            $html =  $this->load->view('admin/laporan/LaporanPenjualan',$data,true);
+            $config = array('format' => 'Folio');
+            $mpdf   = new \Mpdf\Mpdf($config);
+            $html   = $this->load->view('admin/laporan/LaporanPenjualan',$data,true);
             $mpdf->WriteHTML($html);
             $mpdf->Output();
         }
@@ -26,9 +26,9 @@ class Laporan extends CI_Controller{
         if (ceksession())
         {
             $data['record']=  $this->Model_pembelian->getDataPembelian();
-            $config = array('format'=>'Folio');
-            $mpdf = new \Mpdf\Mpdf($config);
-            $html =  $this->load->view('admin/laporan/LaporanPembelian',$data,true);
+            $config = array('format' => 'Folio');
+            $mpdf   = new \Mpdf\Mpdf($config);
+            $html   = $this->load->view('admin/laporan/LaporanPembelian',$data,true);
             $mpdf->WriteHTML($html);
             $mpdf->Output();
         }

@@ -14,6 +14,20 @@ function ceksession()
     }
 }
 
+function ceksessionuser()
+{   $CI= & get_instance();
+    if (isset($_SESSION['userdata']->Id))
+    {
+        isLoginSessionExpireduser();
+        return true;
+    }
+    else
+    {
+        $CI->load->view('user/user_index');
+        return false;
+    }
+}
+
 
 
 
@@ -81,7 +95,7 @@ function isLoginSessionExpireduser() {
 	if(isset($_SESSION['loggedin_time']) && isset($_SESSION['userdata'])){  
 		if(((time() - $_SESSION['loggedin_time']) > $login_session_duration)){ 
          
-            $CI->db->query("update member set isLogin='N', gagallogin=0 where id_member='".$_SESSION['userdata']->id_member."'") ;
+            $CI->db->query("update member set isLogin='N', gagallogin=0 where Id='".$_SESSION['userdata']->Id."'") ;
             session_destroy();
             redirect('user/Shop');
         } 

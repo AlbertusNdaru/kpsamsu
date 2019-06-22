@@ -11,8 +11,8 @@ class Email extends CI_Controller{
         $id = $this->input->post('id');
         $email = $_POST['email'];
         $config = Array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl: //smtp.googlemail.com',
             'smtp_port' => 465,
             'smtp_user' => 'ajengshop20@gmail.com',
             'smtp_pass' => 'AjengShop123',
@@ -47,8 +47,8 @@ class Email extends CI_Controller{
         $id = $this->input->post('id');
         $email= $this->input->post('email');
         $config = Array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl: //smtp.googlemail.com',
             'smtp_port' => 465,
             'smtp_user' => 'ajengshop20@gmail.com',
             'smtp_pass' => 'AjengShop123',

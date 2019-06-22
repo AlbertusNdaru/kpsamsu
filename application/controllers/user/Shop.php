@@ -11,7 +11,7 @@ class Shop extends CI_Controller{
     function index()
     {   
         $barang['all'] = $this->Model_barang->M_tampil_data();
-        $total=0;
+        $total         = 0;
         if(isset($_SESSION['cart']))
         {
             foreach($_SESSION['cart'] as $key => $data)
@@ -28,7 +28,7 @@ class Shop extends CI_Controller{
     }
 
     function cheeckout()
-    {   $total=0;
+    {   $total = 0;
         if(isset($_SESSION['cart']))
         {
             foreach($_SESSION['cart'] as $key => $data)

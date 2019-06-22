@@ -28,7 +28,6 @@
 							<li>
 								<a href="<?php echo base_url()?>penjualan">Home</a>
 							</li>
-
 							<li>
 								<a href="<?php echo base_url()?>penjualan/penjualan">Shop</a>
 							</li>
@@ -41,7 +40,6 @@
 						</ul>
 					</nav>
 				</div>
-
 				<!-- Header Icon -->
 				<div class="header-icons">
 					<a href="#" class="header-wrapicon1 dis-block">

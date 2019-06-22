@@ -29,5 +29,6 @@ class Model_supliyer extends CI_Model{
     {
         $this->db->where('Id', $Id);
         return $this->db->delete('supliyer');
+        
     }
 }

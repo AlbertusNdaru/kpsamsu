@@ -5,12 +5,11 @@ class Customer extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->model('Model_barang');
-      
     }
     
     function index()
     {
-        $data['record']     =    $this->Model_kategori->tampil_data();
+        $data['record'] = $this->Model_kategori->tampil_data();
         $this->template->load('template','admin/kategori/view_category',$data);
     }
 
@@ -21,10 +20,10 @@ class Customer extends CI_Controller{
     
     function addCategory()
     {
-        $categoryname    = $this->input->post('categoryname');
-        $description = $this->input->post('description');
-        $dataCategory    = array('Category_name'=>$categoryname,'Description'=>$description);
-        $insert = $this->Model_kategori->M_addCategory($dataCategory);
+        $categoryname = $this->input->post('categoryname');
+        $description  = $this->input->post('description');
+        $dataCategory = array('Category_name' => $categoryname,'Description' => $description);
+        $insert       = $this->Model_kategori->M_addCategory($dataCategory);
         if($insert)
         {
             $this->session->set_flashdata('Status','Input Succes');
@@ -46,7 +45,7 @@ class Customer extends CI_Controller{
             redirect('kategori');
         }
         else{
-            $id=  $this->uri->segment(3);
+            $id = $this->uri->segment(3);
             $data['record']=  $this->Model_kategori->get_one($id)->row();
             //print_r($data['record']->id_kategori);
             //$this->load->view('kategori/form_edit',$data);
@@ -59,7 +58,7 @@ class Customer extends CI_Controller{
     function delete()
     {
         if (ceksession()){
-        $id=  $this->uri->segment(3);
+        $id = $this->uri->segment(3);
         $this->Model_kategori->delete($id);
         redirect('kategori');
         }

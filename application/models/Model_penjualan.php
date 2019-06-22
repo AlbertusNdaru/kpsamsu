@@ -4,10 +4,10 @@ class Model_penjualan extends ci_model{
    
     function addDetailFromCart($databarangtransaksi)
     {
-        $Product_id=$databarangtransaksi['Product_id'];
-        $Member_id=$_SESSION['userdata']->Id;
-        $Qty=$databarangtransaksi['Qty'];
-        $Price=$databarangtransaksi['Price'];
+        $Product_id    = $databarangtransaksi['Product_id'];
+        $Member_id  = $_SESSION['userdata']->Id;
+        $Qty            = $databarangtransaksi['Qty'];
+        $Price      = $databarangtransaksi['Price'];
         $data= array('Product_id'=>$Product_id,
                      'Price'=>$Price,
                      'Qty'=>$Qty,
@@ -32,8 +32,8 @@ class Model_penjualan extends ci_model{
 
     function updateDetailsFromCart($databarangtransaksi)
     {
-        $Product_id=$databarangtransaksi['Product_id'];
-        $Member_id=$_SESSION['userdata']->Id;
+        $Product_id = $databarangtransaksi['Product_id'];
+        $Member_id  = $_SESSION['userdata']->Id;
         $this->db->where('Transaction_id',Null);
         $this->db->where('Member_id',$Member_id);
         $this->db->where('Product_id',$Product_id);
@@ -65,6 +65,17 @@ class Model_penjualan extends ci_model{
       $this->db->where('Transaction_bill',$bill);
       $data = $this->db->get('transaction')->row();
       return $data->Id;
+    }
+
+    function getdatatransaksi($id)
+    {
+        $this->db->distinct();
+        $this->db->select('b.Member_id as ID, a.*');
+        $this->db->from('transaction as a');
+        $this->db->join('details as b','b.Transaction_id=a.Id');
+        $this->db->where('b.Member_id',$id);
+        $this->db->where('a.Stats',3);
+        return $this->db->get()->result();   
     }
 
     function updateTransaksiSukses($datatransaksi)

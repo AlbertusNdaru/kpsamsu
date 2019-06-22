@@ -6,18 +6,18 @@ class Penjualan extends CI_Controller
         parent::__construct();
         $this->load->model('Model_barang');
         $this->load->model('Model_penjualan');
-
+        
     }
 
     function poscartpending()
     {  
-     
-        $Product_id= $this->input->post('id_barang');
-        $Qty= $this->input->post('jml');
-        $data= $this->Model_barang->M_tampil_data_by_id($Product_id);
-        $Price= $data->Price;
-        $Photo_name= $data->Photo_name;
-        $Product_name= $data->Product_name;
+        
+        $Product_id   = $this->input->post('id_barang');
+        $Qty          = $this->input->post('jml');
+        $data         = $this->Model_barang->M_tampil_data_by_id($Product_id);
+        $Price        = $data->Price;
+        $Photo_name   = $data->Photo_name;
+        $Product_name = $data->Product_name;
         
         if (isset($_SESSION['cart'][$Product_id]))
         {   
@@ -29,21 +29,23 @@ class Penjualan extends CI_Controller
            if(isset($_SESSION['cart']))
            {
             $datatransaksi = $this->session->userdata('cart');
-            $datatransaksi[$Product_id] = array('Product_id'  =>$Product_id,
-                                        'Qty'         =>$Qty,
-                                        'Price'       =>$Price,
-                                        'Photo_name'  =>$Photo_name, 
-                                        'Product_name'=>$Product_name);
+            $datatransaksi[$Product_id] = array(
+                                        'Product_id'   => $Product_id,
+                                        'Qty'          => $Qty,
+                                        'Price'        => $Price,
+                                        'Photo_name'   => $Photo_name, 
+                                        'Product_name' => $Product_name);
             $this->session->set_userdata('cart',$datatransaksi);
 
            } 
            else
            {
-            $datatransaksi[$Product_id] = array('Product_id'  =>$Product_id,
-                                        'Qty'         =>$Qty,
-                                        'Price'       =>$Price,
-                                        'Photo_name'  =>$Photo_name, 
-                                        'Product_name'=>$Product_name);
+            $datatransaksi[$Product_id] = array(
+                                        'Product_id'   => $Product_id,
+                                        'Qty'          => $Qty,
+                                        'Price'        => $Price,
+                                        'Photo_name'   => $Photo_name, 
+                                        'Product_name' => $Product_name);
             $this->session->set_userdata('cart',$datatransaksi);
            }
            
@@ -59,13 +61,13 @@ class Penjualan extends CI_Controller
 
     function post_penjualan()
     {
-        $Product_id= $this->input->post('id_barang');
-        $Qty= $this->input->post('jml');
-        $data= $this->Model_barang->M_tampil_data_by_id($Product_id);
-        $Price= $data->Price;
-        $Photo_name= $data->Photo_name;
-        $Product_name= $data->Product_name;
-        $total= $Price * 1;
+        $Product_id   = $this->input->post('id_barang');
+        $Qty          = $this->input->post('jml');
+        $data         = $this->Model_barang->M_tampil_data_by_id($Product_id);
+        $Price        = $data->Price;
+        $Photo_name   = $data->Photo_name;
+        $Product_name = $data->Product_name;
+        $total        = $Price * 1;
         if (isset($_SESSION['cart'][$Product_id]))
         {  
             $_SESSION['cart'][$Product_id]['Qty']=$_SESSION['cart'][$Product_id]['Qty']+$Qty;
@@ -75,14 +77,14 @@ class Penjualan extends CI_Controller
         }
         else
         {  
-          
             $datatransaksi = $this->session->userdata('cart');
-            $datatransaksi[$Product_id]= array('Product_id'  =>$Product_id,
-                                               'Qty'         =>$Qty,
-                                               'Price'       =>$Price,
-                                               'total'       =>$total,
-                                               'Photo_name'  =>$Photo_name, 
-                                               'Product_name'=>$Product_name);
+            $datatransaksi[$Product_id]= array(
+                                               'Product_id'   => $Product_id,
+                                               'Qty'          => $Qty,
+                                               'Price'        => $Price,
+                                               'total'        => $total,
+                                               'Photo_name'   => $Photo_name, 
+                                               'Product_name' => $Product_name);
             $this->Model_penjualan->addDetailFromLogin($datatransaksi,$Product_id);
             $this->session->set_userdata('cart',$datatransaksi);
            
@@ -137,19 +139,29 @@ class Penjualan extends CI_Controller
 
   function checkout()
   {
-      $transaksibill = $_SESSION['userdata']->Member_name.'-'.get_current_date();
-      $datacheckout= array('Payment'=> $_POST['Payment'],
-                           'Transaction_bill' => $transaksibill,
-                           'Ongkir'=> $_POST['Ongkir']
-                          );
-     $this->Model_penjualan->checkout($datacheckout);
-     $IdTransaksi = $this->Model_penjualan->getidtransaksibyBill($transaksibill);
-     $datacheckout= array('Status'=> 1,
-                          'Transaction_id' => $IdTransaksi
-                         );
-     $this->Model_penjualan->updateTransaksiSukses($datacheckout);
-     unset($_SESSION['cart']);
+        $transaksibill = $_SESSION['userdata']->Member_name.'-'.get_current_date_img();
+        $datacheckout= array(
+                            'Payment'          => $_POST['Payment'],
+                            'Transaction_bill' => $transaksibill,
+                            'Ongkir'           => $_POST['Ongkir'],
+                            'Kurir'            => $_POST['Kurir']
+                            );
+        $this->Model_penjualan->checkout($datacheckout);
+        $IdTransaksi = $this->Model_penjualan->getidtransaksibyBill($transaksibill);
+        $datacheckout= array(
+                            'Status'         => 1,
+                            'Transaction_id' => $IdTransaksi
+                            );
+        $this->Model_penjualan->updateTransaksiSukses($datacheckout);
+        unset($_SESSION['cart']);
   }
+
+ function getdatatransaksi()
+ {
+    $id=$_POST['id'];
+    $dataTransaksi = $this->Model_penjualan->getdatatransaksi($id);
+    echo json_encode($dataTransaksi);
+ }
 
 
 }

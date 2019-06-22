@@ -14,8 +14,8 @@ class Product extends CI_Controller {
     {     
         if (ceksession())
         {
-            $data['record']     =    $this->Model_barang->M_tampil_data();
-            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $data['record']    = $this->Model_barang->M_tampil_data();
+            $data['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/product/view_product',$data);
         }
     }
@@ -26,8 +26,8 @@ class Product extends CI_Controller {
         if (ceksession())
         {
             $data['dataCategory'] = $this->Model_kategori->M_tampil_data();
-            $data['dataType'] = $this->Model_barang->M_tampil_data_type();
-            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $data['dataType']     = $this->Model_barang->M_tampil_data_type();
+            $data['transaksi']    = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/product/input_product',$data);
         }
     }
@@ -101,14 +101,15 @@ class Product extends CI_Controller {
             $price       = $this->input->post('price');
             $price_S     = $this->input->post('price_supliyer');
             $status      = $this->input->post('status');
-            $dataProduct = array('Product_name'=>$productname,
-                                 'Category_id'=>$category,
-                                 'Merk'=>$merk,
-                                 'Description'=>$description,
-                                 'Product_type_id'=>$typeproduct,
-                                 'Price'=>$price,
-                                 'Harga_supliyer'=>$price_S,
-                                 'Status_item'=>$status);
+            $dataProduct = array(
+                                 'Product_name'    => $productname,
+                                 'Category_id'     => $category,
+                                 'Merk'            => $merk,
+                                 'Description'     => $description,
+                                 'Product_type_id' => $typeproduct,
+                                 'Price'           => $price,
+                                 'Harga_supliyer'  => $price_S,
+                                 'Status_item'     => $status);
             $insert     = $this->Model_barang->M_addProduct($dataProduct,$stok);
              if($insert)
              {
@@ -137,15 +138,16 @@ class Product extends CI_Controller {
             $harga_supliyer   = $this->input->post('harga_supliyer');
             $update_at        = get_current_date();
             $id               = $this->input->post('id');
-            $dataEdit= array('Product_name'=>$productname,
-                             'Category_id'=>$category_id,
-                             'Merk'=>$merk,
-                             'Description'=>$description,
-                             'Product_type_id'=>$product_type_id,
-                             'Update_at'=>$update_at,
-                             'Harga_supliyer'=>$harga_supliyer,
-                             'Price'=>$price,
-                             'Status_item'=>$status);
+            $dataEdit= array(
+                             'Product_name'    => $productname,
+                             'Category_id'     => $category_id,
+                             'Merk'            => $merk,
+                             'Description'     => $description,
+                             'Product_type_id' => $product_type_id,
+                             'Update_at'       => $update_at,
+                             'Harga_supliyer'  => $harga_supliyer,
+                             'Price'           => $price,
+                             'Status_item'     => $status);
             $edit=$this->Model_barang->M_editProduct($dataEdit,$id);
             if($edit)
             {
