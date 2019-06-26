@@ -36,5 +36,11 @@ class Model_penjualan_admin extends ci_model{
        $this->db->where('a.Transaction_id',$Id);
        return $this->db->get()->result();
     }
+
+    function getBarang10Baranglaris()
+    {
+      $query = "SELECT a.Product_id, SUM(Qty) as jmljual , b.Product_name , c.Type_name FROM details as a inner join product as b on b.Id = a.Product_id inner join product_type as c on c.Id = b.Product_type_id GROUP BY a.Product_id ASC LIMIT 0,10";
+      return $this->db->query($query)->result();
+    }
 }
 ?>

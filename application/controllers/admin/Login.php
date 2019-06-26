@@ -38,28 +38,38 @@ class Login extends CI_Controller{
     {
         $nik = $this->input->post('nik');
         $data = $this->Model_karyawan->get_karyawan_by_nik($nik);
-        if($data)
-        {     
-            $Karyawan_id = $data->Id;
-            $Username = $this->input->post('username');
-            $Password = $this->input->post('password');
-            $Usergrup_id = $this->input->post('usergrup');
-            $pertanyaan = $this->input->post('pertanyaan');
-            $jawaban = $this->input->post('jawaban');
-            $datauser = array(
-                'Usergrup_id'=>$Usergrup_id,
-                'Username'=>$Username,
-                'Password'=>$Password,
-                'pertanyaan'=>$pertanyaan,
-                'jawaban'=>$jawaban,
-                'Karyawan_id'=>$Karyawan_id
-            );
-            $hasil=  $this->Model_login->M_inputadmin($datauser); 
-            redirect('admin/Login/loginadmin');
-        }
-        else
+        $validasi = $this->Model_user->getUserById($data->Id);
+        if($validasi)
         {
+            $this->session->set_flashdata('Error','Nik Sudah Terdaftar Sebagai Admin'); 
             redirect('admin/Login/viewregister');
+        }
+        else 
+        {
+            if($data)
+            {     
+                $Karyawan_id = $data->Id;
+                $Username = $this->input->post('username');
+                $Password = $this->input->post('password');
+                $Usergrup_id = $this->input->post('usergrup');
+                $pertanyaan = $this->input->post('pertanyaan');
+                $jawaban = $this->input->post('jawaban');
+                $datauser = array(
+                    'Usergrup_id'=>$Usergrup_id,
+                    'Username'=>$Username,
+                    'Password'=>$Password,
+                    'pertanyaan'=>$pertanyaan,
+                    'jawaban'=>$jawaban,
+                    'Karyawan_id'=>$Karyawan_id
+                );
+                $hasil=  $this->Model_login->M_inputadmin($datauser); 
+                redirect('admin/Login/loginadmin');
+            }
+            else
+            {
+                $this->session->set_flashdata('Error','Username and Password Incorect'); 
+                redirect('admin/Login/viewregister');
+            }
         }
     }
     

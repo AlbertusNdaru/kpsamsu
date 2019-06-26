@@ -148,7 +148,9 @@
                 { 
                     if(data == "true")
                     {
+                      
                         window.location = "<?php echo base_url('admin/Login/loginadmin')?>";
+                        alert("Password Berhasil Diganti");
                     }
                     else
                     {

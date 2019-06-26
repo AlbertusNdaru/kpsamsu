@@ -39,7 +39,7 @@
 					
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email">
+						<input id="email" class="input100" type="text" name="email">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Email</span>
 					</div>
@@ -53,7 +53,7 @@
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div>
-							<a href="#" class="txt1">
+							<a href="#" onclick="forget()" class="txt1">
 								Forgot Password?
 							</a>
 						</div>
@@ -98,68 +98,82 @@
 <!--===============================================================================================-->
     <script src="<?= base_url('assets/loginshop/')?>js/main.js"></script>
     
-    <script>
-  <?php if (!empty($this->session->flashdata('Status'))){?>
-    setnotifstatus('<?php echo $this->session->flashdata('Status')?>');
+<script>
+<?php if (!empty($this->session->flashdata('Status'))){?>
+	setnotifstatus('<?php echo $this->session->flashdata('Status')?>');
 <?php }?>
 
 
- function setnotifstatus(err)
+function setnotifstatus(err)
 { 
-if (err == 'Input Succes')
-    {
-      ttp='success';
-    }
- else if(err== "Email & Password Tidak Cocok" || err=="Akun telah digunakan untuk Login" || err=="'Akun terblokir. SIlahkan klik lupa password")
-    {
-    ttp='danger';
-    }
+	if (err == 'Input Succes')
+		{
+		ttp='success';
+		}
+	else if(err== "Email & Password Tidak Cocok" || err=="Akun telah digunakan untuk Login" || err=="'Akun terblokir. SIlahkan klik lupa password")
+		{
+		ttp='danger';
+		}
 
-  $.notify({
-	// options
-	message: err,
-  },{
-    // settings
-    element: 'body',
-    position: null,
-    type: ttp,
-    allow_dismiss: true,
-    newest_on_top: false,
-    showProgressbar: false,
-    placement: {
-      from: "bottom",
-      align: "right"
-    },
-    offset: 20,
-    spacing: 10,
-    z_index: 1031,
-    delay: 5000,
-    timer: 1000,
-    url_target: '_blank',
-    mouse_over: null,
-    animate: {
-      enter: 'animated fadeInRight',
-      exit: 'animated fadeOutRight'
-    },
-    onShow: null,
-    onShown: null,
-    onClose: null,
-    onClosed: null,
-    icon_type: 'class',
-    template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
-      '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-      '<span data-notify="icon"></span> ' +
-      '<span data-notify="title">{1}</span> ' +
-      '<span data-notify="message">{2}</span>' +
-      '<div class="progress" data-notify="progressbar">' +
-        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-      '</div>' +
-      '<a href="{3}" target="{4}" data-notify="url"></a>' +
-    '</div>' 
-  });
+	$.notify({
+		// options
+		message: err,
+	},{
+		// settings
+		element: 'body',
+		position: null,
+		type: ttp,
+		allow_dismiss: true,
+		newest_on_top: false,
+		showProgressbar: false,
+		placement: {
+		from: "bottom",
+		align: "right"
+		},
+		offset: 20,
+		spacing: 10,
+		z_index: 1031,
+		delay: 5000,
+		timer: 1000,
+		url_target: '_blank',
+		mouse_over: null,
+		animate: {
+		enter: 'animated fadeInRight',
+		exit: 'animated fadeOutRight'
+		},
+		onShow: null,
+		onShown: null,
+		onClose: null,
+		onClosed: null,
+		icon_type: 'class',
+		template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+		'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+		'<span data-notify="icon"></span> ' +
+		'<span data-notify="title">{1}</span> ' +
+		'<span data-notify="message">{2}</span>' +
+		'<div class="progress" data-notify="progressbar">' +
+			'<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+		'</div>' +
+		'<a href="{3}" target="{4}" data-notify="url"></a>' +
+		'</div>' 
+	});
 
 }
-  </script>
+
+	function forget()
+	{
+		var email= $('#email').val();
+		if(email=="")
+		{
+			alert('Username Tidak Boleh Kosong');
+		}
+		else
+		{
+			window.location = "<?php echo base_url('user/Login/viewForegetPassword?email=')?>"+email;
+		}
+	}
+</script>
+
 
 </body>
 </html>

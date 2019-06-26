@@ -65,6 +65,9 @@
             <li>
             <a href="<?= base_url('admin/Laporan/laporanpenjualan')?>" target="_blank">Laporan Penjualan</a>
             </li>
+            <li>
+            <a href="<?= base_url('admin/Laporan/laporanbaranglaris')?>" target="_blank">Barang Laris</a>
+            </li>
         </ul>
     </li>
 </ul>

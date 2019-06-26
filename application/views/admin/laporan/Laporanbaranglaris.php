@@ -12,10 +12,9 @@
                     <div>
                         <h2 align="center">
                             TOKO BAJU <br>
-                            Laporan Penjualan : 
+                            Laporan 10 Barang Laris : 
                             <small><?=  date('d-m-y') ?></small>
                         </h2>
-                       
                     </div>
                 </div>
             </div> 
@@ -29,24 +28,20 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Tanggal Transaksi</th>
-                                                <th>Nama Pembeli</th>
-                                                <th>Total Transaksi</th>
+                                                <th>Nama Barang</th>
+                                                <th>Type Barang</th>
+                                                <th>Jumlah Terjual</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         <?php $no=1; $total=0; foreach ($record as $r){ ?>
                                             <tr class="gradeU">
                                                 <td align="center"><?php echo $no ?></td>
-                                                <td align="center"><?php echo $r->Date ?></td>
-                                                <td align="center"><?php $nama=explode('-',$r->Transaction_bill); echo $nama[0] ?></td>
-                                                <td align="left">Rp <?php $payment=($r->Ongkir+$r->Payment); echo number_format($payment,2) ?></td>
+                                                <td align="left"><?php echo $r->Product_name ?></td>
+                                                <td align="center"><?php echo $r->Type_name ?></td>
+                                                <td align="center"><?php echo $r->jmljual ?></td>  
                                             </tr>
-                                        <?php $no++; $total=$total+$payment; } ?>
-                                            <tr>
-                                                <td colspan="3" style="text-align: right; font-size:18px;" ><B>Total</B></td>
-                                                <td style="font-size:18px;"><B>Rp <?php echo  number_format($total,2);?></B></td>
-                                            </tr>
+                                        <?php $no++; } ?>
                                         </tbody>
                                     </table>
                                     <br><br>
@@ -64,7 +59,6 @@
                                                 <td align="center"> <br></td>
                                             </tr>
                                             <tr class="gradeU">
-                           
                                                 <td align="center">  <?= $_SESSION['userdata']->Username?></td>
                                             </tr>
                                         </tbody>

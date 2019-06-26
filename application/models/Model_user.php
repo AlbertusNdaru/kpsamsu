@@ -119,6 +119,12 @@ class Model_user extends ci_model
         $this->db->where('Username',$username);
         return $this->db->get('user')->row();
     }
+    
+    function getUserById($Id)
+    {
+        $this->db->where('Karyawan_id',$Id);
+        return $this->db->get('user')->row();
+    }
 
     function cekjawaban($filter)
     {

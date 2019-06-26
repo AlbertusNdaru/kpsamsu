@@ -7,6 +7,7 @@ class Login extends CI_Controller{
         $this->load->model('Model_barang');
         $this->load->model('Model_penjualan');
         $this->load->model('Model_user');
+        $this->load->model('Model_member');
     }
     
     function loginuser()
@@ -29,6 +30,13 @@ class Login extends CI_Controller{
     function viewFormRegister()
     {
         $this->load->view('user/register');
+    }
+
+    function viewForegetPassword()
+    {
+        $email = $this->input->get('email');
+        $data['record'] = $this->Model_member->getDataMemberbyEmail($email);
+        $this->load->view('user/forgetpassword',$data);
     }
 
     function login()
@@ -118,6 +126,46 @@ class Login extends CI_Controller{
         unset($_SESSION['cart']);
         $Member_id = $_SESSION['userdata']->Id;
         $this->Model_penjualan->emptychartfromlogin($Member_id);
+    }
+
+    function cekJawaban()
+    {
+        $Email      = $this->input->post('email');
+        $Pertanyaan = $this->input->post('pertanyaan');
+        $Jawaban    = $this->input->post('jawaban');
+        $filter = array (
+            'Email'    => $Email,
+            'Question' => $Pertanyaan,
+            'Answer'   => $Jawaban
+        );
+        $data = $this->Model_member->cekjawaban($filter);
+        if($data)
+        {
+            echo "true";
+        }
+        else 
+        {
+            echo "false";
+        }
+    }
+
+    function resetpassword()
+    {
+        $Email   = $this->input->post('email');
+        $Password   = $this->input->post('password');
+        $data = array(
+            'Password'=>$Password,
+            'Update_at'=> get_current_date()
+            );
+        $Update = $this->Model_member->updatePassword($data,$Email);
+        if($Update)
+        {
+            echo "true";
+        }
+        else 
+        {
+            echo "false";
+        }
     }
 
 }

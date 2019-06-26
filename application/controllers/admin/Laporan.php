@@ -33,5 +33,18 @@ class Laporan extends CI_Controller{
             $mpdf->Output();
         }
     }
+
+    function laporanbaranglaris()
+    {
+        if(ceksession())
+        {
+            $data['record']=  $this->Model_penjualan_admin->getBarang10Baranglaris();
+            $config = array('format' => 'Folio');
+            $mpdf   = new \Mpdf\Mpdf($config);
+            $html   = $this->load->view('admin/laporan/Laporanbaranglaris',$data,true);
+            $mpdf->WriteHTML($html);
+            $mpdf->Output();
+        }
+    }
     
 }

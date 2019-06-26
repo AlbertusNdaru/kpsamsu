@@ -44,27 +44,36 @@ class Karyawan extends CI_Controller{
     }
 
     function addkaryawan()
-    {
+    {  
         if (ceksession())
         {
-            $karyawan = array(
-                'Nama'      => $this->input->post('nama'),
-                'NIK'      => $this->input->post('nik'),
-                'Alamat'    => $this->input->post('alamat'),
-                'No_hp'     => $this->input->post('nohp'),
-                'Email'     => $this->input->post('email'),
-                'Jenis_kel' => $this->input->post('jeniskel'),
-                );
-            $addkaryawan=$this->Model_karyawan->add_karyawan($karyawan);
-            if($addkaryawan)
+            $validasi = $this->Model_karyawan->get_karyawan_by_nik($this->input->post('nik'));
+            if($validasi)
             {
-                $this->session->set_flashdata('Status','Input Succes');
+                $this->session->set_flashdata('Status','Input Failed , NiK Sudah Terdaftar');
                 redirect('admin/Karyawan');
             }
-            else
+            else 
             {
-                $this->session->set_flashdata('Status','Input Failed');
-                redirect('admin/Karyawan');
+                $karyawan = array(
+                    'Nama'      => $this->input->post('nama'),
+                    'NIK'       => $this->input->post('nik'),
+                    'Alamat'    => $this->input->post('alamat'),
+                    'No_hp'     => $this->input->post('nohp'),
+                    'Email'     => $this->input->post('email'),
+                    'Jenis_kel' => $this->input->post('jeniskel'),
+                    );
+                $addkaryawan=$this->Model_karyawan->add_karyawan($karyawan);
+                if($addkaryawan)
+                {
+                    $this->session->set_flashdata('Status','Input Succes');
+                    redirect('admin/Karyawan');
+                }
+                else
+                {
+                    $this->session->set_flashdata('Status','Input Failed');
+                    redirect('admin/Karyawan');
+                }
             }
         }
     }
