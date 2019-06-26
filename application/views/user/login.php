@@ -165,7 +165,7 @@ function setnotifstatus(err)
 		var email= $('#email').val();
 		if(email=="")
 		{
-			alert('Username Tidak Boleh Kosong');
+			alert('Email Tidak Boleh Kosong');
 		}
 		else
 		{
