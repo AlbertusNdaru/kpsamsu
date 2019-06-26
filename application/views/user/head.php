@@ -25,6 +25,32 @@
           });
         });
     </script>
+
+<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+	</script>
+<!-- //end-smoth-scrolling -->
+<!--flex slider-->
+<script defer src="<?php echo base_url_shop()?>js/jquery.flexslider.js"></script>
+<link rel="stylesheet" href="<?php echo base_url_shop()?>css/flexslider.css" type="text/css" media="screen" />
+
+<script>
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: "thumbnails"
+  });
+});
+</script>
+<!--flex slider-->
+<script src="<?php echo base_url_shop()?>js/imagezoom.js"></script>
+
   <!-- //end-smoth-scrolling -->
   <script src="<?php echo base_url_shop()?>js/simpleCart.min.js"> </script>
   <script src="<?php echo base_url_shop()?>js/bootstrap.min.js"></script>

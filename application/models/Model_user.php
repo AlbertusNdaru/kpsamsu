@@ -106,5 +106,31 @@ class Model_user extends ci_model
         return $chek->result();
     }
 
+    function getAllUser()
+    {
+        $this->db->select('a.*, b.Name as HakAkses');
+        $this->db->from('user as a');
+        $this->db->join('usergrup as b','b.Id = a.Usergrup_id');
+        return $this->db->get()->result();
+    }
+
+    function getUserByUsername($username)
+    {
+        $this->db->where('Username',$username);
+        return $this->db->get('user')->row();
+    }
+
+    function cekjawaban($filter)
+    {
+        return $this->db->get_where('user',$filter)->row();
+    }
+
+    function updatePassword($data,$Username)
+    {
+        $this->db->where('Username', $Username);
+        return $this->db->update('user',$data);
+    }
+
+
 }
 ?>

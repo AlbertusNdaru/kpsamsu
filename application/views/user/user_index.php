@@ -16,13 +16,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="blc-layer2">
 	<div class="container">
 		<div class="blc-layer2-main">
-			 <div class="col-md-6 blc-layer2-left">
-			 	  <h3>WELCOME TO TOKO SAMSU</h3>
-			 	  <p>SELAMAT BERBELANJA</p>
-			 </div>
-			 <div class="col-md-6 blc-layer2-right">
-			 	
-			 </div>
+				<div class="col-md-6 blc-layer2-left">
+					<h3>WELCOME TO TOKO SAMSU</h3>
+					<p>SELAMAT BERBELANJA</p>
+				</div>
+				<div class="col-md-6 blc-layer2-right">
+				
+				</div>
 			<div class="clearfix"> </div>
 		</div>
 	</div>
@@ -37,7 +37,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<h1><?= $P->Product_name?></h1>
 				<h5 class="item_price">Rp <?= $P->Price?></h5>
 				<ul class="bann-small-img">
-					<li style="margin-right:0px; width:100%;"> <a href="single.html"><img style="width:100%;height:255px;" src="<?= base_url_shop()."images/".$P->Photo_name?>"></a></li>
+					<li style="margin-right:0px; width:100%;"> <a href="<?= base_url('user/Detailproduct/viewDetailProduct/').$P->Id ?>"><img style="width:100%;height:255px;" src="<?= base_url_shop()."images/".$P->Photo_name?>"></a></li>
 				</ul>
 				<ul class="bann-btns">
 				<li style="display:block; margin-right:0px;"><a href="#" onclick="addtocart('<?= $P->Id?>','<?php if(isset($_SESSION['userdata'])) {echo 'TRUE';} else {echo 'False';} ?>')" >Add To Cart</a></li>
@@ -54,124 +54,5 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php include('footer.php')?>
 <!--footer end here-->
 </body>
-<script>
- <?php if(empty($_SESSION['cart'])){?>$('#totalchart').html('Rp 0');<?php } else  {?> $('#totalchart').html('Rp <?php echo $total?>');<?php }?>
-	function addtocart(id,user)
-		{ 
-			    var qty = 1;
-				if(user=='TRUE')
-					{
-						$.ajax({
-						url  :"<?php echo base_url('user/Penjualan/post_penjualan');?>",
-						type : 'POST',
-						data : {
-							id_barang : id,
-							jml : qty
-						},
-						success : function(data)
-						{ 
-							$('#totalchart').html('Rp '+data);
-							alert('Success Add to Cart');
-							
-						}
-					});
 
-					}
-					else
-					{
-						$.ajax({
-						url  :"<?php echo base_url('user/Penjualan/poscartpending');?>",
-						type : 'POST',
-						data : {
-							id_barang : id,
-							jml: qty
-						},
-						success : function(data)
-						{
-						 $('#totalchart').html('Rp '+data);
-						alert('Success Add to Cart');
-						}
-					});	
-					}         
-		}
-	function emptychart(validate)
-	{
-		if (validate=='TRUE')
-		{
-			$.ajax({
-				url  :"<?php echo base_url('user/Penjualan/emptychartfromlogin');?>",
-				type : 'POST',
-				data : {
-				},
-				success : function(data)
-				{
-					alert('Success empty Cart From Login');
-					window.location.href = "<?php echo base_url('user/Shop')?>";
-				}
-			});
-		}
-		else
-		{
-			$.ajax({
-						url  :"<?php echo base_url('user/Penjualan/emptychart');?>",
-						type : 'POST',
-						data : {
-						},
-						success : function(data)
-						{
-						alert('Success empty Cart');
-						window.location.href = "<?php echo base_url('user/Shop')?>";
-						}
-					});	
-		}
-	}
-
-	function status()
-	{
-		if ('<?php if(isset($_SESSION["userdata"])) {echo true;} else {echo false;}?>')
-		{
-			$.ajax({
-				url:"<?php echo base_url('user/Penjualan/getdatatransaksi');?>",
-				type : "POST",
-				data : {id : '<?php if(isset($_SESSION["userdata"])) {echo $_SESSION['userdata']->Id;} else{echo null;}?>'},
-				success : function(data)
-				{
-				var result = $.parseJSON(data);
-				console.log(result);
-				$("#modalstatusdetail").empty();
-				for(var i=0; i<result.length; i++)
-				{
-					var link="";
-					var kurir="";
-					if(result[i]['Kurir']=='jne')
-						{
-						link='https://track.aftership.com/jne/'+result[i]['Resi']+'?'; kurir='JNE';
-						}
-					else if(result[i]['Kurir']=='tiki')
-						{
-						link='https://track.aftership.com/tiki/'+result[i]['Resi']+'?'; kurir='TIKI';
-						}else if(result[i]['Kurir']=='pos')
-							{
-								link='https://track.aftership.com/pos-indonesia-int/'+result[i]['Resi']+'?'; kurir="POS";
-							}
-					
-					$("#modalstatusdetail").append(
-								"<tr >"+
-									"<td>"+result[i]['Transaction_bill']+"</td>"+
-									"<td>"+result[i]['Date']+"</td>"+
-									"<td>Rp "+result[i]['Payment']+"</td>"+
-									"<td>Rp "+result[i]['Ongkir']+"</td>"+
-									"<td>"+result[i]['Stats']+"</td>"+
-									"<td>"+result[i]['Resi']+"</td>"+
-									"<td  style='text-align:center'>"+
-										"<a type='button' class='btn btn-danger' target='_blank' style='height: 22px;font-size: 12px;padding-top: 2px;' href="+link+">"+kurir+"</button>"+
-									"</td>"+
-								"</tr>"
-						);
-					}
-				}
-			});
-    	}
-	}
-</script>
 </html>

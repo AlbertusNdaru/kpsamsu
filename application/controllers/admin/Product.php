@@ -102,25 +102,25 @@ class Product extends CI_Controller {
             $price_S     = $this->input->post('price_supliyer');
             $status      = $this->input->post('status');
             $dataProduct = array(
-                                 'Product_name'    => $productname,
-                                 'Category_id'     => $category,
-                                 'Merk'            => $merk,
-                                 'Description'     => $description,
-                                 'Product_type_id' => $typeproduct,
-                                 'Price'           => $price,
-                                 'Harga_supliyer'  => $price_S,
-                                 'Status_item'     => $status);
+                                    'Product_name'    => $productname,
+                                    'Category_id'     => $category,
+                                    'Merk'            => $merk,
+                                    'Description'     => $description,
+                                    'Product_type_id' => $typeproduct,
+                                    'Price'           => $price,
+                                    'Harga_supliyer'  => $price_S,
+                                    'Status_item'     => $status);
             $insert     = $this->Model_barang->M_addProduct($dataProduct,$stok);
-             if($insert)
-             {
-                 $this->session->set_flashdata('Status','Input Succes');
-                 redirect('admin/Product/viewAddProduct');
-             }
-             else
-             {
-                 $this->session->set_flashdata('Status','Input Failed');
-                 redirect('admin/Product/viewAddProduct');
-             }
+                if($insert)
+                {
+                    $this->session->set_flashdata('Status','Input Succes');
+                    redirect('admin/Product/viewAddProduct');
+                }
+                else
+                {
+                    $this->session->set_flashdata('Status','Input Failed');
+                    redirect('admin/Product/viewAddProduct');
+                }
         }
     }
 
@@ -139,15 +139,15 @@ class Product extends CI_Controller {
             $update_at        = get_current_date();
             $id               = $this->input->post('id');
             $dataEdit= array(
-                             'Product_name'    => $productname,
-                             'Category_id'     => $category_id,
-                             'Merk'            => $merk,
-                             'Description'     => $description,
-                             'Product_type_id' => $product_type_id,
-                             'Update_at'       => $update_at,
-                             'Harga_supliyer'  => $harga_supliyer,
-                             'Price'           => $price,
-                             'Status_item'     => $status);
+                                'Product_name'    => $productname,
+                                'Category_id'     => $category_id,
+                                'Merk'            => $merk,
+                                'Description'     => $description,
+                                'Product_type_id' => $product_type_id,
+                                'Update_at'       => $update_at,
+                                'Harga_supliyer'  => $harga_supliyer,
+                                'Price'           => $price,
+                                'Status_item'     => $status);
             $edit=$this->Model_barang->M_editProduct($dataEdit,$id);
             if($edit)
             {

@@ -17,13 +17,13 @@ class Login extends CI_Controller{
         }
         else
         { 
-            $this->load->view('user/login');
+            $this->load->view('user/Login');
         }
     }
 
     function logincekout()
     {
-        $this->load->view('user/login');
+        $this->load->view('user/Login');
     }
 
     function viewFormRegister()

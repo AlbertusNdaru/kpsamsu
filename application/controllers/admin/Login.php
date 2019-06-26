@@ -5,6 +5,8 @@ class Login extends CI_Controller{
     function __construct() {
         parent::__construct();
         $this->load->model('Model_login');
+        $this->load->model('Model_karyawan');
+        $this->load->model('Model_user');
         
     }
 
@@ -26,16 +28,39 @@ class Login extends CI_Controller{
         $data['usergroup'] = $this->Model_login->M_selectusergrup();
         $this->load->view('admin/registeradmin',$data);
     }
+    function viewForegetPassword($username)
+    {
+        $data['record'] = $this->Model_user->getUserByUsername($username);
+        $this->load->view('admin/forgetpassword',$data);
+    }
 
     function register()
     {
-        // proses login disini
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
-        $usergrup = $this->input->post('usergrup');
-        $datauser = array('Usergrup_id'=>$usergrup,'Username'=>$username,'Password'=>$password);
-        $hasil=  $this->Model_login->M_inputadmin($datauser); 
-        redirect('admin/Login/loginadmin');
+        $nik = $this->input->post('nik');
+        $data = $this->Model_karyawan->get_karyawan_by_nik($nik);
+        if($data)
+        {     
+            $Karyawan_id = $data->Id;
+            $Username = $this->input->post('username');
+            $Password = $this->input->post('password');
+            $Usergrup_id = $this->input->post('usergrup');
+            $pertanyaan = $this->input->post('pertanyaan');
+            $jawaban = $this->input->post('jawaban');
+            $datauser = array(
+                'Usergrup_id'=>$Usergrup_id,
+                'Username'=>$Username,
+                'Password'=>$Password,
+                'pertanyaan'=>$pertanyaan,
+                'jawaban'=>$jawaban,
+                'Karyawan_id'=>$Karyawan_id
+            );
+            $hasil=  $this->Model_login->M_inputadmin($datauser); 
+            redirect('admin/Login/loginadmin');
+        }
+        else
+        {
+            redirect('admin/Login/viewregister');
+        }
     }
     
     function login()

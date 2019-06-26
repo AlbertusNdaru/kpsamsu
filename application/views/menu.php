@@ -20,6 +20,15 @@
             <li>
             <a href="<?= base_url('admin/Supliyer')?>">Supliyer</a>
             </li>
+            <li>
+            <a href="<?= base_url('admin/Karyawan')?>">Karyawan</a>
+            </li>
+            <li>
+            <a href="<?= base_url('admin/Member')?>">Member</a>
+            </li>
+            <li>
+            <a href="<?= base_url('admin/User')?>">User</a>
+            </li>
         </ul>
         <ul class="ml-menu">
             <li>

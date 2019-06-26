@@ -41,7 +41,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
+                            <input type="text" id="username" class="form-control" name="username" placeholder="Username" required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
@@ -52,21 +52,17 @@
                             <input type="password" class="form-control" name="password" placeholder="Password" required>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-8 p-t-5">
-                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
-                            <label for="rememberme">Remember Me</label>
-                        </div>
-                        <div class="col-xs-4">
+                    <div class="row" style="display:grid;">
+                        <div class="col-xs-4" style=" margin: auto; margin-bottom: 10px;"> 
                             <button class="btn btn-block bg-pink waves-effect" type="submit">SIGN IN</button>
                         </div>
                     </div>
                     <div class="row m-t-15 m-b--20">
                         <div class="col-xs-6">
-                            <a href="<?php echo base_url('Login/viewregister')?>">Register Now!</a>
+                            <a href="<?php echo base_url('admin/Login/viewregister')?>">Register Now!</a>
                         </div>
                         <div class="col-xs-6 align-right">
-                            <a href="forgot-password.html">Forgot Password?</a>
+                            <a href="#" onclick="forget()" >Forgot Password?</a>
                         </div>
                     </div>
                 </form>
@@ -147,6 +143,19 @@
     '</div>' 
   });
 
+}
+
+function forget()
+{
+    var username= $('#username').val();
+    if(username=="")
+    {
+        alert('Username Tidak Boleh Kosong');
+    }
+    else
+    {
+        window.location = "<?php echo base_url('admin/Login/viewForegetPassword/')?>"+username;
+    }
 }
 </script>
 

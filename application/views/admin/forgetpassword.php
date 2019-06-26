@@ -33,38 +33,14 @@
         </div>
         <div class="card">
             <div class="body">
-            <?php echo form_open('admin/Login/register'); ?>
-                    <div class="msg">Register a new membership</div>
+            <?php echo form_open(''); ?>
+                    <div class="msg">Recovery Password</div>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="nik" placeholder="NIK" required autofocus>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">person</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="password" class="form-control" name="password" minlength="6" placeholder="Password" required>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="password" class="form-control" name="confirm" minlength="6" placeholder="Confirm Password" required>
+                            <input type="text" id="username" readonly class="form-control" name="username" value="<?= $record->Username ?>" required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
@@ -72,7 +48,7 @@
                             <i class="material-icons">vpn_key</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="pertanyaan" minlength="6" placeholder="Question" required>
+                            <input type="text" id="pertanyaan" readonly class="form-control" name="pertanyaan" minlength="6" value="<?= $record->pertanyaan ?>" required>
                         </div>
                     </div>
                     <div class="input-group">
@@ -80,28 +56,26 @@
                             <i class="material-icons">vpn_key</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="jawaban" minlength="6" placeholder="Answer" required>
+                            <input type="text" id="jawaban" class="form-control" name="jawaban" minlength="6" placeholder="Answer" required>
                         </div>
                     </div>
-                    <div class="input-group">
+                    <div id="pass" hidden>
+                    <div  class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">accessibility</i>
+                            <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                        <select class="form-control show-tick" name="usergrup">
-                                        <option value="">-- User Group--</option>
-                                    <?php foreach($usergroup as $user){?>
-                                        <option value=<?php echo $user->Id?>><?php echo $user->Name?></option>
-                                    <?php }?>
-                        </select>
+                            <input type="password" class="form-control" id="password" name="password" minlength="6" placeholder="Password" required>
                         </div>
                     </div>
-                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">SIGN UP</button>
-
-                    <div class="m-t-25 m-b--5 align-center">
-                        <a href="sign-in.html">You already have a membership?</a>
                     </div>
-                </form>
+                    <div id="btncek" >
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" onclick="cekjawaban()">Recovery</button>
+                    </div>
+                    <div id="btnreset" hidden>
+                    <button hidden class="btn btn-block btn-lg bg-pink waves-effect"  type="submit" onclick="resetpassword()">Reset</button>
+                    </div>
+            </form>
             </div>
         </div>
     </div>
@@ -122,5 +96,68 @@
     <script src="<?php echo base_url('assets/')?>js/admin.js"></script>
     <script src="<?php echo base_url('assets/')?>js/pages/examples/sign-up.js"></script>
 </body>
+
+<script>
+ function cekjawaban()
+ {
+    var username= $('#username').val();
+    var pertanyaan= $('#pertanyaan').val();
+    var jawaban= $('#jawaban').val();
+    $.ajax({
+        url  :"<?php echo base_url('admin/User/cekJawaban');?>",
+        type : 'POST',
+        data : {
+            username : username,
+            pertanyaan : pertanyaan,
+            jawaban : jawaban
+        },
+            success : function(data)
+            { console.log(data);
+                if (data == "true")
+                {
+                $('#pass').removeAttr('hidden');
+                $('#btncek').attr('hidden','true');
+                $('#btnreset').removeAttr('hidden');
+                }
+                else
+                {
+                alert('Jawaban salah!');
+                }
+            }
+        })
+    }   
+
+ function resetpassword()
+ {
+    var username= $('#username').val();
+    var password= $('#password').val(); 
+    if(password == "")
+    {
+        alert('Password Tidak Boleh Kosong');
+    }
+    else
+    {
+        $.ajax({
+            url  :"<?php echo base_url('admin/User/resetpassword');?>",
+            type : 'POST',
+            data : {
+                username : username,
+                password : password,
+            },
+                success : function(data)
+                { 
+                    if(data == "true")
+                    {
+                        window.location = "<?php echo base_url('admin/Login/loginadmin')?>";
+                    }
+                    else
+                    {
+                        alert('Error');
+                    }
+                }
+            })
+    }
+}   
+</script>
 
 </html>

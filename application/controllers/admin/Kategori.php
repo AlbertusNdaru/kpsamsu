@@ -102,4 +102,5 @@ class Kategori extends CI_Controller{
             }
         }
     }
+    
 }
