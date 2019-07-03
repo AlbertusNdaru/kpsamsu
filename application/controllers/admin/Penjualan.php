@@ -32,8 +32,9 @@ class Penjualan  extends CI_Controller {
         if (ceksession())
         {
             $Id = $_GET['Id'];
-            $dataTransaksi= array('Stats'=>2,
-                                  'Update_at' => get_current_date()
+            $dataTransaksi= array(  
+                                    'Stats'     => 2,
+                                    'Update_at' => get_current_date()
                                 );
             $Validate = $this->Model_penjualan_admin->updateStatusTransaksi($dataTransaksi,$Id);
             if ($Validate)
@@ -79,6 +80,13 @@ class Penjualan  extends CI_Controller {
             $dataPenjualan['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/transaksi/view_detail_transaksi',$dataPenjualan);
         }
+    }
+
+    function getBukti()
+    {
+        $bill =$_POST['bill'];
+        $dataImg = $this->Model_penjualan_admin->getbukti($bill);
+        echo json_encode($dataImg);
     }
 
 }

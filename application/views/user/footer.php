@@ -165,6 +165,93 @@
 									"<td>"+result[i]['Stats']+"</td>"+
 									"<td>"+result[i]['Resi']+"</td>"+
 									"<td  style='text-align:center'>"+
+										"<a type='button' class='btn btn-danger' target='_blank' style='height: 22px;font-size: 12px;padding-top: 2px;' href="+link+">"+kurir+"</a>"+
+									"</td>"+
+								"</tr>"
+						);
+					}
+				}
+			});
+    	}
+	}
+
+	function bukti()
+	{
+		if ('<?php if(isset($_SESSION["userdata"])) {echo true;} else {echo false;}?>')
+		{
+			$.ajax({
+				url:"<?php echo base_url('user/Penjualan/getdatatransaksiVerified');?>",
+				type : "POST",
+				data : {id : '<?php if(isset($_SESSION["userdata"])) {echo $_SESSION['userdata']->Id;} else{echo null;}?>'},
+				success : function(data)
+				{
+				var result = $.parseJSON(data);
+				console.log(result);
+				$("#modalstatusbukti").empty();
+				for(var i=0; i<result.length; i++)	
+				{   var Payment = parseInt(result[i]['Payment']);	
+					var Ongkir 	= parseInt(result[i]['Ongkir']);
+					var total 	= Payment + Ongkir;
+					$("#modalstatusbukti").append(
+								"<tr >"+
+									"<td>"+result[i]['Transaction_bill']+"</td>"+
+									"<td>"+result[i]['Date']+"</td>"+
+									"<td>Rp "+result[i]['Payment']+"</td>"+
+									"<td>Rp "+result[i]['Ongkir']+"</td>"+
+									"<td>Rp "+total+"</td>"+
+									"<td  style='text-align:center'>"+
+										"<form action='http://localhost/kpsamsu/user/Penjualan/addBukti' enctype='multipart/form-data' method='post' accept-charset='utf-8'>"+
+										" <input hidden name='bill' type='text' value='"+result[i]['Transaction_bill']+"'>"+
+										"<input required  id='inputBukti' accept='image/x-png,image/gif,image/jpeg' type='file' class='form-control' name='berkas' placeholder='upload'>"+
+										"<button type='submit' class='btn btn-success''>Upload Bukti</button>"+
+										"</form>"+
+									"</td>"+
+								"</tr>"
+						);
+					}
+				}
+			});
+    	}
+	}
+
+	function Pembayaran()
+	{
+		if ('<?php if(isset($_SESSION["userdata"])) {echo true;} else {echo false;}?>')
+		{
+			$.ajax({
+				url:"<?php echo base_url('user/Penjualan/getdatatransaksi');?>",
+				type : "POST",
+				data : {id : '<?php if(isset($_SESSION["userdata"])) {echo $_SESSION['userdata']->Id;} else{echo null;}?>'},
+				success : function(data)
+				{
+				var result = $.parseJSON(data);
+				console.log(result);
+				$("#modalstatusdetail").empty();
+				for(var i=0; i<result.length; i++)
+				{
+					var link="";
+					var kurir="";
+					if(result[i]['Kurir']=='jne')
+						{
+						link='https://track.aftership.com/jne/'+result[i]['Resi']+'?'; kurir='JNE';
+						}
+					else if(result[i]['Kurir']=='tiki')
+						{
+						link='https://track.aftership.com/tiki/'+result[i]['Resi']+'?'; kurir='TIKI';
+						}else if(result[i]['Kurir']=='pos')
+							{
+								link='https://track.aftership.com/pos-indonesia-int/'+result[i]['Resi']+'?'; kurir="POS";
+							}
+					
+					$("#modalstatusdetail").append(
+								"<tr >"+
+									"<td>"+result[i]['Transaction_bill']+"</td>"+
+									"<td>"+result[i]['Date']+"</td>"+
+									"<td>Rp "+result[i]['Payment']+"</td>"+
+									"<td>Rp "+result[i]['Ongkir']+"</td>"+
+									"<td>"+result[i]['Stats']+"</td>"+
+									"<td>"+result[i]['Resi']+"</td>"+
+									"<td  style='text-align:center'>"+
 										"<a type='button' class='btn btn-danger' target='_blank' style='height: 22px;font-size: 12px;padding-top: 2px;' href="+link+">"+kurir+"</button>"+
 									"</td>"+
 								"</tr>"

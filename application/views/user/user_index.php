@@ -51,6 +51,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--home block end here-->
 <!--footer strat here-->
 <?php  include "modal_status.php";  ?>
+<?php  include "modal_uploadbukti.php";  ?>
 <?php include('footer.php')?>
 <!--footer end here-->
 </body>

@@ -16,7 +16,7 @@
                                     <thead>
                                         <tr>
                                             <th>Id Transaksi</th>
-                                            <th>Nama Member</th>
+                                            <th>Bukti Transaksi</th>
                                             <th>Tanggal</th>
                                             <th>Onkos Kirim</th>
                                             <th>Resi</th>
@@ -30,7 +30,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>Id Transaksi</th>
-                                            <th>Nama Member</th>
+                                            <th>Bukti Transaksi</th>
                                             <th>Tanggal</th>
                                             <th>Onkos Kirim</th>
                                             <th>Resi</th>
@@ -48,7 +48,7 @@
                                     foreach ($record as $r) { ?>
                                         <tr class="gradeU">
                                             <td><?php echo $r->Transaction_bill ?></td>
-                                            <td><?php $namamember=explode('-',$r->Transaction_bill) ;echo $namamember[0] ;?></td>
+                                            <td><button data-toggle="modal" data-target="#modalpreviewbukti" class="btn btn-primary" onclick="previewbukti('<?php echo $r->Transaction_bill ?>')">Preview</button></td>
                                             <td><?php echo $r->Date ?></td>
                                             <td>Rp <?php echo $r->Ongkir ?></td>
                                             <td><?php echo $r->Resi ?></td>
@@ -75,6 +75,7 @@
             </div>
             <!-- #END# Basic Examples -->
         </div>
+        <?php include 'view_bukti.php'?>
 <script>
  function kirim(id_penjualan,bill)
  {
@@ -158,5 +159,24 @@ $.notify({
         '</div>' 
     });
 
+}
+
+function previewbukti(bill)
+{
+    $.ajax({
+        url:"<?php echo base_url('admin/Penjualan/getBukti');?>",
+        type : "POST",
+        data:{
+            bill : bill
+        },
+        success : function(data)
+        {
+            var result = $.parseJSON(data);
+            $("#buktitrans").empty();
+            $("#buktitrans").append(
+                       "<image style='width: 50%;'src=<?php echo base_url().'assets/Bukti_transaksi/'?>"+result['Bukti_transaksi']+">"
+                );
+        }
+    });
 }
 </script>

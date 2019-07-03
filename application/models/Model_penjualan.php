@@ -77,6 +77,17 @@ class Model_penjualan extends ci_model{
         $this->db->where('a.Stats',3);
         return $this->db->get()->result();   
     }
+    function getdatatransaksiVerified($id)
+    {
+        $this->db->distinct();
+        $this->db->select('b.Member_id as ID, a.*');
+        $this->db->from('transaction as a');
+        $this->db->join('details as b','b.Transaction_id=a.Id');
+        $this->db->where('b.Member_id',$id);
+        $this->db->where('a.Stats',2);
+        $this->db->where('a.Bukti_transaksi is NULL');
+        return $this->db->get()->result();   
+    }
 
     function updateTransaksiSukses($datatransaksi)
     {
@@ -85,5 +96,12 @@ class Model_penjualan extends ci_model{
         $this->db->where('Member_id',$Member_id);
         $this->db->Update('details',$datatransaksi);
     }
+
+    function M_Update_bukti($idbil,$bill)
+    {
+       $query="UPDATE transaction set Bukti_transaksi='".$bill.".jpg', Update_at = now() where Transaction_bill='".$idbil."'";
+       $this->db->query($query);
+    }
+
 }
 ?>

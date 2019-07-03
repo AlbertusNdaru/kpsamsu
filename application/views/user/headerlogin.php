@@ -148,10 +148,13 @@
 					<!--/.navbar-->
 				</div>
 			</div>
-			<div class="header-right">
+			<div class="header-right" style="width : 50%;">
 				<div class="search">
 					<div class="search-text">
 					<button  style="margin-top: 6px; margin-right:5px;"  class='btn btn-primary' data-toggle="modal" data-target="#modalstatus" onclick="status()">Cek Status Pesanan</button>
+					</div>
+					<div class="search-text">
+					<button  style="margin-top: 6px; margin-right:5px;"  class='btn btn-primary' data-toggle="modal" data-target="#modalbukti" onclick="bukti()">Transaksi Pembayaran</button>
 					</div>
 					<div class="cart box_1">
 						<a href="<?= base_url('user/Shop/cheeckout')?>">
