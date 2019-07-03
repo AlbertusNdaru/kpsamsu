@@ -4,7 +4,7 @@
                 <div class="modal-content" style="background-color:white;border-radius: 20px;top: 57px;">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Product Image</h4>
+                        <h4 class="modal-title">Bukti Transaksi</h4>
                     </div>
                     <div  class="modal-body">
                             <div id="buktitrans" align="center" >     
