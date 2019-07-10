@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2019 at 06:29 PM
+-- Generation Time: Jul 10, 2019 at 09:02 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -102,7 +102,8 @@ INSERT INTO `details` (`Id`, `Transaction_id`, `Product_id`, `Price`, `Date`, `Q
 (5, 3, 6, 40000, '2019-06-26 04:23:35', 1, 6, 1, '2019-06-26 04:23:35', NULL),
 (6, 4, 1, 80000, '2019-07-03 14:26:03', 1, 6, 1, '2019-07-03 14:26:03', NULL),
 (7, 4, 6, 40000, '2019-07-03 14:26:06', 1, 6, 1, '2019-07-03 14:26:06', NULL),
-(8, 4, 5, 60000, '2019-07-03 14:26:08', 1, 6, 1, '2019-07-03 14:26:08', NULL);
+(8, 4, 5, 60000, '2019-07-03 14:26:08', 1, 6, 1, '2019-07-03 14:26:08', NULL),
+(9, 5, 6, 40000, '2019-07-10 05:47:38', 1, 6, 1, '2019-07-10 05:47:38', NULL);
 
 --
 -- Triggers `details`
@@ -164,7 +165,7 @@ CREATE TABLE `karyawan` (
 
 INSERT INTO `karyawan` (`Id`, `NIK`, `Nama`, `Alamat`, `No_hp`, `Email`, `Create_at`, `Update_at`, `Jenis_kel`) VALUES
 (1, '123456789', 'Samsu', 'Yogyakarta', '081568767567', 'samsu@gmail.com', '2019-06-25 15:38:02', '2019-06-26 09:34:22', 'L'),
-(5, '210892210892', 'ss', 'dsadasdad', '1212121212', 'ndarualbert21@gmail.com', '2019-06-26 08:19:21', NULL, 'L');
+(5, '210892210892', 'ss', 'dsadasdad', '1212121212', 'ndarualbert21@gmail.com', '2019-06-26 08:19:21', '2019-07-05 12:04:09', 'L');
 
 -- --------------------------------------------------------
 
@@ -267,8 +268,9 @@ INSERT INTO `product` (`Id`, `Product_name`, `Category_id`, `Merk`, `Price`, `Ph
 (2, 'Test', 1, '123', 40000, 'IMG_20190626095533_Product.jpg', 'New', '12221', 1, 35, 35000, '2019-05-20 04:21:28', '2019-06-26 02:55:33'),
 (3, 'Test', 1, 'Nais', 40000, 'IMG_20190626095722_Product.jpg', 'New', '12221', 1, 30, 35000, '2019-05-26 04:53:33', '2019-06-26 02:57:22'),
 (5, 'Test 10', 1, '1235', 60000, 'IMG_20190609223249_Product.jpg', 'New', '12221', 1, 19, 35000, '2019-05-31 09:27:42', '2019-06-09 15:32:49'),
-(6, 'Test 10', 1, 'Nais', 40000, 'IMG_20190608091320_Product.jpg', 'New', '12221', 1, 5, 35000, '2019-06-08 01:32:30', '2019-06-08 02:13:20'),
-(7, 'terter', 1, 'Erigo', 45000, 'IMG_20190609223650_Product.jpg', 'New', 'dfsfsfsfdsfsdf', 1, 40, 40000, '2019-06-09 15:34:14', '2019-06-09 15:36:50');
+(6, 'Test 10', 1, 'Nais', 40000, 'IMG_20190608091320_Product.jpg', 'New', '12221', 1, 20, 35000, '2019-06-08 01:32:30', '2019-06-08 02:13:20'),
+(7, 'terter', 1, 'Erigo', 45000, 'IMG_20190609223650_Product.jpg', 'New', 'dfsfsfsfdsfsdf', 1, 40, 40000, '2019-06-09 15:34:14', '2019-06-09 15:36:50'),
+(8, '', 1, '', 0, NULL, 'None', 'sadadasdasd', 1, 0, 0, '2019-07-05 04:33:33', NULL);
 
 -- --------------------------------------------------------
 
@@ -331,6 +333,9 @@ CREATE TABLE `transaction` (
   `Bukti_transaksi` text,
   `Resi` varchar(40) DEFAULT NULL,
   `Kurir` varchar(5) DEFAULT NULL,
+  `Alamat_kirim` varchar(30) DEFAULT NULL,
+  `Provinsi` int(11) DEFAULT NULL,
+  `Kota` int(11) DEFAULT NULL,
   `Create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `Update_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -339,11 +344,12 @@ CREATE TABLE `transaction` (
 -- Dumping data for table `transaction`
 --
 
-INSERT INTO `transaction` (`Id`, `Transaction_bill`, `Date`, `Stats`, `Ongkir`, `Payment`, `Bukti_transaksi`, `Resi`, `Kurir`, `Create_at`, `Update_at`) VALUES
-(1, 'Albertus Ndaru-2019-06-15 11:47:23', '2019-06-15 11:47:23', 'Sending', 61000, 80000, 'Ndaru-2019-06-15.jpg', 'jhgjgjhgjgjghj', 'jne', '2019-06-15 04:47:23', '2019-07-03 23:27:41'),
-(2, 'Albertus Ndaru-20190617154657', '2019-06-17 15:46:57', 'Sending', 77000, 120000, 'Ndaru-20190617154657.jpg', 'jhgjhgjhgjghjghj', 'pos', '2019-06-17 08:46:57', '2019-07-03 23:27:37'),
-(3, 'Albertus Ndaru-20190626112406', '2019-06-26 11:24:06', 'Sending', 61000, 120000, 'Ndaru-20190626112406.jpg', 'hjjmghjhgjhgj', 'jne', '2019-06-26 04:24:06', '2019-07-03 23:27:33'),
-(4, 'Albertus Ndaru-20190703212628', '2019-07-03 21:26:28', 'Sending', 61000, 180000, 'Ndaru-20190703212628.jpg', 'rtutyutryuytutyu', 'jne', '2019-07-03 14:26:28', '2019-07-03 23:24:29');
+INSERT INTO `transaction` (`Id`, `Transaction_bill`, `Date`, `Stats`, `Ongkir`, `Payment`, `Bukti_transaksi`, `Resi`, `Kurir`, `Alamat_kirim`, `Provinsi`, `Kota`, `Create_at`, `Update_at`) VALUES
+(1, 'Albertus Ndaru-2019-06-15 11:47:23', '2019-06-15 11:47:23', 'Sending', 61000, 80000, 'Ndaru-2019-06-15.jpg', 'jhgjgjhgjgjghj', 'jne', NULL, NULL, NULL, '2019-06-15 04:47:23', '2019-07-03 23:27:41'),
+(2, 'Albertus Ndaru-20190617154657', '2019-06-17 15:46:57', 'Sending', 77000, 120000, 'Ndaru-20190617154657.jpg', 'jhgjhgjhgjghjghj', 'pos', NULL, NULL, NULL, '2019-06-17 08:46:57', '2019-07-03 23:27:37'),
+(3, 'Albertus Ndaru-20190626112406', '2019-06-26 11:24:06', 'Sending', 61000, 120000, NULL, 'hjjmghjhgjhgj', 'jne', NULL, NULL, NULL, '2019-06-26 04:24:06', '2019-07-03 23:27:33'),
+(4, 'Albertus Ndaru-20190703212628', '2019-07-03 21:26:28', 'Sending', 61000, 180000, NULL, 'rtutyutryuytutyu', 'jne', NULL, NULL, NULL, '2019-07-03 14:26:28', '2019-07-03 23:24:29'),
+(5, 'Albertus Ndaru-20190710130456', '2019-07-10 13:04:56', 'Success', 15000, 40000, NULL, NULL, 'jne', NULL, NULL, 344, '2019-07-10 06:04:56', '2019-07-10 13:05:34');
 
 -- --------------------------------------------------------
 
@@ -370,8 +376,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`Id`, `Usergrup_id`, `Username`, `Password`, `IsLogin`, `LastLogin`, `pertanyaan`, `jawaban`, `Create_at`, `Update_at`, `Karyawan_id`) VALUES
-(2, 1, 'Samsu', 'pass@word5', 1, '1562171185', 'Apa', 'Aja', '2019-06-25 15:38:34', NULL, 1),
-(3, 1, 'Ndaru', '210892', 0, '1561542681', 'Ndaruuu', 'Alberttt', '2019-06-26 08:20:51', '2019-06-26 21:36:38', 5);
+(2, 1, 'Samsu', 'pass@word5', 1, '1562739085', 'Apa', 'Aja', '2019-06-25 15:38:34', NULL, 1),
+(3, 2, 'Ndaru', '210892', 1, '1562303848', 'Ndaruuu', 'Alberttt', '2019-06-26 08:20:51', '2019-06-26 21:36:38', 5);
 
 -- --------------------------------------------------------
 
@@ -392,7 +398,8 @@ CREATE TABLE `usergrup` (
 --
 
 INSERT INTO `usergrup` (`Id`, `Name`, `Description`, `Create_at`, `Update_at`) VALUES
-(1, 'Superadmin', 'Admin', '2019-02-28 02:55:24', NULL);
+(1, 'Superadmin', 'Admin', '2019-02-28 02:55:24', NULL),
+(2, 'Admin', 'Admin', '2019-07-05 04:58:21', NULL);
 
 --
 -- Indexes for dumped tables
@@ -509,7 +516,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `details`
 --
 ALTER TABLE `details`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `imageproduct`
@@ -539,7 +546,7 @@ ALTER TABLE `pembelian`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product_type`
@@ -569,7 +576,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `usergrup`
 --
 ALTER TABLE `usergrup`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
