@@ -38,8 +38,13 @@ class Karyawan extends CI_Controller{
        //echo $id_karyawan;
         if (ceksession())
         {
+            if ($_SESSION['userdata']->Usergrup_id == 1) { 
             $data['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/karyawan/input_karyawan',$data);
+            }
+            else {
+                redirect('admin/product');
+            }
         }
     }
 

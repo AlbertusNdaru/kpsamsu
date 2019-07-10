@@ -16,9 +16,14 @@ class Pembelian  extends CI_Controller {
     {
         if (ceksession())
         {
+            if ($_SESSION['userdata']->Usergrup_id == 1) { 
             $dataProduct['record']    = $this->Model_barang->M_tampil_data();  
             $dataProduct['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/pembelian_product/view_pembelian',$dataProduct);
+            }
+            else {
+                redirect('admin/product');
+            }
         }
     }
 

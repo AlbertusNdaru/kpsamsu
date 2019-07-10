@@ -50,12 +50,12 @@ class Product_type extends CI_Controller {
             if($insert)
             {
                 $this->session->set_flashdata('Status','Input Succes');
-                redirect('admin/product_type/viewAddProductType');
+                redirect('admin/Product_type');
             }
             else
             {
                 $this->session->set_flashdata('Status','Input Failed');
-                redirect('admin/product_type/viewAddProductType');
+                redirect('admin/Product_type');
             }
      
        }

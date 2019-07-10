@@ -12,6 +12,7 @@ class Model_barang extends ci_model{
         $this->db->join('product_type as c','c.Id=a.Product_type_id');
         $this->db->join('imageproduct as d','d.Product_id = a.Id');
         $this->db->where('a.Photo_name is NOT NULL', NULL, FALSE);
+        $this->db->where('a.Stok>','0');
         return $this->db->get()->result();
     }
 
@@ -107,11 +108,6 @@ class Model_barang extends ci_model{
         return $delete;
     }
 
-    function M_productFeatured_all()
-    {
-       $all   = $this->db->get('product')->result();
-       return $all;
-    }
    
     function M_productFeatured_Man()
     {

@@ -76,6 +76,7 @@
             <!-- #END# Basic Examples -->
         </div>
         <?php include 'view_bukti.php'?>
+        
 <script>
  function kirim(id_penjualan,bill)
  {

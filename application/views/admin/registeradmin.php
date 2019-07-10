@@ -25,7 +25,7 @@
     <link href="<?php echo base_url('assets/')?>css/style.css" rel="stylesheet">
 </head>
 
-<body class="signup-page" style="overflow-y:hidden;">
+<body class="signup-page" style="overflow-y:auto;">
     <div class="signup-box">
         <div class="logo">
             <a href="javascript:void(0);">Admin<b>SHOP</b></a>

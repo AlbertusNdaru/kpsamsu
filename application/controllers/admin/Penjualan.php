@@ -40,12 +40,12 @@ class Penjualan  extends CI_Controller {
             if ($Validate)
             {
                 $this->session->set_flashdata('Status','Acc Succes');
-                redirect('admin/Penjualan');
+                redirect('admin/Product');
             }
             else
             {
                 $this->session->set_flashdata('Status','Acc Failed');
-                redirect('admin/Penjualan');
+                redirect('admin/Product');
             }
         }
     }

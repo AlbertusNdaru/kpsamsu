@@ -37,7 +37,7 @@
                                         <div class="form-group">
                                                 <label class="form-label">Jumlah Beli</label>
                                             <div class="form-line">
-                                                <input type="number" class="form-control" name="jumlah_beli"  />
+                                                <input required type="number" class="form-control" name="jumlah_beli"  />
                                             </div>
                                         </div>
                                     </div>

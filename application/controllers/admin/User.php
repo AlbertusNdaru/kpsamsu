@@ -13,9 +13,13 @@ class User extends CI_Controller {
     {     
         if (ceksession())
         {
+            if ($_SESSION['userdata']->Usergrup_id == 1) { 
             $data['record']    = $this->Model_user->getAllUser();
             $data['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/user/view_user',$data);
+            }else {
+                redirect('admin/product');
+            }
         }
     }
 

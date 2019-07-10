@@ -462,7 +462,7 @@
     <section class="content">
       <?php echo $contents; ?>
     </section>
-
+    <?php include "modal_input_tgl.php" ?>
 </body>
 
 </html>

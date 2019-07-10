@@ -14,6 +14,20 @@ class Model_penjualan_admin extends ci_model{
         return $this->db->get('transaction')->result();
     }
 
+    
+    function getDataLaporanPenjualan()
+    {
+      $this->db->where("(Stats=3)");
+        return $this->db->get('transaction')->result();
+    }
+
+    function getDataLaporanPenjualanBydate($tgl1,$tgl2)
+    {
+      $this->db->where("(Stats=3)");
+      $this->db->where("(Date BETWEEN '$tgl1' AND '$tgl2')");
+        return $this->db->get('transaction')->result();
+    }
+
     function getDataPenjualanKirim()
     {
         $this->db->where("(Stats=2 OR Stats=3)");

@@ -114,12 +114,12 @@ class Product extends CI_Controller {
                 if($insert)
                 {
                     $this->session->set_flashdata('Status','Input Succes');
-                    redirect('admin/Product/viewAddProduct');
+                    redirect('admin/Product');
                 }
                 else
                 {
                     $this->session->set_flashdata('Status','Input Failed');
-                    redirect('admin/Product/viewAddProduct');
+                    redirect('admin/Product');
                 }
         }
     }

@@ -12,7 +12,7 @@
                                 <div class="col-sm-12"  style="margin-top:10px !important">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Nama" value='<?= $record->Nama?>'>
+                                            <input required type="text" class="form-control" name="Nama" value='<?= $record->Nama?>'>
                                             <label class="form-label">Nama Supliyer</label>
                                         </div>
                                     </div>
@@ -20,7 +20,7 @@
                                 <div class="col-sm-12"  style="margin-top:10px !important">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Alamat" value='<?= $record->Alamat?>'>
+                                            <input required type="text" class="form-control" name="Alamat" value='<?= $record->Alamat?>'>
                                             <label class="form-label">Alamat</label>
                                         </div>
                                     </div>
@@ -28,7 +28,7 @@
                                 <div class="col-sm-12"  style="margin-top:10px !important">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="Kontak" value='<?= $record->Kontak?>'>
+                                            <input required type="text" class="form-control" name="Kontak" value='<?= $record->Kontak?>'>
                                             <label class="form-label">No Telp</label>
                                         </div>
                                     </div>

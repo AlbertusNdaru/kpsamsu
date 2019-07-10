@@ -12,7 +12,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="productname" value='<?= $record->Product_name?>'>
+                                                    <input required type="text" class="form-control" name="productname" value='<?= $record->Product_name?>'>
                                                     <label class="form-label">Product Name</label>
                                                 </div>
                                             </div>
@@ -47,7 +47,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group form-float form-group">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="merk" value='<?= $record->Merk?>' />
+                                                    <input required type="text" class="form-control" name="merk" value='<?= $record->Merk?>' />
                                                     <label class="form-label">Merk</label>
                                                 </div>
                                             </div>
@@ -55,7 +55,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="description" value='<?= $record->Description?>' />
+                                                    <input required type="text" class="form-control" name="description" value='<?= $record->Description?>' />
                                                     <label class="form-label">Description</label>
                                                 </div>
                                             </div>
@@ -63,7 +63,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="harga" value="<?= $record->Price?>">
+                                                    <input required type="text" class="form-control" name="harga" value="<?= $record->Price?>">
                                                     <label class="form-label">Harga</label>
                                                 </div>
                                             </div>
@@ -71,7 +71,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="harga_supliyer" value="<?= $record->Harga_supliyer?>">
+                                                    <input required type="text" class="form-control" name="harga_supliyer" value="<?= $record->Harga_supliyer?>">
                                                     <label class="form-label">Harga Supliyer</label>
                                                 </div>
                                             </div>

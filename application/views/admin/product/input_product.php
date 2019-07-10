@@ -13,7 +13,7 @@
                                         <div class="form-group">
                                              <label class="form-label">Product Name</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="productname" placeholder="Enter Product Name">
+                                                <input required type="text" class="form-control" name="productname" placeholder="Enter Product Name">
                                             </div>
                                         </div>
                                     </div>
@@ -45,15 +45,7 @@
                                         <div class="form-group">
                                               <label class="form-label">Merk</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="merk" placeholder="Enter Merk" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                              <label class="form-label">Description</label>
-                                            <div class="form-line">
-                                                <input type="text" class="form-control" name="description" placeholder="Enter Description" />
+                                                <input required type="text" class="form-control" name="merk" placeholder="Enter Merk" />
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +53,7 @@
                                         <div class="form-group">
                                                 <label class="form-label">Price Supliyer</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="price_supliyer" placeholder="Enter Price" />
+                                                <input required type="text" class="form-control" name="price_supliyer" placeholder="Enter Price" />
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +61,7 @@
                                         <div class="form-group">
                                                 <label class="form-label">Price</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="price" placeholder="Enter Price" />
+                                                <input required type="text" class="form-control" name="price" placeholder="Enter Price" />
                                             </div>
                                         </div>
                                     </div>
@@ -81,6 +73,14 @@
                                                 <option value="New">New</option>
                                                 <option value="Sale">Sale</option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                              <label class="form-label">Description</label>
+                                            <div class="form-line">
+                                                <textarea required rows="3" type="text" class="form-control" name="description" placeholder="Enter Description" ></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12" style="margin-bottom:5px !important">

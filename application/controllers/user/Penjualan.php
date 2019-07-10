@@ -144,7 +144,10 @@ class Penjualan extends CI_Controller
                             'Payment'          => $_POST['Payment'],
                             'Transaction_bill' => $transaksibill,
                             'Ongkir'           => $_POST['Ongkir'],
-                            'Kurir'            => $_POST['Kurir']
+                            'Kurir'            => $_POST['Kurir'],
+                            'Alamat_kirim'     => $_POST['Alamat_kirim'],
+                            'Provinsi'         => $_POST['Provinsi'],
+                            'Kota'             => $_POST['Kota']
                             );
         $this->Model_penjualan->checkout($datacheckout);
         $IdTransaksi = $this->Model_penjualan->getidtransaksibyBill($transaksibill);

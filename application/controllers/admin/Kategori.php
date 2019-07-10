@@ -24,7 +24,7 @@ class Kategori extends CI_Controller{
     {
         if (ceksession())
         {
-            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $data['transaksi'] = $this->Model_penjualan_admin->cekpenjualan();
             $this->template->load('template','admin/kategori/input_category',$data);
         }
     }
@@ -50,12 +50,12 @@ class Kategori extends CI_Controller{
             if($insert)
             {
                 $this->session->set_flashdata('Status','Input Succes');
-                redirect('admin/Kategori/viewAddCategory');
+                redirect('admin/Kategori');
             }
             else
             {
                 $this->session->set_flashdata('Status','Input Failed');
-                redirect('admin/Kategori/viewAddCategory');
+                redirect('admin/Kategori');
             }
         }
     }

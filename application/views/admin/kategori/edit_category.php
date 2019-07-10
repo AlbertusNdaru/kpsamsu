@@ -12,7 +12,7 @@
                                 <div class="col-sm-12"  style="margin-top:10px !important">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="categoryname" value='<?= $record->Category_name?>'>
+                                            <input required type="text" class="form-control" name="categoryname" value='<?= $record->Category_name?>'>
                                             <label class="form-label">Category Name</label>
                                         </div>
                                     </div>
@@ -21,7 +21,7 @@
                                 <div class="col-sm-12" style="margin-bottom:5px !important">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="description" value='<?= $record->Description?>'>
+                                            <input required type="text" class="form-control" name="description" value='<?= $record->Description?>'>
                                             <label class="form-label">Description</label>
                                         </div>
                                     </div>

@@ -13,7 +13,7 @@
                                         <div class="form-group">
                                             <label class="form-label">NIK</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="nik" placeholder="Enter NIK">
+                                                <input required type="text" class="form-control" name="nik" placeholder="Enter NIK">
                                             </div>
                                         </div>
                                     </div>
@@ -21,7 +21,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Nama</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="nama" placeholder="Enter Name">
+                                                <input required type="text" class="form-control" name="nama" placeholder="Enter Name">
                                             </div>
                                         </div>
                                     </div>
@@ -29,7 +29,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Alamat</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="alamat" placeholder="Enter Alamat" />
+                                                <input required required type="text" class="form-control" name="alamat" placeholder="Enter Alamat" />
                                             </div>
                                         </div>
                                     </div>
@@ -37,7 +37,7 @@
                                         <div class="form-group">
                                             <label class="form-label">No HP</label>
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="nohp" placeholder="Enter No HP" />
+                                                <input required required type="text" class="form-control" name="nohp" placeholder="Enter No HP" />
                                             </div>
                                         </div>
                                     </div>
@@ -45,7 +45,7 @@
                                         <div class="form-group">
                                                 <label class="form-label">Price Email</label>
                                             <div class="form-line">
-                                                <input type="email" class="form-control" name="email" placeholder="Enter Email" />
+                                                <input required type="email" class="form-control" name="email" placeholder="Enter Email" />
                                             </div>
                                         </div>
                                     </div>

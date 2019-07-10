@@ -13,10 +13,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--banner strat here-->
 <!--banner end here-->
 <!--block-layer2 start here-->
-<div class="blc-layer2">
+<div class="blc-layer2" style="min-height:100px;">
 	<div class="container">
-		<div class="blc-layer2-main">
-				<div class="col-md-6 blc-layer2-left">
+		<div class="blc-layer2-main" >
+				<div class="col-md-6 blc-layer2-left" style="margin-top: 4em; margin-bottom: 4em;">
 					<h3>WELCOME TO TOKO SAMSU</h3>
 					<p>SELAMAT BERBELANJA</p>
 				</div>
@@ -34,9 +34,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="home-block-main">
 			<?php foreach($all as $P) { ?>
 				<div class="col-md-2 banner-right simpleCart_shelfItem" style="padding-top:0px !important;">
-				<h1><?= $P->Product_name?></h1>
+				<h1 style="margin-bottom: 4px;"><?= $P->Product_name?></h1>
 				<h5 class="item_price">Rp <?= $P->Price?></h5>
-				<ul class="bann-small-img">
+				<ul class="bann-small-img" style="margin-top: 4px;">
 					<li style="margin-right:0px; width:100%;"> <a href="<?= base_url('user/Detailproduct/viewDetailProduct/').$P->Id ?>"><img style="width:100%;height:255px;" src="<?= base_url_shop()."images/".$P->Photo_name?>"></a></li>
 				</ul>
 				<ul class="bann-btns">

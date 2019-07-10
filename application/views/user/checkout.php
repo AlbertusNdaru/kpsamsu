@@ -31,6 +31,18 @@
 					<?php } } ?>
 					</ul>
 					<div>
+					<div class="wrap-input100 validate-input" style="height: 30px;">
+						<input style="width: 25%;" id="alamat"  class="selection-2" name="alamat" placeholder="Input Alamat"/>
+					</div>
+					<div class="wrap-input100 validate-input" style="height: 30px;">
+						<select style="width: 25%;" id="province_destination"  class="selection-2" name="province_destination" onchange="get_city_destination(this);">	
+						</select>
+					</div>
+                    <div class="wrap-input100 validate-input" style="height: 30px;">
+						<select style="width: 25%;" id="city_destination"  class="selection-2" name="city_destination">
+							<option value=''>Pilih Kota</option>
+						</select>
+                    </div>
 						<?php if (isset($_SESSION['userdata'])) {?>
 						<select  style="width: 25%;" name="courier" id="courier">
 									<option value="">Pilih Kurir</option>
@@ -38,7 +50,7 @@
 									<option value="tiki">TIKI</option>
 									<option value="pos">POS</option>
 						</select>
-						<button onclick="get_cost('501','<?= $_SESSION['userdata']->City?>',courier.value)" class="btn btn-success">
+						<button onclick="get_cost('501',city_destination.value,courier.value)" class="btn btn-success">
 								Pilih Jasa Kirim
 						</button>
 						<?php }?>
@@ -57,6 +69,7 @@
 <?php include('footer.php')?>
 <!--footer end here-->
 <script>
+get_city();
 	 <?php if(empty($_SESSION['cart'])){?>$('#totalchart').html('Rp 0');<?php } else  {?> $('#totalchart').html('Rp <?php echo $total?>');<?php }?>
 		function emptychart(validate)
 		{
@@ -107,9 +120,12 @@
 					url  :"<?php echo base_url('user/Penjualan/checkout');?>",
 					type :"POST" ,
 					data :{ 
-							Payment: <?php echo $total?>,
-							Ongkir : total,
-							Kurir  : courier.value 
+							Payment       : <?php echo $total?>,
+							Ongkir        : total,
+							Kurir         : courier.value,
+							Alamat_kirim  : alamat.value,
+							Kota          : city_destination.value,
+							Provinsi       : province_destination.value
 						},
 					success : function(data)
 					{
@@ -172,6 +188,44 @@
 				$('#ongkir').val(pilih);
 			}
 		
+		}
+
+		function get_city()
+		{
+			$.ajax({
+					url  :"<?php echo base_url('Apiongkir/province');?>",
+					type : 'POST',
+					success : function(data)
+					{
+
+					var all_province = $.parseJSON(data);
+					$("#province_destination").html("<option value=''>Pilih Provinsi</option>");
+							$.each(all_province['rajaongkir']['results'], function (key, value) {
+								$("#province_destination").append(
+									"<option value='" + value.province_id + "'>" + value.province + "</option>"
+								);
+							});
+					}
+			})
+		}
+
+		function get_city_destination(sel)
+		{
+			$.ajax({
+					url  :"<?php echo base_url('Apiongkir/city');?>",
+					type : 'POST',
+					data : {id: sel.value},
+					success : function(data)
+					{
+					var get_city = $.parseJSON(data);
+					$("#city_destination").html("<option value=''>Pilih Kota</option>");
+							$.each(get_city['rajaongkir']['results'], function (key, value) {
+								$("#city_destination").append(
+									"<option value='" + value.city_id + "'>" + value.type + " - " + value.city_name + "</option>"
+								);
+							});
+				}
+		})
 		}
 </script>
 </body>

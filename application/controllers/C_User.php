@@ -10,7 +10,7 @@ class C_User extends CI_Controller {
 
 	function index()
     {     
-		$data['all'] = $this->Model_barang->M_productFeatured_all();
+		$data['all'] = $this->Model_barang->M_tampil_data();
         $this->load->view('user/user_index',$data);
     }
 

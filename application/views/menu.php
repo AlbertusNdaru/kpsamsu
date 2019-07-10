@@ -20,33 +20,30 @@
             <li>
             <a href="<?= base_url('admin/Supliyer')?>">Supliyer</a>
             </li>
+            <?php if ($_SESSION['userdata']->Usergrup_id == 1) { ?>
             <li>
             <a href="<?= base_url('admin/Karyawan')?>">Karyawan</a>
             </li>
+            <?php } ?>
             <li>
             <a href="<?= base_url('admin/Member')?>">Member</a>
             </li>
+            <?php if ($_SESSION['userdata']->Usergrup_id == 1) { ?>
             <li>
             <a href="<?= base_url('admin/User')?>">User</a>
             </li>
-        </ul>
-        <ul class="ml-menu">
-            <li>
-            <a href="<?= base_url('admin/Carousel')?>">View Data</a>
-            </li>
-            <li>
-            <a href="<?= base_url('admin/Kategori')?>">Input Data</a>
-            </li>
-            <li>
+            <?php } ?>
         </ul>
         <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">widgets</i>
             <span>TRANSAKSI</span>
         </a>
         <ul class="ml-menu">
+             <?php if ($_SESSION['userdata']->Usergrup_id == 1) { ?> 
             <li>
             <a href="<?= base_url('admin/Pembelian')?>">Pembelian</a>
             </li>
+             <?php } ?>
             <li>
             <a href="<?= base_url('admin/Penjualan')?>">Penjualan</a>
             </li>
@@ -66,8 +63,13 @@
             <a href="<?= base_url('admin/Laporan/laporanpenjualan')?>" target="_blank">Laporan Penjualan</a>
             </li>
             <li>
+            <a data-toggle="modal" data-target="#modalinputtgl">Laporan Penjualan Bulan</a>
+            </li>
+            <li>
             <a href="<?= base_url('admin/Laporan/laporanbaranglaris')?>" target="_blank">Barang Laris</a>
             </li>
         </ul>
     </li>
 </ul>
+
+

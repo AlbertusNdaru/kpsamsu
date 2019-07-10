@@ -117,6 +117,13 @@ function get_current_date()
     return $date->format('Y-m-d H:i:s');
 }
 
+function get_format_date($tgl,$format,$time=null)
+{
+    $date = new DateTime($tgl);
+    $date->setTimezone(new DateTimeZone('Asia/Jakarta'));
+    return $date->format($format)." ".$time;
+}
+
 function get_current_date_img()
 {
     $date = new DateTime();

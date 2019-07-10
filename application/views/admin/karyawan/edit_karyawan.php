@@ -12,7 +12,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input readonly type="text" class="form-control" name="nama" value='<?= $record->NIK?>'>
+                                                    <input required readonly type="text" class="form-control" name="nama" value='<?= $record->NIK?>'>
                                                     <label class="form-label">NIK</label>
                                                 </div>
                                             </div>
@@ -20,7 +20,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="nama" value='<?= $record->Nama?>'>
+                                                    <input required type="text" class="form-control" name="nama" value='<?= $record->Nama?>'>
                                                     <label class="form-label">Nama</label>
                                                 </div>
                                             </div>
@@ -29,7 +29,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group form-float form-group">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="alamat" value='<?= $record->Alamat?>' />
+                                                    <input required type="text" class="form-control" name="alamat" value='<?= $record->Alamat?>' />
                                                     <label class="form-label">Alamat</label>
                                                 </div>
                                             </div>
@@ -37,7 +37,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control" name="nohp" value='<?= $record->No_hp?>' />
+                                                    <input required type="text" class="form-control" name="nohp" value='<?= $record->No_hp?>' />
                                                     <label class="form-label">No HP</label>
                                                 </div>
                                             </div>
@@ -45,7 +45,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <input type="email" class="form-control" name="email" value="<?= $record->Email?>">
+                                                    <input required type="email" class="form-control" name="email" value="<?= $record->Email?>">
                                                     <label class="form-label">Email</label>
                                                 </div>
                                             </div>

@@ -46,20 +46,20 @@ class Supliyer extends CI_Controller{
             $Alamat = $this->input->post('Alamat');
             $Kontak = $this->input->post('Kontak');
             $dataSupliyer    = array(
-                                     'Nama'   => $Nama,
-                                     'Alamat' => $Alamat,
-                                     'Kontak' => $Kontak
+                                        'Nama'   => $Nama,
+                                        'Alamat' => $Alamat,
+                                        'Kontak' => $Kontak
                                     );
             $insert = $this->Model_supliyer->addSupliyer($dataSupliyer);
             if($insert)
             {
                 $this->session->set_flashdata('Status','Input Success');
-                redirect('admin/supliyer/viewAddSupliyer');
+                redirect('admin/supliyer');
             }
             else
             {
                 $this->session->set_flashdata('Status','Input Failed');
-                redirect('admin/supliyer/viewAddSupliyer');
+                redirect('admin/supliyer');
             }
         }
     }
@@ -73,10 +73,10 @@ class Supliyer extends CI_Controller{
             $Alamat = $this->input->post('Alamat');
             $Kontak = $this->input->post('Kontak');
             $dataSupliyer    = array(
-                                     'Nama'   => $Nama,
-                                     'Alamat' => $Alamat,
-                                     'Kontak' => $Kontak,
-                                     'Update' => Get_current_date()
+                                        'Nama'   => $Nama,
+                                        'Alamat' => $Alamat,
+                                        'Kontak' => $Kontak,
+                                        'Update' => Get_current_date()
                                     );
             $edit=$this->Model_supliyer->editSupliyer($dataSupliyer,$Id);
             if($edit)

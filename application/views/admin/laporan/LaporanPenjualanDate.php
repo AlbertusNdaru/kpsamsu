@@ -1,5 +1,5 @@
 <?php
-   include APPPATH.'views/admin/laporan/laporan.php';
+    include APPPATH.'views/admin/laporan/laporan.php';
 
     // $subtotalpayment=0;
     // $totalfinepayment=0;
@@ -8,12 +8,12 @@
 ?>          
             <div>
                 <div align="center" >
-                    <img style="display: block;margin-left: auto;margin-right: auto;width: 100px;" src="<?php echo base_url()?>assets/images/logolaporan.jpg">
+                <img style="display: block;margin-left: auto;margin-right: auto;width: 100px;" src="<?php echo base_url()?>assets/images/logolaporan.jpg">
                     <div>
                         <h2 align="center">
                             ALFALFA COLECTION <br>
-                            Laporan Pembelian : 
-                            <small><?=  date('d-m-y') ?></small>
+                            Laporan Penjualan : 
+                            <small><?= $tgl['tgl1']?> - <?= $tgl['tgl2']?> </small>
                         </h2>
                        
                     </div>
@@ -30,8 +30,7 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Tanggal Transaksi</th>
-                                                <th>Jumlah</th>
-                                                <th>Nama Barang</th>
+                                                <th>Nama Pembeli</th>
                                                 <th>Total Transaksi</th>
                                             </tr>
                                         </thead>
@@ -39,19 +38,18 @@
                                         <?php $no=1; $total=0; foreach ($record as $r){ ?>
                                             <tr class="gradeU">
                                                 <td align="center"><?php echo $no ?></td>
-                                                <td align="center"><?php echo $r->create_at ?></td>
-                                                <td align="center"><?php echo $r->jumlah_beli ?></td>
-                                                <td align="center"><?php echo $r->Product_name ?></td>
-                                                <td align="left">Rp <?php $jml=$r->jumlah_beli*$r->price;echo number_format($jml,2) ?></td>
+                                                <td align="center"><?php echo $r->Date ?></td>
+                                                <td align="center"><?php $nama=explode('-',$r->Transaction_bill); echo $nama[0] ?></td>
+                                                <td align="left">Rp <?php $payment=($r->Ongkir+$r->Payment); echo number_format($payment,2) ?></td>
                                             </tr>
-                                        <?php $no++; $total=$total+$jml; } ?>
+                                        <?php $no++; $total=$total+$payment; } ?>
                                             <tr>
-                                                <td colspan="4" style="text-align: right; font-size:18px;" ><B>Total</B></td>
+                                                <td colspan="3" style="text-align: right; font-size:18px;" ><B>Total</B></td>
                                                 <td style="font-size:18px;"><B>Rp <?php echo  number_format($total,2);?></B></td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                     <br><br>
+                                    <br><br>
                                     <table style="width: 100%; margin-left: 75%;">
                                         <tbody>
                                             <tr class="gradeU">

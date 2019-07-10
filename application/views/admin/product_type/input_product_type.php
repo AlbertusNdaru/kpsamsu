@@ -12,7 +12,7 @@
                                 <div class="col-sm-12"  style="margin-top:10px !important">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="typename">
+                                            <input required type="text" class="form-control" name="typename">
                                             <label class="form-label">Name Type</label>
                                         </div>
                                     </div>
@@ -31,7 +31,7 @@
                                 <div class="col-sm-12" style="margin-bottom:5px !important">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="description">
+                                            <input required type="text" class="form-control" name="description">
                                             <label class="form-label">Description</label>
                                         </div>
                                     </div>

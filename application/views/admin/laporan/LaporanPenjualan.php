@@ -11,7 +11,7 @@
                 <img style="display: block;margin-left: auto;margin-right: auto;width: 100px;" src="<?php echo base_url()?>assets/images/logolaporan.jpg">
                     <div>
                         <h2 align="center">
-                            TOKO BAJU <br>
+                            ALFALFA COLECTION <br>
                             Laporan Penjualan : 
                             <small><?=  date('d-m-y') ?></small>
                         </h2>
