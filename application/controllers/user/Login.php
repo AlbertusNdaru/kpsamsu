@@ -71,13 +71,11 @@ class Login extends CI_Controller{
                 $this->session->set_flashdata('Status','Akun terblokir. SIlahkan klik lupa password');
                 redirect('user/Login/loginuser');
             }
-
             else 
             {
                 redirect('user/Shop');
             }
         }
-                   
     }
 
     function logout()
@@ -90,7 +88,6 @@ class Login extends CI_Controller{
 
     function register()
     {
-       
         $Member_name = $_POST['name_member'];
         $Address     = $_POST['alamat'];
         $City        = $_POST['city_destination'];
@@ -100,15 +97,15 @@ class Login extends CI_Controller{
         $Question    = $_POST['pertanyaan'];
         $Answer      = $_POST['jawaban'];
         $datauser = array(
-                          'Member_name' => $Member_name,
-                          'Address'     => $Address,
-                          'Email'       => $Email,
-                          'Password'    => $Password,
-                          'Question'    => $Question,
-                          'Answer'      => $Answer,
-                          'City'        => $City,
-                          'Province'    => $Province,
-                          'Question'    => $Question);
+                            'Member_name' => $Member_name,
+                            'Address'     => $Address,
+                            'Email'       => $Email,
+                            'Password'    => $Password,
+                            'Question'    => $Question,
+                            'Answer'      => $Answer,
+                            'City'        => $City,
+                            'Province'    => $Province,
+                            'Question'    => $Question);
         $hasil=  $this->Model_user->registeruser($datauser); 
         if($hasil==1)
         {

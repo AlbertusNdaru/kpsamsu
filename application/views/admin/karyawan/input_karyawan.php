@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                                <label class="form-label">Price Email</label>
+                                                <label class="form-label">Email</label>
                                             <div class="form-line">
                                                 <input required type="email" class="form-control" name="email" placeholder="Enter Email" />
                                             </div>

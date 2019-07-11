@@ -19,7 +19,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <a href="" target="_blank" type="submit" class="btn btn-default" >Cetak</a>
+                        <button target="_blank" type="submit" class="btn btn-default" >Cetak</button>
                     </div>
                     </form>
 
