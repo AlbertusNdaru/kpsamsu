@@ -24,7 +24,8 @@ class Product_type extends CI_Controller {
     {
         if (ceksession())
         {
-            $this->template->load('template','admin/product_type/input_product_type');
+            $data['transaksi']  =    $this->Model_penjualan_admin->cekpenjualan();
+            $this->template->load('template','admin/product_type/input_product_type',$data);
         }
     }
 
