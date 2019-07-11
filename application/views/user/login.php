@@ -110,7 +110,7 @@ function setnotifstatus(err)
 		{
 		ttp='success';
 		}
-	else if(err== "Email & Password Tidak Cocok" || err=="Akun telah digunakan untuk Login" || err=="'Akun terblokir. SIlahkan klik lupa password")
+	else if(err== "Email & Password Tidak Cocok" || err=="Akun telah digunakan untuk Login" || err=="Akun terblokir. SIlahkan klik lupa password" || err=="Email Tidak Terdaftar" )
 		{
 		ttp='danger';
 		}

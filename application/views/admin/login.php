@@ -97,7 +97,6 @@
  function setnotif(err)
 { 
 
-
   $.notify({
 	// options
 	icon: 'glyphicon glyphicon-warning-sign',

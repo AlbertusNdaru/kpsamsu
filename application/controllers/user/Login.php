@@ -75,6 +75,9 @@ class Login extends CI_Controller{
             {
                 redirect('user/Shop');
             }
+        }else {
+            $this->session->set_flashdata('Status','Email Tidak Terdaftar');
+            redirect('user/Login/loginuser');
         }
     }
 
