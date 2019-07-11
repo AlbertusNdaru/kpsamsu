@@ -131,6 +131,11 @@ class Model_user extends ci_model
         return $this->db->get_where('user',$filter)->row();
     }
 
+    function cekUser($filter)
+    {
+        return $this->db->get_where('user',$filter)->row();
+    }
+
     function updatePassword($data,$Username)
     {
         $this->db->where('Username', $Username);

@@ -148,13 +148,32 @@
 function forget()
 {
     var username= $('#username').val();
+  
     if(username=="")
     {
         alert('Username Tidak Boleh Kosong');
     }
     else
     {
-        window.location = "<?php echo base_url('admin/Login/viewForegetPassword/')?>"+username;
+        $.ajax({
+        url  :"<?php echo base_url('admin/User/cekUser');?>",
+        type : 'POST',
+        data : {
+            username : username
+        },
+            success : function(data)
+            { 
+                if(data=='true')
+                {
+                    window.location = "<?php echo base_url('admin/Login/viewForegetPassword/')?>"+username;
+                }
+                else
+                {
+                    alert('Username Tidak Terdaftar');
+                }
+            }
+        })
+      
     }
 }
 </script>

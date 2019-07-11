@@ -22,6 +22,10 @@ class Model_member extends ci_model
   {
       return $this->db->get_where('member',$filter)->row();
   }
+  function cekEmail($filter)
+  {
+      return $this->db->get_where('member',$filter)->row();
+  }
 
   function updatePassword($data,$Email)
   {

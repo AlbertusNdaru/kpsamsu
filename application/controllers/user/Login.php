@@ -147,6 +147,23 @@ class Login extends CI_Controller{
         {
             echo "false";
         }
+    
+    }
+    function cekEmail()
+    {
+        $Email      = $this->input->post('email');
+        $filter = array (
+            'Email'    => $Email
+        );
+        $data = $this->Model_member->cekEmail($filter);
+        if($data)
+        {
+            echo "true";
+        }
+        else 
+        {
+            echo "false";
+        }
     }
 
     function resetpassword()

@@ -169,7 +169,25 @@ function setnotifstatus(err)
 		}
 		else
 		{
-			window.location = "<?php echo base_url('user/Login/viewForegetPassword?email=')?>"+email;
+			$.ajax({
+				url  :"<?php echo base_url('user/Login/cekEmail');?>",
+				type : 'POST',
+				data : {
+					email : email
+				},
+					success : function(data)
+					{ 
+						if(data=='true')
+						{
+							window.location = "<?php echo base_url('user/Login/viewForegetPassword?email=')?>"+email;
+						}
+						else
+						{
+							alert('Email Tidak Terdaftar');
+						}
+					}
+				})
+		
 		}
 	}
 </script>

@@ -16,6 +16,19 @@ class Model_barang extends ci_model{
         return $this->db->get()->result();
     }
 
+    function M_tampil_data_pembelian()
+    {
+        // $query= "SELECT a.* ,b.Category_name, c.Type_name, d.Photo_name FROM product as a inner join category as b on b.Id=a.Category_id inner join product_type as c on c.Id=a.Product_type_id inner join imageproduct as d on d.Product_id = a.Id";
+        // return $this->db->query($query)->result();
+        $this->db->select('a.* ,b.Category_name, c.Type_name, d.Photo_name ');
+        $this->db->from('product as a');
+        $this->db->join('category as b ','b.Id=a.Category_id');
+        $this->db->join('product_type as c','c.Id=a.Product_type_id');
+        $this->db->join('imageproduct as d','d.Product_id = a.Id');
+        $this->db->where('a.Photo_name is NOT NULL', NULL, FALSE);
+        return $this->db->get()->result();
+    }
+
     function M_tampil_data_by_id($id)
     {
         //$query= "SELECT a.* ,b.Category_name, c.Type_name FROM product as a inner join category as b on b.Id=a.Category_id inner join product_type as c on c.Id=a.Product_type_id where a.Id=".$id." ";

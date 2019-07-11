@@ -44,6 +44,23 @@ class User extends CI_Controller {
         }
     }
 
+    function cekUser()
+    {
+        $Username   = $this->input->post('username');
+        $filter = array (
+            'Username'   => $Username,
+        );
+        $data = $this->Model_user->cekjawaban($filter);
+        if($data)
+        {
+            echo "true";
+        }
+        else 
+        {
+            echo "false";
+        }
+    }
+
     function resetpassword()
     {
         $Username   = $this->input->post('username');
