@@ -29,7 +29,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 <!--block-layer2 end here-->
 <!--home-block start here-->
-<div class="home-block">
+<div class="home-block" style="padding-top:0em;">
 	<div class="container" style="width:100%">
 		<div class="home-block-main">
 			<?php foreach($all as $P) { ?>
