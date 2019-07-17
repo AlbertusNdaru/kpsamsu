@@ -31,8 +31,9 @@
 					<?php } } ?>
 					</ul>
 					<div>
+					
 					<div class="wrap-input100 validate-input" style="height: 30px;">
-						<input style="width: 25%;" id="alamat"  class="selection-2" name="alamat" value="<?= $_SESSION['userdata']->Address ?>"/>
+						<input style="width: 25%;" id="alamat"  class="selection-2" name="alamat" value="<?php if(isset($_SESSION['userdata'])) echo $_SESSION['userdata'->Adress]; else echo 'Input Alamat' ?>"/>
 					</div>
 					<div class="wrap-input100 validate-input" style="height: 30px;">
 						<select style="width: 25%;" id="province_destination"  class="selection-2" name="province_destination" onchange="get_city_destination(this);">	
@@ -192,6 +193,7 @@ get_city();
 
 		function get_city()
 		{
+			var session = <?php if(isset($_SESSION['userdata'])) echo 1; else echo 0;?>;
 			$.ajax({
 					url  :"<?php echo base_url('Apiongkir/province');?>",
 					type : 'POST',
@@ -205,22 +207,20 @@ get_city();
 									"<option value='" + value.province_id + "'>" + value.province + "</option>"
 								);
 							});
-							setprovince();
+                            if (session == 1 )
+							{
+						    var prov = <?php if(isset($_SESSION['userdata'])) echo $_SESSION['userdata']->province; else echo 0;?>;
+							$("#province_destination").val(prov);
+							get_city_destination(prov);
+							}
+				
 					}
 			});
 		
 		}
 
-		function setprovince()
-		{
-			$("#province_destination").val('<?php echo $_SESSION["userdata"]->Province?>');
-			get_city_destination(<?php echo $_SESSION["userdata"]->Province?>);
-		}
 
-		function setcity()
-		{
-			$("#city_destination").val('<?php echo $_SESSION["userdata"]->City?>');
-		}
+
 
 		function get_city_destination(sel)
 		{
@@ -237,7 +237,11 @@ get_city();
 									"<option value='" + value.city_id + "'>" + value.type + " - " + value.city_name + "</option>"
 								);
 							});
-					setcity();
+							if (session == 1 )
+							{
+						    var prov = <?php if(isset($_SESSION['userdata'])) echo $_SESSION["userdata"]->City; else echo 0;?>;
+							$("#city_destination").val(prov);
+							}
 				}
 		})
 		}
