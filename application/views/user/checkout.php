@@ -32,7 +32,7 @@
 					</ul>
 					<div>
 					<div class="wrap-input100 validate-input" style="height: 30px;">
-						<input style="width: 25%;" id="alamat"  class="selection-2" name="alamat" placeholder="Input Alamat"/>
+						<input style="width: 25%;" id="alamat"  class="selection-2" name="alamat" value="<?= $_SESSION['userdata']->Address ?>"/>
 					</div>
 					<div class="wrap-input100 validate-input" style="height: 30px;">
 						<select style="width: 25%;" id="province_destination"  class="selection-2" name="province_destination" onchange="get_city_destination(this);">	
@@ -205,8 +205,21 @@ get_city();
 									"<option value='" + value.province_id + "'>" + value.province + "</option>"
 								);
 							});
+							setprovince();
 					}
-			})
+			});
+		
+		}
+
+		function setprovince()
+		{
+			$("#province_destination").val('<?php echo $_SESSION["userdata"]->Province?>');
+			get_city_destination(<?php echo $_SESSION["userdata"]->Province?>);
+		}
+
+		function setcity()
+		{
+			$("#city_destination").val('<?php echo $_SESSION["userdata"]->City?>');
 		}
 
 		function get_city_destination(sel)
@@ -224,6 +237,7 @@ get_city();
 									"<option value='" + value.city_id + "'>" + value.type + " - " + value.city_name + "</option>"
 								);
 							});
+					setcity();
 				}
 		})
 		}
