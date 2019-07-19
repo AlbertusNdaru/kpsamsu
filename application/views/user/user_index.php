@@ -34,7 +34,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="home-block-main">
 			<?php foreach($all as $P) { ?>
 				<div class="col-md-2 banner-right simpleCart_shelfItem" style="padding-top:0px !important;">
-				<h1 style="margin-bottom: 4px;"><?= $P->Product_name?></h1>
+				<h1 style="margin-bottom: 4px; font-size:30px;"><?= $P->Product_name?></h1>
 				<h5 class="item_price">Rp <?= $P->Price?></h5>
 				<ul class="bann-small-img" style="margin-top: 4px;">
 					<li style="margin-right:0px; width:100%;"> <a href="<?= base_url('user/Detailproduct/viewDetailProduct/').$P->Id ?>"><img style="width:100%;height:255px;" src="<?= base_url_shop()."images/".$P->Photo_name?>"></a></li>

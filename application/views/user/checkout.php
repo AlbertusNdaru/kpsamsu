@@ -22,44 +22,92 @@
 					</ul>
 					
 					<ul class="cart-header simpleCart_shelfItem">
-					<?php if(isset($_SESSION['cart'])){ foreach ($_SESSION['cart'] as $data) {?>   
+					<?php $berattotal=0; if(isset($_SESSION['cart'])){ foreach ($_SESSION['cart'] as $data) {?>   
 						<li style=" width:25%"><span style="margin-top:20px; text-align: left;"><?= $data['Product_name']?></span></li>
 						<li style=" width:25%"><span style="margin-top:20px; text-align: center; " class="item_price">Rp <?= $data['Price']?></span></li>
 						<li style=" width:25%"><span style="margin-top:20px;text-align: center;"><?= $data['Qty']?></span></li>
 						<li style="text-align: center; width:25%"><a  style="margin-top:20px;" class="btn btn-danger" href="<?= base_url('user/Penjualan/deleteDetailsbyId').'?Product_id='.$data['Product_id'];?>">Delete</a></li>	
+						
 					<div class="clearfix"></div>
-					<?php } } ?>
+					<?php $berattotal = $berattotal+($data['Qty']*250);} ?> <input hidden id="berattotal" value="<?=$berattotal; ?>" /> <?php  } ?>
+					
 					</ul>
 					<div>
+						<ul class="unit">
+							<li style="text-align: left; width:25%"><span>Kurir </span></li>		
+							<li style="text-align: center; width:25%"><span>Ongkir</span></li>
+							<li style="text-align: center; width:25%"><span>Berat</span></li>
+							<li style="text-align: center; width:25%"><span>Total</span></li>
+							<div class="clearfix"></div>
+						</ul>
+					<ul class="cart-header simpleCart_shelfItem">
+		
+						<li style="text-align: left; width:25%">
+							<?php if (isset($_SESSION['userdata'])) {?>
+							    <label id="kurirpilih"></label>
+							<?php }?>
+						</li>
+						<li  style="text-align: center; width:25%">
+							<?php if (isset($_SESSION['userdata'])) {?>
+								<label id="ongkirpilih"></label>
+							<?php }?>
+						</li>
+						<li  style="text-align: center; width:25%">
+							<?php if (isset($_SESSION['userdata'])) {?>
+								<label id="beratpilih"></label>
+							<?php }?>
+						</li>
+						<li  style="text-align: center; width:25%">
+							<?php if (isset($_SESSION['userdata'])) {?>
+								<label id="totalsemuanya"></label>
+							<?php }?>
+						</li>
+						<div class="clearfix"></div>
+					</ul>
+					<button onclick="checkout()" style="transform: translate(0,0); float:right;"class="btn btn-success">Checkout</button>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="wrap-input100 validate-input" style="height: 30px; margin-bottom:5px">
+							<input style="width: 100%;" id="alamat"  class="selection-2" name="alamat" value="<?php if(isset($_SESSION['userdata'])) echo $_SESSION['userdata']->Address; else echo 'Input Alamat' ?>"/>
+							</div>
+						</div>
+				   </div>
+				   <div class="row">
+						<div class="col-md-3">
+							<div class="wrap-input100 validate-input" style="height: 30px; margin-bottom:5px">
+								<select style="width: 100%;" id="province_destination"  class="selection-2" name="province_destination" onchange="get_city_destination(this);">	
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="wrap-input100 validate-input" style="height: 30px margin-bottom:5px;">
+								<select style="width: 100%;" id="city_destination"  class="selection-2" name="city_destination">
+									<option value=''>Pilih Kota</option>
+								</select>
+							</div>
+						</div>
 					
-					<div class="wrap-input100 validate-input" style="height: 30px;">
-						<input style="width: 25%;" id="alamat"  class="selection-2" name="alamat" value="<?php if(isset($_SESSION['userdata'])) echo $_SESSION['userdata']->Address; else echo 'Input Alamat' ?>"/>
 					</div>
-					<div class="wrap-input100 validate-input" style="height: 30px;">
-						<select style="width: 25%;" id="province_destination"  class="selection-2" name="province_destination" onchange="get_city_destination(this);">	
-						</select>
+					<div class="row">
+						<div class="col-md-3">
+							<?php if (isset($_SESSION['userdata'])) {?>
+								<select  style="width: 100%; margin-bottom:5px;" name="courier" id="courier">
+											<option value="">Pilih Kurir</option>
+											<option value="jne">JNE</option>
+											<option value="tiki">TIKI</option>
+											<option value="pos">POS</option>
+								</select>
+							<?php }?>
+						</div>
+						<div class="col-md-3">
+							<button onclick="get_cost('501',city_destination.value,courier.value)" class="btn btn-success">
+									Pilih Jasa Kirim
+							</button>
+						</div>
+											</div>
 					</div>
-                    <div class="wrap-input100 validate-input" style="height: 30px;">
-						<select style="width: 25%;" id="city_destination"  class="selection-2" name="city_destination">
-							<option value=''>Pilih Kota</option>
-						</select>
-                    </div>
-						<?php if (isset($_SESSION['userdata'])) {?>
-						<select  style="width: 25%;" name="courier" id="courier">
-									<option value="">Pilih Kurir</option>
-									<option value="jne">JNE</option>
-									<option value="tiki">TIKI</option>
-									<option value="pos">POS</option>
-						</select>
-						<button onclick="get_cost('501',city_destination.value,courier.value)" class="btn btn-success">
-								Pilih Jasa Kirim
-						</button>
-						<?php }?>
-						<button onclick="checkout()" style="transform: translate(0,0); float:right;"class="btn btn-success">Checkout</button>
-					</div>
-					<span id="totalsemuanya" class="m-text21 w-size20 w-full-sm">
-						 Total : Rp <?= $total?>
-				   </span>
 				   <input hidden id="ongkir" value="0">
 				</div>
 			</div>  
@@ -156,7 +204,7 @@ get_city();
 				data : {
 					city_origin : city_origin,
 					city_destination : city_destination ,
-					weight : <?php if(isset($_SESSION['cart'])) {$totalberat=count($_SESSION['cart'])*0.2; if($totalberat<1){echo 1;}else{echo $totalberat;}} else {echo 0;}?> ,
+					weight : $('#berattotal').val() ,
 					courier : courier
 				},
 					success : function(data)
@@ -185,7 +233,11 @@ get_city();
 				total = <?php echo $total?>;
 				pilih = parseInt(pilih);
 				total = total+pilih ;
-				$('#totalsemuanya').html('Total : Rp '+total);
+				var totalberat =  $('#berattotal').val() ;
+				$('#totalsemuanya').html('Rp. '+total);
+				$('#kurirpilih').html(kurir.toUpperCase()+' (1 Hari Sampai)');
+				$('#ongkirpilih').html('Rp. '+pilih);
+				$('#beratpilih').html(totalberat+" Gram");
 				$('#ongkir').val(pilih);
 			}
 		
